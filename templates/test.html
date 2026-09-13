@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ t.title }} | {{ site.name }}</title>
+<meta name="description" content="{{ t.description }}">
+<link rel="canonical" href="{{ site.url }}/{{ t.slug }}/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{{ t.title }}">
+<meta property="og:description" content="{{ t.og_description }}">
+<meta property="og:url" content="{{ site.url }}/{{ t.slug }}/">
+<link rel="stylesheet" href="/static/site.css">
+{% if site.adsense_client %}<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.adsense_client }}" crossorigin="anonymous"></script>{% endif %}
+<script type="application/ld+json">{{ jsonld|safe }}</script>
+</head>
+<body>
+<div class="top"><div class="in">
+  <a class="brand" href="/">{{ site.name }}</a>
+  <nav><a href="/tests/">전체 검사</a><a href="/about/">소개</a></nav>
+</div></div>
+
+<div class="wrap">
+<div class="crumb"><a href="/">홈</a> › <a href="/tests/">심리 검사</a> › {{ t.category }}</div>
+<h1>{{ t.title }}</h1>
+<p class="lead">{{ t.lead }}</p>
+<p class="meta">작성 {{ t.publish }} · 검사 시간 약 {{ t.minutes }}분 · <a href="#refs">출처 보기</a></p>
+
+<div class="toc"><b>목차</b><ol>
+{% for s in t.sections %}<li><a href="#{{ s.id }}">{{ s.title }}</a></li>{% endfor %}
+<li><a href="#test">자가진단 하기</a></li>
+{% for s in t.after_sections %}<li><a href="#{{ s.id }}">{{ s.title }}</a></li>{% endfor %}
+<li><a href="#faq">자주 묻는 질문</a></li>
+</ol></div>
+
+{{ ad|safe }}
+
+{% for s in t.sections %}
+<h2 id="{{ s.id }}">{{ s.title }}</h2>
+{{ s.html|safe }}
+{% endfor %}
+
+<h2 id="test">자가진단 하기</h2>
+<div class="tool">
+  <p class="hint">각 문항에 가장 가까운 답을 고르세요. 결과는 저장되지 않습니다.</p>
+  <div class="prog"><i id="prog"></i></div>
+  <div id="qs"></div>
+  <div class="bar"><button class="go" id="go">결과 보기</button><button id="reset">다시 하기</button></div>
+  <div class="err" id="err"></div>
+  <div class="res" id="res">
+    <div class="score"><b id="sc">0</b><span>/ {{ t.max_score }}점</span></div>
+    <span class="tag" id="tag"></span>
+    <div class="scale">{% for seg in t.scale_segments %}<i style="flex:{{ seg.flex }};background:var(--{{ seg.tone }}-soft)"></i>{% endfor %}</div>
+    <div class="scale-l">{% for l in t.scale_labels %}<span>{{ l }}</span>{% endfor %}</div>
+    <p class="ev" id="ev"></p>
+    <h3>조언</h3>
+    <ul id="ad"></ul>
+    {% if t.habits %}
+    <h3 style="margin-top:18px">{{ t.habits_title }}</h3>
+    <div class="habits">{% for h in t.habits %}<div class="habit"><b>{{ h.name }}</b><span>{{ h.text }}</span></div>{% endfor %}</div>
+    {% endif %}
+    <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 지속적인 무기력이나 우울감이 있다면 전문가와 상담하세요.</p>
+    <button class="share" id="share">카카오톡으로 공유하기</button>
+  </div>
+</div>
+
+{{ ad|safe }}
+
+{% for s in t.after_sections %}
+<h2 id="{{ s.id }}">{{ s.title }}</h2>
+{{ s.html|safe }}
+{% endfor %}
+
+<h2 id="faq">자주 묻는 질문</h2>
+<div class="faq">
+{% for f in t.faq %}<details><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>{% endfor %}
+</div>
+
+{% if related %}
+<h2>함께 보면 좋은 검사</h2>
+<div class="related">
+{% for r in related %}<a href="/{{ r.slug }}/">{{ r.short_name }}<small>{{ r.items|length }}문항 · {{ r.minutes }}분</small></a>{% endfor %}
+</div>
+{% endif %}
+
+<div class="author">
+  <div class="av">{{ site.author_initial }}</div>
+  <div><b>{{ site.author }}</b><p>{{ site.author_bio }} <a href="/about/">더 보기</a></p></div>
+</div>
+
+<h2 id="refs" style="font-size:17px">참고 자료</h2>
+<ol class="refs">{% for r in t.references %}<li>{{ r|safe }}</li>{% endfor %}</ol>
+</div>
+
+<footer>
+<a href="/about/">소개</a>·<a href="/privacy/">개인정보처리방침</a>·<a href="/contact/">문의</a><br>
+© {{ year }} {{ site.name }}. 이 사이트의 검사는 참고용이며 전문적 진단을 대신하지 않습니다.
+</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+var T={{ tool_json|safe }};
+var ans=new Array(T.items.length).fill(null);
+var box=document.getElementById("qs");
+T.items.forEach(function(it,i){
+  var d=document.createElement("div");d.className="q";d.id="q"+i;
+  var n=document.createElement("p");n.className="qn";n.textContent=(i+1)+" / "+T.items.length;d.appendChild(n);
+  var t=document.createElement("p");t.className="qt";t.textContent=it.text;d.appendChild(t);
+  var o=document.createElement("div");o.className="opts";
+  T.labels.forEach(function(l,j){
+    var b=document.createElement("button");b.textContent=l;
+    b.onclick=function(){
+      ans[i]=j;
+      Array.prototype.forEach.call(o.children,function(c,k){c.className=k===j?"on":"";});
+      d.className="q done";document.getElementById("err").textContent="";
+      var cnt=ans.filter(function(a){return a!==null}).length;
+      document.getElementById("prog").style.width=Math.round(cnt*100/T.items.length)+"%";
+      var nx=document.getElementById("q"+(i+1));
+      if(nx&&ans[i+1]===null){setTimeout(function(){nx.scrollIntoView({behavior:"smooth",block:"center"});},120);}
+    };
+    o.appendChild(b);
+  });
+  d.appendChild(o);box.appendChild(d);
+});
+document.getElementById("go").onclick=function(){
+  var miss=[];ans.forEach(function(a,i){if(a===null)miss.push(i+1);});
+  if(miss.length){document.getElementById("err").textContent=miss.join(", ")+"번 문항에 답해 주세요";document.getElementById("q"+(miss[0]-1)).scrollIntoView({behavior:"smooth",block:"center"});return;}
+  var n=T.labels.length,s=0;
+  ans.forEach(function(a,i){s+=T.items[i].reverse?a+1:n-a;});
+  var b=T.bands.filter(function(x){return s<=x.max;})[0]||T.bands[T.bands.length-1];
+  document.getElementById("sc").textContent=s;
+  var tg=document.getElementById("tag");tg.textContent=b.label;tg.style.background="var(--"+b.tone+"-soft)";tg.style.color="var(--"+b.tone+")";
+  document.getElementById("ev").textContent=b.eval;
+  var ul=document.getElementById("ad");ul.innerHTML="";
+  b.advice.forEach(function(a){var li=document.createElement("li");li.textContent=a;ul.appendChild(li);});
+  var r=document.getElementById("res");r.style.display="block";
+  setTimeout(function(){r.scrollIntoView({behavior:"smooth",block:"start"});},100);
+};
+document.getElementById("reset").onclick=function(){
+  ans=new Array(T.items.length).fill(null);
+  document.querySelectorAll(".opts button").forEach(function(b){b.className="";});
+  document.querySelectorAll(".q").forEach(function(q){q.className="q";});
+  document.getElementById("prog").style.width="0";
+  document.getElementById("res").style.display="none";
+  document.getElementById("err").textContent="";
+  document.getElementById("test").scrollIntoView({behavior:"smooth"});
+};
+function toast(m){var t=document.getElementById("toast");t.textContent=m;t.className="toast show";setTimeout(function(){t.className="toast";},1800);}
+document.getElementById("share").onclick=function(){
+  var url=location.href.split("#")[0],text=T.short_name+" — "+T.items.length+"문항, "+T.minutes+"분.";
+  if(navigator.share){navigator.share({title:T.short_name,text:text,url:url}).catch(function(){});}
+  else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){toast("링크를 복사했어요. 카톡에 붙여넣기 하세요");});}
+  else{prompt("아래 링크를 복사하세요",url);}
+};
+</script>
+</body>
+</html>
