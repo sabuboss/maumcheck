@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://maumcheck.com/sitemap.xml
