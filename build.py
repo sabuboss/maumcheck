@@ -16,9 +16,13 @@ PUBLISH_ALL = "--all" in sys.argv
 site = json.loads((ROOT / "site.json").read_text(encoding="utf-8"))
 env = Environment(loader=FileSystemLoader(ROOT / "templates"), autoescape=False)
 
-AD = '<div class="ad">광고 영역 (AdSense)</div>' if not site.get("adsense_client") else (
-    '<ins class="adsbygoogle" style="display:block" data-ad-client="%s" data-ad-format="auto" data-full-width-responsive="true"></ins>'
-    '<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>' % site["adsense_client"])
+_SLOT = ('<ins class="adsbygoogle" style="display:block" data-ad-client="%s" data-ad-format="auto" data-full-width-responsive="true"></ins>'
+         '<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>')
+
+# 광고 ID가 없으면 운영 빌드에는 아무것도 넣지 않는다.
+# "광고 영역" 자리표시자는 --all(미리보기)에서만 보인다 — 방문자·애드센스 심사자에게 보이면 안 되므로.
+AD = (_SLOT % site["adsense_client"]) if site.get("adsense_client") else (
+    '<div class="ad">광고 영역 (AdSense)</div>' if PUBLISH_ALL else '')
 
 
 def load_tests():
@@ -76,16 +80,16 @@ def main():
         head, body = p.read_text(encoding="utf-8").split("---", 1)
         meta = dict(line.split(":", 1) for line in head.strip().splitlines())
         meta = {k.strip(): v.strip() for k, v in meta.items()}
-        write(p.stem, ptpl.render(site=site, year=year, slug=p.stem, body=body, **meta))
+        write(p.stem, ptpl.render(site=site, year=year, slug=p.stem, body=body, ad="", **meta))
 
     # 검사 목록 + 홈
     cards = "".join(
         f'<a href="/{t["slug"]}/">{t["short_name"]}<small>{t["category"]} · {len(t["items"])}문항 · {t["minutes"]}분</small></a>'
         for t in tests)
     listing = f'<p>{site["tagline"]}. 모든 검사는 무료이며 결과는 저장되지 않습니다.</p><div class="related">{cards}</div>'
-    write("tests", ptpl.render(site=site, year=year, slug="tests", title="전체 검사", description="마인드체크의 모든 심리 자가진단 목록", body=listing))
+    write("tests", ptpl.render(site=site, year=year, slug="tests", title="전체 검사", description=f"{site['name']}의 모든 심리 자가진단 목록", body=listing, ad=AD))
     (DIST / "index.html").write_text(
-        ptpl.render(site=site, year=year, slug="", title=site["name"], description=site["tagline"], body=listing), encoding="utf-8")
+        ptpl.render(site=site, year=year, slug="", title=site["name"], description=site["tagline"], body=listing, ad=AD), encoding="utf-8")
 
     # sitemap / robots
     urls = [""] + ["tests", "about", "privacy", "contact"] + [t["slug"] for t in tests]
