@@ -26,15 +26,25 @@ AD = (_SLOT % site["adsense_client"]) if site.get("adsense_client") else (
 
 
 def load_tests():
-    out = []
+    """(발행된 검사, 예약된 검사) — 예약분은 홈에 '준비 중'으로만 보여 준다."""
+    out, soon = [], []
     for p in sorted((ROOT / "tests").glob("*.json")):
         t = json.loads(p.read_text(encoding="utf-8"))
         pub = datetime.date.fromisoformat(t["publish"])
         if PUBLISH_ALL or pub <= TODAY:
             out.append(t)
         else:
+            soon.append(t)
             print(f"  (예약) {t['short_name']} → {pub}")
-    return out
+    soon.sort(key=lambda t: t["publish"])
+    return out, soon
+
+
+def cards_html(tests):
+    return '<div class="cards">' + "".join(
+        f'<a class="card" href="/{t["slug"]}/"><span class="chip">{t["category"]}</span><b>{t["short_name"]}</b>'
+        f'<p>{t["description"]}</p><small>{len(t["items"])}문항 · 약 {t["minutes"]}분</small></a>'
+        for t in tests) + "</div>"
 
 
 def jsonld(t):
@@ -64,7 +74,7 @@ def main():
     DIST.mkdir()
     shutil.copytree(ROOT / "static", DIST / "static")
 
-    tests = load_tests()
+    tests, soon = load_tests()
     year = TODAY.year
     tpl = env.get_template("test.html")
     for t in tests:
@@ -83,13 +93,13 @@ def main():
         write(p.stem, ptpl.render(site=site, year=year, slug=p.stem, body=body, ad="", **meta))
 
     # 검사 목록 + 홈
-    cards = "".join(
-        f'<a href="/{t["slug"]}/">{t["short_name"]}<small>{t["category"]} · {len(t["items"])}문항 · {t["minutes"]}분</small></a>'
-        for t in tests)
-    listing = f'<p>{site["tagline"]}. 모든 검사는 무료이며 결과는 저장되지 않습니다.</p><div class="related">{cards}</div>'
+    cards = cards_html(tests)
+    listing = f'<p>{site["tagline"]}. 모든 검사는 무료이며 결과는 저장되지 않습니다.</p>' + cards
     write("tests", ptpl.render(site=site, year=year, slug="tests", title="전체 검사", description=f"{site['name']}의 모든 심리 자가진단 목록", body=listing, ad=AD))
+    home_ld = json.dumps({"@context": "https://schema.org", "@type": "WebSite", "name": site["name"], "url": site["url"],
+                          "description": site["tagline"]}, ensure_ascii=False)
     (DIST / "index.html").write_text(
-        ptpl.render(site=site, year=year, slug="", title=site["name"], description=site["tagline"], body=listing, ad=AD), encoding="utf-8")
+        env.get_template("home.html").render(site=site, year=year, tests=tests, soon=soon, cards=cards, ad=AD, jsonld=home_ld), encoding="utf-8")
 
     # sitemap / robots
     urls = [""] + ["tests", "about", "privacy", "contact"] + [t["slug"] for t in tests]
