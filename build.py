@@ -25,11 +25,27 @@ AD = (_SLOT % site["adsense_client"]) if site.get("adsense_client") else (
     '<div class="ad">광고 영역 (AdSense)</div>' if PUBLISH_ALL else '')
 
 
+def flatten(t):
+    """다차원 검사: 차원별 문항을 번갈아 섞어 t["items"]로 펼친다.
+    한 특성의 문항이 연달아 나오면 응답자가 패턴을 눈치채기 때문."""
+    dims = t["dimensions"]
+    longest = max(len(d["items"]) for d in dims)
+    flat = []
+    for k in range(longest):
+        for di, d in enumerate(dims):
+            if k < len(d["items"]):
+                it = dict(d["items"][k]); it["d"] = di
+                flat.append(it)
+    t["items"] = flat
+
+
 def load_tests():
     """(발행된 검사, 예약된 검사) — 예약분은 홈에 '준비 중'으로만 보여 준다."""
     out, soon = [], []
     for p in sorted((ROOT / "tests").glob("*.json")):
         t = json.loads(p.read_text(encoding="utf-8"))
+        if "dimensions" in t:
+            flatten(t)
         pub = datetime.date.fromisoformat(t["publish"])
         if PUBLISH_ALL or pub <= TODAY:
             out.append(t)
@@ -77,11 +93,25 @@ def main():
     tests, soon = load_tests()
     year = TODAY.year
     tpl = env.get_template("test.html")
+    mtpl = env.get_template("test-multi.html")
     for t in tests:
         related = [r for r in tests if r["slug"] != t["slug"]][:4]
-        tool = {k: t[k] for k in ("items", "labels", "bands", "short_name", "minutes")}
-        write(t["slug"], tpl.render(t=t, site=site, related=related, ad=AD, year=year,
-                                    jsonld=jsonld(t), tool_json=json.dumps(tool, ensure_ascii=False)))
+        multi = "dimensions" in t
+        if multi:
+            n_lab = len(t["labels"])
+            tool = {"items": t["items"], "labels": t["labels"], "short_name": t["short_name"],
+                    "minutes": t["minutes"],
+                    "dims": [{"name": d["name"], "desc": d["desc"],
+                              "low_label": d["low_label"], "high_label": d["high_label"],
+                              "bands": d["bands"],
+                              "min": len(d["items"]), "max": len(d["items"]) * n_lab}
+                             for d in t["dimensions"]]}
+        else:
+            tool = {k: t[k] for k in ("items", "labels", "bands", "short_name", "minutes")}
+            tool["offset"] = t.get("offset", 0)
+        write(t["slug"], (mtpl if multi else tpl).render(
+            t=t, site=site, related=related, ad=AD, year=year,
+            jsonld=jsonld(t), tool_json=json.dumps(tool, ensure_ascii=False)))
         print(f"  발행  /{t['slug']}/")
 
     # 고정 페이지

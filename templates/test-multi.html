@@ -42,25 +42,17 @@
 
 <h2 id="test">자가진단 하기</h2>
 <div class="tool">
-  <p class="hint">각 문항에 가장 가까운 답을 고르세요. 결과는 저장되지 않습니다.</p>
+  <p class="hint">각 문항에 가장 가까운 답을 고르세요. 다섯 가지 특성의 문항이 섞여 있습니다. 결과는 저장되지 않습니다.</p>
   <div class="prog"><i id="prog"></i></div>
   <div id="qs"></div>
   <div class="bar"><button class="go" id="go">결과 보기</button><button id="reset">다시 하기</button></div>
   <div class="err" id="err"></div>
   <div class="res" id="res">
-    <div class="score"><b id="sc">0</b><span>/ {{ t.max_score }}점</span></div>
-    <span class="tag" id="tag"></span>
-    <div class="scale">{% for seg in t.scale_segments %}<i style="flex:{{ seg.flex }};background:var(--{{ seg.tone }}-soft)"></i>{% endfor %}</div>
-    <div class="scale-l">{% for l in t.scale_labels %}<span>{{ l }}</span>{% endfor %}</div>
-    <p class="ev" id="ev"></p>
-    <h3>조언</h3>
-    <ul id="ad"></ul>
-    {% if t.habits %}
-    <h3 style="margin-top:18px">{{ t.habits_title }}</h3>
-    <div class="habits">{% for h in t.habits %}<div class="habit"><b>{{ h.name }}</b><span>{{ h.text }}</span></div>{% endfor %}</div>
-    {% endif %}
-    <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 지속적인 무기력이나 우울감이 있다면 전문가와 상담하세요.</p>
-    <button class="share" id="share">카카오톡으로 공유하기</button>
+    <h3 style="margin-top:0">나의 다섯 가지 성격 특성</h3>
+    <p class="hint" style="margin-bottom:16px">높고 낮음에 좋고 나쁨은 없습니다. 각 특성이 어느 쪽으로 기울어 있는지를 보여 줄 뿐입니다.</p>
+    <div id="dims"></div>
+    <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 채용, 평가, 진로 결정의 근거로 쓰기에 적합하지 않습니다.</p>
+    <button class="share" id="share">결과 링크 공유하기</button>
   </div>
 </div>
 
@@ -106,7 +98,7 @@ T.items.forEach(function(it,i){
   var d=document.createElement("div");d.className="q";d.id="q"+i;
   var n=document.createElement("p");n.className="qn";n.textContent=(i+1)+" / "+T.items.length;d.appendChild(n);
   var t=document.createElement("p");t.className="qt";t.textContent=it.text;d.appendChild(t);
-  var o=document.createElement("div");o.className="opts";
+  var o=document.createElement("div");o.className="opts opts5";
   T.labels.forEach(function(l,j){
     var b=document.createElement("button");b.textContent=l;
     b.onclick=function(){
@@ -125,15 +117,35 @@ T.items.forEach(function(it,i){
 document.getElementById("go").onclick=function(){
   var miss=[];ans.forEach(function(a,i){if(a===null)miss.push(i+1);});
   if(miss.length){document.getElementById("err").textContent=miss.join(", ")+"번 문항에 답해 주세요";document.getElementById("q"+(miss[0]-1)).scrollIntoView({behavior:"smooth",block:"center"});return;}
-  var n=T.labels.length,s=0;
-  ans.forEach(function(a,i){s+=T.items[i].reverse?a+1:n-a;});
-  s-=T.offset||0;   // 원 척도의 0점 기준에 맞춘다 (예: GAD-7 0~21)
-  var b=T.bands.filter(function(x){return s<=x.max;})[0]||T.bands[T.bands.length-1];
-  document.getElementById("sc").textContent=s;
-  var tg=document.getElementById("tag");tg.textContent=b.label;tg.style.background="var(--"+b.tone+"-soft)";tg.style.color="var(--"+b.tone+")";
-  document.getElementById("ev").textContent=b.eval;
-  var ul=document.getElementById("ad");ul.innerHTML="";
-  b.advice.forEach(function(a){var li=document.createElement("li");li.textContent=a;ul.appendChild(li);});
+  var n=T.labels.length;
+  var sums=T.dims.map(function(){return 0;});
+  ans.forEach(function(a,i){var it=T.items[i];sums[it.d]+=it.reverse?a+1:n-a;});
+  var host=document.getElementById("dims");host.innerHTML="";
+  T.dims.forEach(function(dim,di){
+    var s=sums[di];
+    var b=dim.bands.filter(function(x){return s<=x.max;})[0]||dim.bands[dim.bands.length-1];
+    var pct=Math.round((s-dim.min)*100/(dim.max-dim.min));
+    var w=document.createElement("div");w.className="dim";
+    var h=document.createElement("div");h.className="dim-h";
+    var nm=document.createElement("b");nm.textContent=dim.name;h.appendChild(nm);
+    var sc=document.createElement("span");sc.textContent=s+" / "+dim.max;h.appendChild(sc);
+    w.appendChild(h);
+    var sub=document.createElement("p");sub.className="dim-sub";sub.textContent=dim.desc;w.appendChild(sub);
+    var bar=document.createElement("div");bar.className="dim-bar";
+    var fill=document.createElement("i");fill.style.width=pct+"%";fill.style.background="var(--"+b.tone+")";
+    bar.appendChild(fill);w.appendChild(bar);
+    var ends=document.createElement("div");ends.className="dim-ends";
+    var lo=document.createElement("span");lo.textContent=dim.low_label;
+    var hi=document.createElement("span");hi.textContent=dim.high_label;
+    ends.appendChild(lo);ends.appendChild(hi);w.appendChild(ends);
+    var tg=document.createElement("span");tg.className="tag";tg.textContent=b.label;
+    tg.style.background="var(--"+b.tone+"-soft)";tg.style.color="var(--"+b.tone+")";w.appendChild(tg);
+    var ev=document.createElement("p");ev.className="dim-ev";ev.textContent=b.eval;w.appendChild(ev);
+    var ul=document.createElement("ul");ul.className="dim-adv";
+    b.advice.forEach(function(a){var li=document.createElement("li");li.textContent=a;ul.appendChild(li);});
+    w.appendChild(ul);
+    host.appendChild(w);
+  });
   var r=document.getElementById("res");r.style.display="block";
   setTimeout(function(){r.scrollIntoView({behavior:"smooth",block:"start"});},100);
 };
@@ -150,7 +162,7 @@ function toast(m){var t=document.getElementById("toast");t.textContent=m;t.class
 document.getElementById("share").onclick=function(){
   var url=location.href.split("#")[0],text=T.short_name+" — "+T.items.length+"문항, "+T.minutes+"분.";
   if(navigator.share){navigator.share({title:T.short_name,text:text,url:url}).catch(function(){});}
-  else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){toast("링크를 복사했어요. 카톡에 붙여넣기 하세요");});}
+  else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){toast("링크를 복사했어요");});}
   else{prompt("아래 링크를 복사하세요",url);}
 };
 </script>
