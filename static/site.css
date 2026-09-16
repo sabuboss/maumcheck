@@ -119,3 +119,20 @@
   .dim-adv{font-size:13px;color:var(--muted);margin:0;padding-left:18px}
   .dim-adv li{margin-bottom:4px}
   @media (max-width:420px){.opts.opts5 button{font-size:11px;padding:10px 1px}}
+  /* ---- 검사 전 안내 / 위기 연락처 / 활용법 / 공유 ---- */
+  .warnbox{border-left:4px solid var(--warn);background:var(--warn-soft);padding:14px 16px;border-radius:0 10px 10px 0;margin:16px 0 0;font-size:15px}
+  .warnbox p{margin:0 0 8px;font-size:15px}
+  .warnbox p:last-child{margin:0}
+  .warnbox b{color:var(--warn)}
+  .crisis{border:1px solid var(--danger);background:var(--danger-soft);border-radius:12px;padding:14px 16px;margin:18px 0 0;font-size:14px}
+  .crisis b{display:block;color:var(--danger);margin-bottom:6px;font-size:15px}
+  .crisis p{margin:0 0 6px;font-size:14px}
+  .crisis p:last-child{margin:0}
+  .crisis a{color:var(--danger);font-weight:600}
+  .uses{display:grid;gap:10px;margin-top:8px}
+  .use{background:var(--field);border-radius:12px;padding:14px 16px;font-size:14px}
+  .use b{display:block;font-weight:600;margin-bottom:3px;color:var(--accent);font-size:15px}
+  .use span{color:var(--muted);line-height:1.6}
+  .sharebar{display:flex;gap:8px;margin-top:16px}
+  .sharebar .share{flex:1;margin-top:0}
+  .sharebar .copy{font:inherit;font-size:15px;padding:14px 18px;border-radius:12px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;flex:none}
