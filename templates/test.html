@@ -31,6 +31,7 @@
 {% for s in t.sections %}<li><a href="#{{ s.id }}">{{ s.title }}</a></li>{% endfor %}
 <li><a href="#test">자가진단 하기</a></li>
 {% for s in t.after_sections %}<li><a href="#{{ s.id }}">{{ s.title }}</a></li>{% endfor %}
+{% if t.uses %}<li><a href="#uses">이렇게 활용해 보세요</a></li>{% endif %}
 <li><a href="#faq">자주 묻는 질문</a></li>
 </ol></div>
 
@@ -42,6 +43,7 @@
 {% endfor %}
 
 <h2 id="test">자가진단 하기</h2>
+{% if t.pre_test %}<div class="warnbox">{{ t.pre_test|safe }}</div>{% endif %}
 <div class="tool">
   <p class="hint">각 문항에 가장 가까운 답을 고르세요. 결과는 저장되지 않습니다.</p>
   <div class="prog"><i id="prog"></i></div>
@@ -60,8 +62,9 @@
     <h3 style="margin-top:18px">{{ t.habits_title }}</h3>
     <div class="habits">{% for h in t.habits %}<div class="habit"><b>{{ h.name }}</b><span>{{ h.text }}</span></div>{% endfor %}</div>
     {% endif %}
+    {% if t.crisis %}<div class="crisis"><b>{{ t.crisis.title }}</b>{{ t.crisis.html|safe }}</div>{% endif %}
     <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 지속적인 무기력이나 우울감이 있다면 전문가와 상담하세요.</p>
-    <button class="share" id="share">카카오톡으로 공유하기</button>
+    <div class="sharebar"><button class="share" id="share">결과 공유하기</button><button class="copy" id="copy">결과 복사</button></div>
   </div>
 </div>
 
@@ -71,6 +74,12 @@
 <h2 id="{{ s.id }}">{{ s.title }}</h2>
 {{ s.html|safe }}
 {% endfor %}
+
+{% if t.uses %}
+<h2 id="uses">이렇게 활용해 보세요</h2>
+<div class="uses">{% for u in t.uses %}<div class="use"><b>{{ u.name }}</b><span>{{ u.text }}</span></div>{% endfor %}</div>
+{% if t.reuse %}<div class="callout">{{ t.reuse|safe }}</div>{% endif %}
+{% endif %}
 
 <h2 id="faq">자주 묻는 질문</h2>
 <div class="faq">
@@ -133,6 +142,7 @@ document.getElementById("go").onclick=function(){
   document.getElementById("sc").textContent=s;
   var tg=document.getElementById("tag");tg.textContent=b.label;tg.style.background="var(--"+b.tone+"-soft)";tg.style.color="var(--"+b.tone+")";
   document.getElementById("ev").textContent=b.eval;
+  LAST={score:s,label:b.label};
   var ul=document.getElementById("ad");ul.innerHTML="";
   b.advice.forEach(function(a){var li=document.createElement("li");li.textContent=a;ul.appendChild(li);});
   var r=document.getElementById("res");r.style.display="block";
@@ -148,11 +158,21 @@ document.getElementById("reset").onclick=function(){
   document.getElementById("test").scrollIntoView({behavior:"smooth"});
 };
 function toast(m){var t=document.getElementById("toast");t.textContent=m;t.className="toast show";setTimeout(function(){t.className="toast";},1800);}
+var LAST=null;   // 마지막 결과 {score, label}
+function summary(){
+  var url=location.href.split("#")[0];
+  if(!LAST)return T.short_name+" — "+T.items.length+"문항, "+T.minutes+"분.\n"+url;
+  return T.short_name+" 결과: "+LAST.score+"점 / "+T.max+"점 ("+LAST.label+")\n"+url;
+}
 document.getElementById("share").onclick=function(){
-  var url=location.href.split("#")[0],text=T.short_name+" — "+T.items.length+"문항, "+T.minutes+"분.";
-  if(navigator.share){navigator.share({title:T.short_name,text:text,url:url}).catch(function(){});}
-  else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){toast("링크를 복사했어요. 카톡에 붙여넣기 하세요");});}
-  else{prompt("아래 링크를 복사하세요",url);}
+  var url=location.href.split("#")[0];
+  if(navigator.share){navigator.share({title:T.short_name,text:summary(),url:url}).catch(function(){});}
+  else if(navigator.clipboard){navigator.clipboard.writeText(summary()).then(function(){toast("결과와 링크를 복사했어요");});}
+  else{prompt("아래 내용을 복사하세요",summary());}
+};
+document.getElementById("copy").onclick=function(){
+  if(navigator.clipboard){navigator.clipboard.writeText(summary()).then(function(){toast("복사했어요");});}
+  else{prompt("아래 내용을 복사하세요",summary());}
 };
 </script>
 </body>

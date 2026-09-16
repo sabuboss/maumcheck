@@ -109,6 +109,7 @@ def main():
         else:
             tool = {k: t[k] for k in ("items", "labels", "bands", "short_name", "minutes")}
             tool["offset"] = t.get("offset", 0)
+            tool["max"] = t["max_score"]
         write(t["slug"], (mtpl if multi else tpl).render(
             t=t, site=site, related=related, ad=AD, year=year,
             jsonld=jsonld(t), tool_json=json.dumps(tool, ensure_ascii=False)))

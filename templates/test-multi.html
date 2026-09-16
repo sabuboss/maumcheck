@@ -31,6 +31,7 @@
 {% for s in t.sections %}<li><a href="#{{ s.id }}">{{ s.title }}</a></li>{% endfor %}
 <li><a href="#test">자가진단 하기</a></li>
 {% for s in t.after_sections %}<li><a href="#{{ s.id }}">{{ s.title }}</a></li>{% endfor %}
+{% if t.uses %}<li><a href="#uses">이렇게 활용해 보세요</a></li>{% endif %}
 <li><a href="#faq">자주 묻는 질문</a></li>
 </ol></div>
 
@@ -52,6 +53,7 @@
     <h3 style="margin-top:0">나의 다섯 가지 성격 특성</h3>
     <p class="hint" style="margin-bottom:16px">높고 낮음에 좋고 나쁨은 없습니다. 각 특성이 어느 쪽으로 기울어 있는지를 보여 줄 뿐입니다.</p>
     <div id="dims"></div>
+    {% if t.crisis %}<div class="crisis"><b>{{ t.crisis.title }}</b>{{ t.crisis.html|safe }}</div>{% endif %}
     <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 채용, 평가, 진로 결정의 근거로 쓰기에 적합하지 않습니다.</p>
     <button class="share" id="share">결과 링크 공유하기</button>
   </div>
@@ -63,6 +65,12 @@
 <h2 id="{{ s.id }}">{{ s.title }}</h2>
 {{ s.html|safe }}
 {% endfor %}
+
+{% if t.uses %}
+<h2 id="uses">이렇게 활용해 보세요</h2>
+<div class="uses">{% for u in t.uses %}<div class="use"><b>{{ u.name }}</b><span>{{ u.text }}</span></div>{% endfor %}</div>
+{% if t.reuse %}<div class="callout">{{ t.reuse|safe }}</div>{% endif %}
+{% endif %}
 
 <h2 id="faq">자주 묻는 질문</h2>
 <div class="faq">
