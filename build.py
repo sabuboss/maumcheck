@@ -132,6 +132,11 @@ def main():
     (DIST / "index.html").write_text(
         env.get_template("home.html").render(site=site, year=year, tests=tests, soon=soon, cards=cards, ad=AD, jsonld=home_ld), encoding="utf-8")
 
+    # 404 — Cloudflare Pages가 없는 경로에 이 파일을 404 상태로 돌려준다.
+    # 없으면 홈이 200으로 나가서 검색엔진이 소프트 404로 본다.
+    (DIST / "404.html").write_text(
+        env.get_template("404.html").render(site=site, year=year, tests=tests, cards=cards), encoding="utf-8")
+
     # sitemap / robots
     urls = [""] + ["tests", "about", "privacy", "contact"] + [t["slug"] for t in tests]
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(
