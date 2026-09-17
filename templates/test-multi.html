@@ -44,14 +44,16 @@
 
 <h2 id="test">자가진단 하기</h2>
 <div class="tool">
-  <p class="hint">각 문항에 가장 가까운 답을 고르세요. 다섯 가지 특성의 문항이 섞여 있습니다. 결과는 저장되지 않습니다.</p>
+  <p class="hint">{{ t.tool_hint|default("각 문항에 가장 가까운 답을 고르세요. 결과는 저장되지 않습니다.") }}</p>
+  <div id="subj" class="subj"></div>
   <div class="prog"><i id="prog"></i></div>
   <div id="qs"></div>
   <div class="bar"><button class="go" id="go">결과 보기</button><button id="reset">다시 하기</button></div>
   <div class="err" id="err"></div>
   <div class="res" id="res">
-    <h3 style="margin-top:0">나의 다섯 가지 성격 특성</h3>
-    <p class="hint" style="margin-bottom:16px">높고 낮음에 좋고 나쁨은 없습니다. 각 특성이 어느 쪽으로 기울어 있는지를 보여 줄 뿐입니다.</p>
+    <div class="combo" id="combo"></div>
+    <h3 style="margin-top:0">{{ t.result_title|default("결과") }}</h3>
+    <p class="hint" style="margin-bottom:16px">{{ t.result_hint|default("높고 낮음에 좋고 나쁨은 없습니다.") }}</p>
     <div id="dims"></div>
     {% if t.crisis %}<div class="crisis"><b>{{ t.crisis.title }}</b>{{ t.crisis.html|safe }}</div>{% endif %}
     <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 채용, 평가, 진로 결정의 근거로 쓰기에 적합하지 않습니다.</p>
@@ -102,6 +104,20 @@
 <script>
 var T={{ tool_json|safe }};
 var ans=new Array(T.items.length).fill(null);
+var SUBJ=0;var LASTTYPE=null;
+(function(){
+  if(!T.combo||!T.combo.subjects||T.combo.subjects.length<2)return;
+  var host=document.getElementById("subj");
+  var q=document.createElement("p");q.className="subj-q";q.textContent=T.combo.ask;host.appendChild(q);
+  var row=document.createElement("div");row.className="subj-row";
+  T.combo.subjects.forEach(function(sb,i){
+    var b=document.createElement("button");b.textContent=sb.label;b.className=i===0?"on":"";
+    b.onclick=function(){SUBJ=i;Array.prototype.forEach.call(row.children,function(c,k){c.className=k===i?"on":"";});
+      if(document.getElementById("res").style.display==="block")document.getElementById("go").click();};
+    row.appendChild(b);
+  });
+  host.appendChild(row);
+})();
 var box=document.getElementById("qs");
 T.items.forEach(function(it,i){
   var d=document.createElement("div");d.className="q";d.id="q"+i;
@@ -129,6 +145,25 @@ document.getElementById("go").onclick=function(){
   var n=T.labels.length;
   var sums=T.dims.map(function(){return 0;});
   ans.forEach(function(a,i){var it=T.items[i];sums[it.d]+=it.reverse?a+1:n-a;});
+  T.dims.forEach(function(d,i){sums[i]-=d.offset||0;});
+  if(T.combo){
+    var cut=T.combo.subjects[SUBJ].cuts;
+    var key=sums.map(function(v,i){return v>=cut[i]?"1":"0";}).join("");
+    var ty=T.combo.types[key];
+    var cb=document.getElementById("combo");cb.innerHTML="";
+    if(ty){
+      cb.style.display="block";
+      var k=document.createElement("p");k.className="combo-k";
+      k.textContent=T.combo.subjects.length>1?(T.combo.subjects[SUBJ].label+T.combo.title):T.combo.title;
+      cb.appendChild(k);
+      var nm=document.createElement("b");nm.className="combo-n";nm.textContent=ty.name;cb.appendChild(nm);
+      var ds=document.createElement("p");ds.className="combo-d";ds.textContent=ty.desc;cb.appendChild(ds);
+      if(ty.advice){var au=document.createElement("ul");au.className="dim-adv";
+        ty.advice.forEach(function(a){var li=document.createElement("li");li.textContent=a;au.appendChild(li);});
+        cb.appendChild(au);}
+      LASTTYPE=ty.name;
+    } else { cb.style.display="none"; }
+  }
   var host=document.getElementById("dims");host.innerHTML="";
   T.dims.forEach(function(dim,di){
     var s=sums[di];
@@ -169,7 +204,8 @@ document.getElementById("reset").onclick=function(){
 };
 function toast(m){var t=document.getElementById("toast");t.textContent=m;t.className="toast show";setTimeout(function(){t.className="toast";},1800);}
 document.getElementById("share").onclick=function(){
-  var url=location.href.split("#")[0],text=T.short_name+" — "+T.items.length+"문항, "+T.minutes+"분.";
+  var url=location.href.split("#")[0];
+  var text=LASTTYPE?(T.short_name+" 결과: "+LASTTYPE):(T.short_name+" — "+T.items.length+"문항, "+T.minutes+"분.");
   if(navigator.share){navigator.share({title:T.short_name,text:text,url:url}).catch(function(){});}
   else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){toast("링크를 복사했어요");});}
   else{prompt("아래 링크를 복사하세요",url);}

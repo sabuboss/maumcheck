@@ -104,8 +104,12 @@ def main():
                     "dims": [{"name": d["name"], "desc": d["desc"],
                               "low_label": d["low_label"], "high_label": d["high_label"],
                               "bands": d["bands"],
-                              "min": len(d["items"]), "max": len(d["items"]) * n_lab}
+                              "offset": d.get("offset", 0),
+                              "min": len(d["items"]) - d.get("offset", 0),
+                              "max": len(d["items"]) * n_lab - d.get("offset", 0)}
                              for d in t["dimensions"]]}
+            if "combo" in t:
+                tool["combo"] = t["combo"]
         else:
             tool = {k: t[k] for k in ("items", "labels", "bands", "short_name", "minutes")}
             tool["offset"] = t.get("offset", 0)
