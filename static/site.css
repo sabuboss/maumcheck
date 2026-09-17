@@ -136,3 +136,16 @@
   .sharebar{display:flex;gap:8px;margin-top:16px}
   .sharebar .share{flex:1;margin-top:0}
   .sharebar .copy{font:inherit;font-size:15px;padding:14px 18px;border-radius:12px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;flex:none}
+  /* ---- 대상 선택 · 유형 결과 ---- */
+  .subj{margin:0 0 16px}
+  .subj-q{font-size:14px;font-weight:600;margin:0 0 8px}
+  .subj-row{display:flex;gap:8px}
+  .subj-row button{font:inherit;font-size:14px;padding:10px 20px;border-radius:999px;
+    border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+  .subj-row button.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+  .combo{display:none;background:var(--accent-soft);border-radius:14px;padding:20px 18px;margin:0 0 22px}
+  .combo-k{font-size:12px;font-weight:600;color:var(--accent);margin:0 0 4px;letter-spacing:.01em}
+  .combo-n{display:block;font-size:26px;font-weight:700;line-height:1.25;margin:0 0 8px;color:var(--ink)}
+  .combo-d{font-size:14.5px;margin:0 0 10px;line-height:1.7}
+  .combo .dim-adv{color:var(--ink);opacity:.75}
+  @media (max-width:420px){.combo-n{font-size:22px}.subj-row button{flex:1;padding:10px 6px}}
