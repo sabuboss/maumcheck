@@ -25,6 +25,17 @@ AD = (_SLOT % site["adsense_client"]) if site.get("adsense_client") else (
     '<div class="ad">광고 영역 (AdSense)</div>' if PUBLISH_ALL else '')
 
 
+def cat_style(t):
+    """검사의 카테고리 색을 --accent로 덮어쓴다. 페이지 전체가 그 색을 따라간다."""
+    c = site.get("categories", {}).get(t.get("category"))
+    return f'--accent:{c["c"]};--accent-soft:{c["s"]}' if c else ""
+
+
+def is_new(t):
+    d = datetime.date.fromisoformat(t["publish"])
+    return 0 <= (TODAY - d).days <= site.get("new_days", 14)
+
+
 def flatten(t):
     """다차원 검사: 차원별 문항을 번갈아 섞어 t["items"]로 펼친다.
     한 특성의 문항이 연달아 나오면 응답자가 패턴을 눈치채기 때문."""
@@ -57,10 +68,17 @@ def load_tests():
 
 
 def cards_html(tests):
-    return '<div class="cards">' + "".join(
-        f'<a class="card" href="/{t["slug"]}/"><span class="chip">{t["category"]}</span><b>{t["short_name"]}</b>'
-        f'<p>{t["description"]}</p><small>{len(t["items"])}문항 · 약 {t["minutes"]}분</small></a>'
-        for t in tests) + "</div>"
+    out = []
+    for t in tests:
+        style = cat_style(t)
+        attr = ' style="%s"' % style if style else ""
+        badge = '<span class="new">NEW</span>' if is_new(t) else ""
+        out.append(
+            '<a class="card" href="/%s/"%s><span class="chip">%s</span>%s<b>%s</b>'
+            '<p>%s</p><small>%d문항 · 약 %d분</small></a>'
+            % (t["slug"], attr, t["category"], badge, t["short_name"],
+               t["description"], len(t["items"]), t["minutes"]))
+    return '<div class="cards">' + "".join(out) + "</div>"
 
 
 def jsonld(t):
@@ -116,7 +134,8 @@ def main():
             tool["max"] = t["max_score"]
         write(t["slug"], (mtpl if multi else tpl).render(
             t=t, site=site, related=related, ad=AD, year=year,
-            jsonld=jsonld(t), tool_json=json.dumps(tool, ensure_ascii=False)))
+            jsonld=jsonld(t), tool_json=json.dumps(tool, ensure_ascii=False),
+            cat_style=cat_style(t)))
         print(f"  발행  /{t['slug']}/")
 
     # 고정 페이지

@@ -149,3 +149,10 @@
   .combo-d{font-size:14.5px;margin:0 0 10px;line-height:1.7}
   .combo .dim-adv{color:var(--ink);opacity:.75}
   @media (max-width:420px){.combo-n{font-size:22px}.subj-row button{flex:1;padding:10px 6px}}
+  /* ---- 카테고리 색 · NEW 배지 ---- */
+  .card{position:relative;border-top:3px solid var(--accent)}
+  .cards.soon .card{border-top-color:var(--line)}
+  .new{position:absolute;top:14px;right:14px;font-size:10px;font-weight:700;
+    letter-spacing:.06em;padding:3px 7px;border-radius:5px;
+    background:var(--accent);color:#fff}
+  .card b{padding-right:44px}
