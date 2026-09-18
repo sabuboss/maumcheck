@@ -116,8 +116,9 @@ T.items.forEach(function(it,i){
   var d=document.createElement("div");d.className="q";d.id="q"+i;
   var n=document.createElement("p");n.className="qn";n.textContent=(i+1)+" / "+T.items.length;d.appendChild(n);
   var t=document.createElement("p");t.className="qt";t.textContent=it.text;d.appendChild(t);
-  var o=document.createElement("div");o.className="opts";
-  T.labels.forEach(function(l,j){
+  var L=it.labels||T.labels;
+  var o=document.createElement("div");o.className="opts"+(L.length>4?" opts5":"")+(L.length<=3?" opts3":"");
+  L.forEach(function(l,j){
     var b=document.createElement("button");b.textContent=l;
     b.onclick=function(){
       ans[i]=j;
@@ -135,8 +136,13 @@ T.items.forEach(function(it,i){
 document.getElementById("go").onclick=function(){
   var miss=[];ans.forEach(function(a,i){if(a===null)miss.push(i+1);});
   if(miss.length){document.getElementById("err").textContent=miss.join(", ")+"번 문항에 답해 주세요";document.getElementById("q"+(miss[0]-1)).scrollIntoView({behavior:"smooth",block:"center"});return;}
-  var n=T.labels.length,s=0;
-  ans.forEach(function(a,i){s+=T.items[i].reverse?a+1:n-a;});
+  var s=0;
+  ans.forEach(function(a,i){
+    var it=T.items[i];
+    if(it.scores){s+=it.scores[a];return;}
+    var n=(it.labels||T.labels).length;
+    s+=it.reverse?a+1:n-a;
+  });
   s-=T.offset||0;   // 원 척도의 0점 기준에 맞춘다 (예: GAD-7 0~21)
   var b=T.bands.filter(function(x){return s<=x.max;})[0]||T.bands[T.bands.length-1];
   document.getElementById("sc").textContent=s;
