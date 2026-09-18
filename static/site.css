@@ -156,3 +156,5 @@
     letter-spacing:.06em;padding:3px 7px;border-radius:5px;
     background:var(--accent);color:#fff}
   .card b{padding-right:44px}
+  .opts.opts3{grid-template-columns:1fr}
+  .opts.opts3 button{text-align:left;padding:12px 14px}
