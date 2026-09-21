@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>마음체크</title>
+    <link>https://maumcheck.com/</link>
+    <description>검증된 무료 심리 척도만 모았습니다</description>
+    <language>ko</language>
+    <lastBuildDate>Mon, 21 Sep 2026 09:00:00 +0900</lastBuildDate>
+    <copyright>&#169; 2026 마음체크</copyright>
+    <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>AUDIT 음주 자가진단 — WHO가 만든 10문항 음주 선별검사</title>
+      <link>https://maumcheck.com/alcohol/audit/</link>
+      <guid isPermaLink="true">https://maumcheck.com/alcohol/audit/</guid>
+      <description>세계보건기구가 만들어 공개한 음주 선별검사 AUDIT입니다. 무엇을 재는 검사인지, 8점이라는 기준선은 어디서 왔는지, 한국인에게는 기준이 왜 다른지까지 정리했습니다.</description>
+      <category>음주</category>
+      <pubDate>Mon, 21 Sep 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>자기자비 척도(SCS) — 26문항으로 보는 나를 대하는 태도</title>
+      <link>https://maumcheck.com/self-compassion/scs/</link>
+      <guid isPermaLink="true">https://maumcheck.com/self-compassion/scs/</guid>
+      <description>힘들 때 나를 어떻게 대하는지를 재는 검사입니다. 자기자비가 자존감과 무엇이 다른지, 세 가지 구성 요소가 무엇인지, 점수를 어떻게 읽어야 하는지까지 정리했습니다.</description>
+      <category>자기자비</category>
+      <pubDate>Sun, 20 Sep 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>부모 양육 태도 검사(PBI) — 내 기억 속 부모는 어떤 부모였나</title>
+      <link>https://maumcheck.com/family/parental-bonding/</link>
+      <guid isPermaLink="true">https://maumcheck.com/family/parental-bonding/</guid>
+      <description>성인이 어린 시절의 부모를 떠올려 답하는 25문항 검사입니다. 돌봄과 과보호 두 축으로 네 가지 양육 유형을 가려내며, 어머니와 아버지를 따로 볼 수 있습니다.</description>
+      <category>가족</category>
+      <pubDate>Sat, 19 Sep 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>사랑의 삼각형 검사(TLS-15) — 15문항으로 보는 우리 관계의 세 축</title>
+      <link>https://maumcheck.com/love/triangular/</link>
+      <guid isPermaLink="true">https://maumcheck.com/love/triangular/</guid>
+      <description>심리학자 스턴버그의 사랑의 삼각형 이론을 재는 검사입니다. 친밀감·열정·헌신 세 가지가 지금 우리 관계에서 어떤 모양인지, 그 조합이 어떤 사랑인지까지 알려드립니다.</description>
+      <category>연애</category>
+      <pubDate>Fri, 18 Sep 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>빅파이브 성격검사(Mini-IPIP) — 20문항으로 보는 나의 다섯 가지 성격 특성</title>
+      <link>https://maumcheck.com/personality/big-five/</link>
+      <guid isPermaLink="true">https://maumcheck.com/personality/big-five/</guid>
+      <description>심리학이 가장 널리 인정하는 성격 모형인 빅파이브를 공공영역 문항으로 직접 해보세요. MBTI와 무엇이 다른지, 다섯 특성이 각각 무엇을 뜻하는지, 결과를 어떻게 읽어야 하는지까지 정리했습니다.</description>
+      <category>성격</category>
+      <pubDate>Wed, 16 Sep 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>번아웃 자가진단(CBI) — 7문항으로 보는 일 때문에 닳은 정도</title>
+      <link>https://maumcheck.com/burnout/cbi/</link>
+      <guid isPermaLink="true">https://maumcheck.com/burnout/cbi/</guid>
+      <description>덴마크 국립산업보건연구원이 만든 무료 번아웃 척도 CBI의 일 관련 번아웃 7문항입니다. 번아웃이 무엇이고 무엇이 아닌지, 점수를 어떻게 읽어야 하는지까지 정리했습니다.</description>
+      <category>번아웃</category>
+      <pubDate>Wed, 16 Sep 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>CES-D 우울 자가진단 — 20문항으로 보는 지난 일주일의 우울</title>
+      <link>https://maumcheck.com/depression/ces-d/</link>
+      <guid isPermaLink="true">https://maumcheck.com/depression/ces-d/</guid>
+      <description>전 세계 역학조사에서 가장 널리 쓰인 우울 척도 CES-D를 직접 해보세요. 무엇을 재는 검사인지, 16점이라는 기준선은 어디서 왔는지, 결과를 어떻게 읽어야 하는지까지 정리했습니다.</description>
+      <category>우울</category>
+      <pubDate>Wed, 16 Sep 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>GAD-7 불안 자가진단 — 7문항으로 보는 지난 2주간의 불안</title>
+      <link>https://maumcheck.com/anxiety/gad-7/</link>
+      <guid isPermaLink="true">https://maumcheck.com/anxiety/gad-7/</guid>
+      <description>전 세계 진료실에서 가장 널리 쓰이는 불안 선별검사 GAD-7을 직접 해보세요. 무엇을 재는 검사인지, 점수의 기준선은 어디서 왔는지, 결과를 어떻게 읽어야 하는지까지 정리했습니다.</description>
+      <category>불안</category>
+      <pubDate>Wed, 16 Sep 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>PCL-5 트라우마 자가진단 — 20문항으로 보는 외상후 스트레스 증상</title>
+      <link>https://maumcheck.com/trauma/pcl-5/</link>
+      <guid isPermaLink="true">https://maumcheck.com/trauma/pcl-5/</guid>
+      <description>미국 국가 PTSD 센터가 만들어 공공영역으로 공개한 외상후 스트레스 척도 PCL-5입니다. 어떤 사람에게 의미가 있는 검사인지, 네 가지 증상 묶음이 무엇인지, 33점이라는 기준선은 어디서 왔는지까지 정리했습니다.</description>
+      <category>트라우마</category>
+      <pubDate>Wed, 16 Sep 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>로젠버그 자존감 척도(RSES) 자가진단 — 10문항으로 보는 나의 자존감</title>
+      <link>https://maumcheck.com/self-esteem/rosenberg/</link>
+      <guid isPermaLink="true">https://maumcheck.com/self-esteem/rosenberg/</guid>
+      <description>세계에서 가장 널리 쓰이는 자존감 검사, 로젠버그 자존감 척도를 직접 해보세요. 누가 왜 만들었는지, 점수를 어떻게 읽어야 하는지, 언제 해보면 좋은지까지 정리했습니다.</description>
+      <category>자존감</category>
+      <pubDate>Mon, 14 Sep 2026 09:00:00 +0900</pubDate>
+    </item>
+  </channel>
+</rss>
