@@ -189,7 +189,7 @@ def main():
     # 검사 목록 + 홈
     cards = cards_html(tests)
     listing = f'<p>{site["tagline"]}. 모든 검사는 무료이며 결과는 저장되지 않습니다.</p>' + cards
-    write("tests", ptpl.render(site=site, year=year, slug="tests", title="전체 검사", description=f"{site['name']}의 모든 심리 자가진단 목록", body=listing, ad=AD))
+    write("tests", ptpl.render(site=site, year=year, slug="tests", title="전체 검사", description=f"{site['name']}에 올라온 심리 자가진단 {len(tests)}종을 한곳에 모았습니다. 우울·불안·번아웃·성격·관계까지, 학계에서 검증되고 무료로 공개된 척도만 다룹니다.", body=listing, ad=AD))
     home_ld = json.dumps({"@context": "https://schema.org", "@type": "WebSite", "name": site["name"], "url": site["url"],
                           "description": site["tagline"]}, ensure_ascii=False)
     (DIST / "index.html").write_text(
