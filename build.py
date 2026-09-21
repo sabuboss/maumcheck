@@ -6,6 +6,8 @@
   python build.py --all      # 날짜 무시하고 전부 발행 (미리보기용)
 """
 import json, sys, shutil, datetime, pathlib
+from xml.sax.saxutils import escape
+NL = chr(10)
 from jinja2 import Environment, FileSystemLoader
 
 ROOT = pathlib.Path(__file__).parent
@@ -23,6 +25,44 @@ _SLOT = ('<ins class="adsbygoogle" style="display:block" data-ad-client="%s" dat
 # "광고 영역" 자리표시자는 --all(미리보기)에서만 보인다 — 방문자·애드센스 심사자에게 보이면 안 되므로.
 AD = (_SLOT % site["adsense_client"]) if site.get("adsense_client") else (
     '<div class="ad">광고 영역 (AdSense)</div>' if PUBLISH_ALL else '')
+
+
+_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+
+def rfc822(d):
+    """RSS가 요구하는 날짜 형식. 발행은 매일 09:00 KST에 이뤄진다."""
+    return "%s, %02d %s %d 09:00:00 +0900" % (_DAYS[d.weekday()], d.day, _MONTHS[d.month - 1], d.year)
+
+
+def write_rss(tests, year):
+    """네이버·구글이 새 글을 빨리 가져가도록 RSS 2.0 피드를 만든다."""
+    recent = sorted(tests, key=lambda t: t["publish"], reverse=True)[:20]
+    L = []
+    L.append('<?xml version="1.0" encoding="UTF-8"?>')
+    L.append('<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">')
+    L.append("  <channel>")
+    L.append("    <title>%s</title>" % escape(site["name"]))
+    L.append("    <link>%s/</link>" % site["url"])
+    L.append("    <description>%s</description>" % escape(site["tagline"]))
+    L.append("    <language>ko</language>")
+    L.append("    <lastBuildDate>%s</lastBuildDate>" % rfc822(TODAY))
+    L.append("    <copyright>&#169; %d %s</copyright>" % (year, escape(site["name"])))
+    L.append('    <atom:link href="%s/rss.xml" rel="self" type="application/rss+xml"/>' % site["url"])
+    for t in recent:
+        url = "%s/%s/" % (site["url"], t["slug"])
+        L.append("    <item>")
+        L.append("      <title>%s</title>" % escape(t["title"]))
+        L.append("      <link>%s</link>" % url)
+        L.append('      <guid isPermaLink="true">%s</guid>' % url)
+        L.append("      <description>%s</description>" % escape(t["description"]))
+        L.append("      <category>%s</category>" % escape(t["category"]))
+        L.append("      <pubDate>%s</pubDate>" % rfc822(datetime.date.fromisoformat(t["publish"])))
+        L.append("    </item>")
+    L.append("  </channel>")
+    L.append("</rss>")
+    (DIST / "rss.xml").write_text(NL.join(L) + NL, encoding="utf-8")
 
 
 def cat_style(t):
@@ -159,6 +199,8 @@ def main():
     # 없으면 홈이 200으로 나가서 검색엔진이 소프트 404로 본다.
     (DIST / "404.html").write_text(
         env.get_template("404.html").render(site=site, year=year, tests=tests, cards=cards), encoding="utf-8")
+
+    write_rss(tests, year)
 
     # sitemap / robots
     urls = [""] + ["tests", "about", "privacy", "contact"] + [t["slug"] for t in tests]

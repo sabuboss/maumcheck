@@ -12,6 +12,7 @@
 <meta property="og:url" content="{{ site.url }}/{{ t.slug }}/">
 {% if site.google_verification %}<meta name="google-site-verification" content="{{ site.google_verification }}">{% endif %}
 {% if site.naver_verification %}<meta name="naver-site-verification" content="{{ site.naver_verification }}">{% endif %}
+<link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="/rss.xml">
 <link rel="stylesheet" href="/static/site.css">
 {% if site.adsense_client %}<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.adsense_client }}" crossorigin="anonymous"></script>{% endif %}
 <script type="application/ld+json">{{ jsonld|safe }}</script>
