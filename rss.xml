@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Mon, 21 Sep 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 22 Sep 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>PHQ-9 우울증 선별검사 — 진료실이 쓰는 9문항 표준 도구</title>
+      <link>https://maumcheck.com/depression/phq-9/</link>
+      <guid isPermaLink="true">https://maumcheck.com/depression/phq-9/</guid>
+      <description>전 세계 진료실에서 우울증 선별에 가장 널리 쓰이는 PHQ-9입니다. 진단 기준 아홉 항목을 그대로 묻는 구조와 점수별 의미, 그리고 CES-D와 무엇이 다른지까지 정리했습니다.</description>
+      <category>우울</category>
+      <pubDate>Tue, 22 Sep 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>AUDIT 음주 자가진단 — WHO가 만든 10문항 음주 선별검사</title>
       <link>https://maumcheck.com/alcohol/audit/</link>
