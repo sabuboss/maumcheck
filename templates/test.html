@@ -149,10 +149,10 @@ document.getElementById("go").onclick=function(){
   var b=T.bands.filter(function(x){return s<=x.max;})[0]||T.bands[T.bands.length-1];
   document.getElementById("sc").textContent=s;
   var tg=document.getElementById("tag");tg.textContent=b.label;tg.style.background="var(--"+b.tone+"-soft)";tg.style.color="var(--"+b.tone+")";
-  document.getElementById("ev").textContent=b.eval;
+  document.getElementById("ev").innerHTML=b.eval;
   LAST={score:s,label:b.label};
   var ul=document.getElementById("ad");ul.innerHTML="";
-  b.advice.forEach(function(a){var li=document.createElement("li");li.textContent=a;ul.appendChild(li);});
+  b.advice.forEach(function(a){var li=document.createElement("li");li.innerHTML=a;ul.appendChild(li);});
   var r=document.getElementById("res");r.style.display="block";
   setTimeout(function(){r.scrollIntoView({behavior:"smooth",block:"start"});},100);
 };
