@@ -67,8 +67,87 @@ def write_rss(tests, year):
 
 def cat_style(t):
     """검사의 카테고리 색을 --accent로 덮어쓴다. 페이지 전체가 그 색을 따라간다."""
-    c = site.get("categories", {}).get(t.get("category"))
-    return f'--accent:{c["c"]};--accent-soft:{c["s"]}' if c else ""
+    return cat_style_of(t.get("category"))
+
+
+def cat_meta(cat):
+    return site.get("categories", {}).get(cat, {})
+
+
+def cat_style_of(cat):
+    c = cat_meta(cat)
+    return f'--accent:{c["c"]};--accent-soft:{c["s"]}' if c.get("c") else ""
+
+
+def cat_prefix(ts):
+    """카테고리 URL. 검사 slug의 앞부분이 곧 카테고리 주소가 된다 (예: depression/ces-d -> /depression/).
+    카테고리와 접두사는 1:1로 관리한다."""
+    return ts[0]["slug"].split("/")[0]
+
+
+def group_by_cat(tests):
+    """site.json의 카테고리 순서대로 [(카테고리, 주소, [검사...])] 를 돌려준다."""
+    by = {}
+    for t in tests:
+        by.setdefault(t["category"], []).append(t)
+    for ts in by.values():
+        ts.sort(key=lambda t: t["publish"])
+    out = []
+    for cat in site.get("categories", {}):
+        if cat in by:
+            out.append((cat, cat_prefix(by[cat]), by[cat]))
+    for cat, ts in by.items():           # site.json에 없는 카테고리도 빠뜨리지 않는다
+        if cat not in site.get("categories", {}):
+            out.append((cat, cat_prefix(ts), ts))
+    return out
+
+
+def theme_of(cat):
+    return cat_meta(cat).get("theme")
+
+
+def theme_style(key):
+    m = site.get("themes", {}).get(key, {})
+    return f'--accent:{m["c"]};--accent-soft:{m["s"]}' if m.get("c") else ""
+
+
+def group_by_theme(groups):
+    """카테고리 묶음을 다시 주제로 묶는다. [(키, 메타, [(카테고리, 주소, [검사...])...])]"""
+    out = []
+    for key, meta in site.get("themes", {}).items():
+        inner = [g for g in groups if theme_of(g[0]) == key]
+        if inner:
+            out.append((key, meta, inner))
+    orphan = [g for g in groups if theme_of(g[0]) not in site.get("themes", {})]
+    if orphan:
+        out.append(("etc", {"name": "그 밖의 주제", "d": ""}, orphan))
+    return out
+
+
+def theme_nav_html(themes, current=None):
+    out = []
+    for key, meta, inner in themes:
+        n = sum(len(ts) for _, _, ts in inner)
+        st = theme_style(key)
+        attr = ' style="%s"' % st if st else ""
+        if key == current:
+            out.append('<span class="tchip on"%s>%s <i>%d</i></span>' % (attr, meta["name"], n))
+        else:
+            out.append('<a class="tchip" href="/%s/"%s>%s <i>%d</i></a>' % (key, attr, meta["name"], n))
+    return '<div class="tnav">' + "".join(out) + "</div>"
+
+
+def cat_nav_html(groups, current=None):
+    """주제 칩 목록. 자기 자신은 링크 대신 표시만 한다."""
+    out = []
+    for cat, pre, ts in groups:
+        st = cat_style_of(cat)
+        attr = ' style="%s"' % st if st else ""
+        if cat == current:
+            out.append('<span class="tchip on"%s>%s <i>%d</i></span>' % (attr, cat, len(ts)))
+        else:
+            out.append('<a class="tchip" href="/%s/"%s>%s <i>%d</i></a>' % (pre, attr, cat, len(ts)))
+    return '<div class="tnav">' + "".join(out) + "</div>"
 
 
 def is_new(t):
@@ -153,7 +232,12 @@ def main():
     tpl = env.get_template("test.html")
     mtpl = env.get_template("test-multi.html")
     for t in tests:
-        related = [r for r in tests if r["slug"] != t["slug"]][:4]
+        # 같은 주제 → 같은 갈래 → 나머지 순으로 채운다.
+        others = [r for r in tests if r["slug"] != t["slug"]]
+        th = theme_of(t["category"])
+        rank = lambda r: (0 if r["category"] == t["category"]
+                          else 1 if theme_of(r["category"]) == th else 2)
+        related = sorted(others, key=rank)[:4]
         multi = "dimensions" in t
         if multi:
             n_lab = len(t["labels"])
@@ -174,6 +258,7 @@ def main():
             tool["max"] = t["max_score"]
         write(t["slug"], (mtpl if multi else tpl).render(
             t=t, site=site, related=related, ad=AD, year=year,
+            cat_url=t["slug"].split("/")[0],
             jsonld=jsonld(t), tool_json=json.dumps(tool, ensure_ascii=False),
             cat_style=cat_style(t)))
         print(f"  발행  /{t['slug']}/")
@@ -186,14 +271,80 @@ def main():
         meta = {k.strip(): v.strip() for k, v in meta.items()}
         write(p.stem, ptpl.render(site=site, year=year, slug=p.stem, body=body, ad="", **meta))
 
-    # 검사 목록 + 홈
+    # 주제 > 카테고리 > 검사, 세 층으로 묶는다
+    groups = group_by_cat(tests)
+    themes = group_by_theme(groups)
+    CAT_MIN = 2   # 검사가 이만큼 안 되는 카테고리는 내용이 얇아서 색인에서 뺀다 (링크는 그대로 동작)
+    indexed_cats = [(c, pre) for c, pre, ts in groups if len(ts) >= CAT_MIN]
+
+    # 1) 카테고리 페이지 — /depression/ 처럼 검사 주소의 윗단계가 그대로 주소가 된다
+    for cat, pre, ts in groups:
+        d = cat_meta(cat).get("d", "")
+        tkey = theme_of(cat)
+        tname = site.get("themes", {}).get(tkey, {}).get("name", "")
+        body = [f'<p class="lead">{d}</p>' if d else "", cards_html(ts)]
+        if len(ts) < CAT_MIN:
+            body.append('<p class="note">이 주제는 아직 검사가 하나뿐입니다. '
+                        '<b>자유롭게 쓸 수 있는 척도만 올린다</b>는 기준을 지키다 보니 천천히 늘어납니다. '
+                        f'비슷한 주제는 <a href="/{tkey}/">{tname}</a>에서 함께 보실 수 있습니다.</p>')
+        body.append("<h2>같은 갈래의 다른 주제</h2>")
+        body.append(cat_nav_html([g for g in groups if theme_of(g[0]) == tkey], current=cat))
+        crumb = (f'<div class="crumb"><a href="/">홈</a> &rsaquo; <a href="/tests/">전체 검사</a>'
+                 f' &rsaquo; <a href="/{tkey}/">{tname}</a> &rsaquo; {cat}</div>')
+        write(pre, ptpl.render(
+            site=site, year=year, slug=pre, title=f"{cat} 검사",
+            description=f"{cat} 관련 무료 심리 자가진단 {len(ts)}종. {d}",
+            crumb=crumb, cat_style=cat_style_of(cat), body="".join(body), ad=AD,
+            robots=None if len(ts) >= CAT_MIN else "noindex,follow"))
+
+    # 2) 주제 페이지 — 카테고리 여러 개를 묶어 실제로 읽을거리가 되는 층
+    for key, meta, inner in themes:
+        n = sum(len(ts) for _, _, ts in inner)
+        body = [f'<p class="lead">{meta["d"]}</p>']
+        for cat, pre, ts in inner:
+            d = cat_meta(cat).get("d", "")
+            st = cat_style_of(cat)
+            attr = f' style="{st}"' if st else ""
+            body.append(f'<section class="topic"{attr}><h2><a href="/{pre}/">{cat}</a></h2>'
+                        f'{f"<p>{d}</p>" if d else ""}{cards_html(ts)}</section>')
+        body.append("<h2>다른 갈래</h2>")
+        body.append(theme_nav_html(themes, current=key))
+        crumb = f'<div class="crumb"><a href="/">홈</a> &rsaquo; <a href="/tests/">전체 검사</a> &rsaquo; {meta["name"]}</div>'
+        write(key, ptpl.render(
+            site=site, year=year, slug=key, title=meta["name"],
+            description=f"{meta['name']} — 무료 심리 자가진단 {n}종을 모았습니다. "
+                        f"{', '.join(c for c, _, _ in inner)} 주제를 다룹니다.",
+            crumb=crumb, cat_style=theme_style(key), body="".join(body), ad=AD))
+        print(f"  갈래  /{key}/  ({meta['name']}, 카테고리 {len(inner)}개 · 검사 {n}개)")
+
+    # 3) 전체 검사 — 갈래별로 묶어서 보여 준다
     cards = cards_html(tests)
-    listing = f'<p>{site["tagline"]}. 모든 검사는 무료이며 결과는 저장되지 않습니다.</p>' + cards
-    write("tests", ptpl.render(site=site, year=year, slug="tests", title="전체 검사", description=f"{site['name']}에 올라온 심리 자가진단 {len(tests)}종을 한곳에 모았습니다. 우울·불안·번아웃·성격·관계까지, 학계에서 검증되고 무료로 공개된 척도만 다룹니다.", body=listing, ad=AD))
-    home_ld = json.dumps({"@context": "https://schema.org", "@type": "WebSite", "name": site["name"], "url": site["url"],
-                          "description": site["tagline"]}, ensure_ascii=False)
+    sections = [f'<p>{site["tagline"]}. 모든 검사는 무료이며 결과는 저장되지 않습니다. '
+                f'지금 <b>{len(tests)}종</b>이 <b>{len(themes)}개 갈래</b>, '
+                f'<b>{len(groups)}개 주제</b>로 나뉘어 있습니다.</p>',
+                theme_nav_html(themes)]
+    for key, meta, inner in themes:
+        n = sum(len(ts) for _, _, ts in inner)
+        st = theme_style(key)
+        attr = f' style="{st}"' if st else ""
+        sections.append(f'<section class="theme"{attr}><h2><a href="/{key}/">{meta["name"]}</a>'
+                        f'<span class="cnt">검사 {n}종</span></h2>')
+        sections.append(cat_nav_html(inner))
+        # 카테고리별로 그리드를 쪼개면 카드가 한 줄씩 떨어진다. 갈래 단위로 한 번에 깐다.
+        sections.append(cards_html([t for _, _, ts in inner for t in ts]))
+        sections.append("</section>")
+    write("tests", ptpl.render(site=site, year=year, slug="tests", title="전체 검사",
+        description=f"{site['name']}의 심리 자가진단 {len(tests)}종을 {len(themes)}개 갈래로 묶었습니다. "
+                    f"우울·불안 같은 지금의 상태부터 성격, 관계까지 학계에서 검증되고 무료로 공개된 척도만 다룹니다.",
+        body="".join(sections), ad=AD))
+
+    # 홈
+    home_ld = json.dumps({"@context": "https://schema.org", "@type": "WebSite", "name": site["name"],
+                          "url": site["url"], "description": site["tagline"]}, ensure_ascii=False)
     (DIST / "index.html").write_text(
-        env.get_template("home.html").render(site=site, year=year, tests=tests, soon=soon, cards=cards, ad=AD, jsonld=home_ld), encoding="utf-8")
+        env.get_template("home.html").render(site=site, year=year, tests=tests, soon=soon,
+                                             cards=cards, themes=themes, theme_nav=theme_nav_html(themes),
+                                             ad=AD, jsonld=home_ld), encoding="utf-8")
 
     # 404 — Cloudflare Pages가 없는 경로에 이 파일을 404 상태로 돌려준다.
     # 없으면 홈이 200으로 나가서 검색엔진이 소프트 404로 본다.
@@ -203,12 +354,14 @@ def main():
     write_rss(tests, year)
 
     # sitemap / robots
-    urls = [""] + ["tests", "about", "privacy", "contact"] + [t["slug"] for t in tests]
+    urls = ([""] + ["tests", "about", "privacy", "contact"]
+            + [k for k, _, _ in themes]
+            + [pre for _, pre in indexed_cats] + [t["slug"] for t in tests])
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(
         f"  <url><loc>{site['url']}/{u}{'/' if u else ''}</loc></url>\n" for u in urls) + "</urlset>\n"
     (DIST / "sitemap.xml").write_text(sm, encoding="utf-8")
     (DIST / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {site['url']}/sitemap.xml\n", encoding="utf-8")
-    print(f"완료: 검사 {len(tests)}개, dist/ 생성")
+    print(f"완료: 검사 {len(tests)}개 · 갈래 {len(themes)}개 · 주제 {len(groups)}개(색인 {len(indexed_cats)}개)")
 
 
 if __name__ == "__main__":

@@ -158,3 +158,28 @@
   .card b{padding-right:44px}
   .opts.opts3{grid-template-columns:1fr}
   .opts.opts3 button{text-align:left;padding:12px 14px}
+
+  /* 주제별 묶음 — 주제 칩, 주제 구획, 안내문 */
+  .tnav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 28px}
+  .tchip{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;
+    color:var(--accent);background:var(--accent-soft);border:1px solid transparent;
+    padding:6px 12px;border-radius:999px;text-decoration:none;line-height:1.2}
+  .tchip:hover{border-color:currentColor}
+  .tchip i{font-style:normal;font-weight:500;opacity:.65;font-size:12px}
+  .tchip.on{border-color:currentColor;cursor:default}
+  .topic{margin:0 0 34px;padding-left:14px;border-left:3px solid var(--accent)}
+  .topic h2{margin:0 0 4px;font-size:19px}
+  .topic h2 a{color:var(--accent);text-decoration:none}
+  .topic h2 a:hover{text-decoration:underline}
+  .topic>p{margin:0 0 14px;color:var(--muted);font-size:14px;line-height:1.65}
+  .note{margin:18px 0 0;padding:12px 14px;background:var(--field);border-radius:8px;
+    color:var(--muted);font-size:13.5px;line-height:1.65}
+  .theme{margin:0 0 40px;padding:18px 18px 4px;background:var(--accent-soft);border-radius:12px}
+  .theme>h2{display:flex;align-items:baseline;gap:10px;margin:0 0 2px;font-size:20px}
+  .theme>h2 a{color:var(--accent);text-decoration:none}
+  .theme>h2 a:hover{text-decoration:underline}
+  .theme .cnt{font-size:13px;font-weight:500;color:var(--muted)}
+  .theme .tnav{margin:12px 0 16px}
+  .theme .tchip{background:var(--paper)}
+  .theme .cards{margin-bottom:16px}
+
