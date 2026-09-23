@@ -5,6 +5,11 @@
   <url><loc>https://maumcheck.com/about/</loc></url>
   <url><loc>https://maumcheck.com/privacy/</loc></url>
   <url><loc>https://maumcheck.com/contact/</loc></url>
+  <url><loc>https://maumcheck.com/mood/</loc></url>
+  <url><loc>https://maumcheck.com/self/</loc></url>
+  <url><loc>https://maumcheck.com/traits/</loc></url>
+  <url><loc>https://maumcheck.com/relations/</loc></url>
+  <url><loc>https://maumcheck.com/depression/</loc></url>
   <url><loc>https://maumcheck.com/alcohol/audit/</loc></url>
   <url><loc>https://maumcheck.com/personality/big-five/</loc></url>
   <url><loc>https://maumcheck.com/burnout/cbi/</loc></url>
@@ -15,5 +20,6 @@
   <url><loc>https://maumcheck.com/depression/phq-9/</loc></url>
   <url><loc>https://maumcheck.com/self-esteem/rosenberg/</loc></url>
   <url><loc>https://maumcheck.com/self-compassion/scs/</loc></url>
+  <url><loc>https://maumcheck.com/self-control/discipline/</loc></url>
   <url><loc>https://maumcheck.com/love/triangular/</loc></url>
 </urlset>
