@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Wed, 23 Sep 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 24 Sep 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>분노 성향 검사 — 10문항으로 보는 얼마나 쉽게 화가 나는가</title>
+      <link>https://maumcheck.com/anger/irritability/</link>
+      <guid isPermaLink="true">https://maumcheck.com/anger/irritability/</guid>
+      <description>화가 얼마나 쉽게, 얼마나 자주 올라오는지를 재는 검사입니다. 분노가 왜 나쁜 감정이 아닌지, 참는 것이 왜 답이 아닌지, 점수를 어떻게 읽어야 하는지까지 정리했습니다.</description>
+      <category>분노</category>
+      <pubDate>Thu, 24 Sep 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>자기규율 검사 — 10문항으로 보는 미루는 습관의 반대편</title>
       <link>https://maumcheck.com/self-control/discipline/</link>
