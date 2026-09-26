@@ -75,8 +75,8 @@
 {% if t.uses %}
 <h2 id="uses">이렇게 활용해 보세요</h2>
 <div class="uses">{% for u in t.uses %}<div class="use"><b>{{ u.name }}</b><span>{{ u.text }}</span></div>{% endfor %}</div>
-{% if t.reuse %}<div class="callout">{{ t.reuse|safe }}</div>{% endif %}
 {% endif %}
+{% if t.reuse %}<div class="callout">{{ t.reuse|safe }}</div>{% endif %}
 
 <h2 id="faq">자주 묻는 질문</h2>
 <div class="faq">
