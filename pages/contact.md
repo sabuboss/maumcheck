@@ -1,5 +1,6 @@
 title: 문의
 description: 마음체크에 대한 오류 제보, 새로운 심리 척도 제안, 사용 문의를 받습니다. 검사 결과에 대한 개인 상담은 제공하지 않으며, 도움이 필요할 때 연락할 수 있는 기관을 안내합니다.
+updated: 2026-09-26
 ---
 <p>마음체크에 관한 문의는 아래 주소로 보내주세요. 운영자 한 사람이 직접 읽고 답합니다. 평일 기준 2~3일 안에 답장을 드리며, 내용에 따라 더 걸릴 수 있습니다.</p>
 <p style="font-size:18px;font-weight:600;margin:20px 0"><a href="mailto:sabuboss@naver.com">sabuboss@naver.com</a></p>

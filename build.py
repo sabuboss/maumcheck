@@ -281,10 +281,12 @@ def main():
 
     # 고정 페이지
     ptpl = env.get_template("page.html")
+    page_upd = {}
     for p in (ROOT / "pages").glob("*.md"):
         head, body = p.read_text(encoding="utf-8").split("---", 1)
         meta = dict(line.split(":", 1) for line in head.strip().splitlines())
         meta = {k.strip(): v.strip() for k, v in meta.items()}
+        page_upd[p.stem] = meta.get("updated", "")
         write(p.stem, ptpl.render(site=site, year=year, slug=p.stem, body=body, ad="", **meta))
 
     # 주제 > 카테고리 > 검사, 세 층으로 묶는다
@@ -373,8 +375,29 @@ def main():
     urls = ([""] + ["tests", "about", "privacy", "contact"]
             + [k for k, _, _ in themes]
             + [pre for _, pre in indexed_cats] + [t["slug"] for t in tests])
-    sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(
-        f"  <url><loc>{site['url']}/{u}{'/' if u else ''}</loc></url>\n" for u in urls) + "</urlset>\n"
+
+    # lastmod — 구글이 무엇을 다시 크롤링할지 정하는 데 쓴다. 매일 발행하는 사이트에서는
+    # 이게 없으면 새 글이 올라온 사실을 알아차리는 데 시간이 더 걸린다.
+    newest = max((t["publish"] for t in tests), default="")
+    lm = {"": newest, "tests": newest}
+    for key, _meta, inner in themes:
+        lm[key] = max(t["publish"] for _c, _p, ts in inner for t in ts)
+    for _cat, pre, ts in groups:
+        lm[pre] = max(t["publish"] for t in ts)
+    for t in tests:
+        lm[t["slug"]] = t["publish"]
+    for stem, d in page_upd.items():
+        if d:
+            lm[stem] = d
+
+    sm = ('<?xml version="1.0" encoding="UTF-8"?>' + NL
+          + '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + NL
+          + "".join(
+              "  <url><loc>%s/%s</loc>%s</url>%s" % (
+                  site["url"], u + ("/" if u else ""),
+                  "<lastmod>%s</lastmod>" % lm[u] if lm.get(u) else "", NL)
+              for u in urls)
+          + "</urlset>" + NL)
     (DIST / "sitemap.xml").write_text(sm, encoding="utf-8")
     (DIST / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {site['url']}/sitemap.xml\n", encoding="utf-8")
 
