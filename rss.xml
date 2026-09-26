@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Fri, 25 Sep 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 26 Sep 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>완벽주의 검사 — 9문항으로 보는 나와 남에게 요구하는 기준</title>
+      <link>https://maumcheck.com/perfectionism/standards/</link>
+      <guid isPermaLink="true">https://maumcheck.com/perfectionism/standards/</guid>
+      <description>완벽을 요구하는 정도를 재는 검사입니다. 완벽주의가 왜 장점이자 부담인지, 나를 향한 완벽주의와 남을 향한 완벽주의가 어떻게 다른지, 점수를 어떻게 읽어야 하는지까지 정리했습니다.</description>
+      <category>완벽주의</category>
+      <pubDate>Sat, 26 Sep 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>자기효능감 검사 — 10문항으로 보는 해낼 수 있다는 믿음</title>
       <link>https://maumcheck.com/self-efficacy/competence/</link>
