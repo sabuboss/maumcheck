@@ -44,6 +44,7 @@
 {{ s.html|safe }}
 {% endfor %}
 
+{% if t.compare %}<div class="cmpbar" id="cmpbar" style="display:none"></div>{% endif %}
 <h2 id="test">자가진단 하기</h2>
 <div class="tool">
   <p class="hint">{{ t.tool_hint|default("각 문항에 가장 가까운 답을 고르세요. 결과는 저장되지 않습니다.") }}</p>
@@ -54,12 +55,13 @@
   <div class="err" id="err"></div>
   <div class="res" id="res">
     <div class="combo" id="combo"></div>
+    {% if t.compare %}<div class="cmp" id="cmp" style="display:none"></div>{% endif %}
     <h3 style="margin-top:0">{{ t.result_title|default("결과") }}</h3>
     <p class="hint" style="margin-bottom:16px">{{ t.result_hint|default("높고 낮음에 좋고 나쁨은 없습니다.") }}</p>
     <div id="dims"></div>
     {% if t.crisis %}<div class="crisis"><b>{{ t.crisis.title }}</b>{{ t.crisis.html|safe }}</div>{% endif %}
     <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 채용, 평가, 진로 결정의 근거로 쓰기에 적합하지 않습니다.</p>
-    <button class="share" id="share">결과 링크 공유하기</button>
+    <div class="sharebar"><button class="share" id="share">결과 링크 공유하기</button>{% if t.compare %}<button class="copy" id="cmpmake">둘이 비교할 링크 만들기</button>{% endif %}</div>
   </div>
 </div>
 
@@ -106,7 +108,7 @@
 <script>
 var T={{ tool_json|safe }};
 var ans=new Array(T.items.length).fill(null);
-var SUBJ=0;var LASTTYPE=null;
+var SUBJ=0;var LASTTYPE=null;var LASTSUMS=null;
 (function(){
   if(!T.combo||!T.combo.subjects||T.combo.subjects.length<2)return;
   var host=document.getElementById("subj");
@@ -192,6 +194,7 @@ document.getElementById("go").onclick=function(){
     w.appendChild(ul);
     host.appendChild(w);
   });
+  LASTSUMS=sums;renderCompare(sums);
   var r=document.getElementById("res");r.style.display="block";
   setTimeout(function(){r.scrollIntoView({behavior:"smooth",block:"start"});},100);
 };
@@ -212,6 +215,77 @@ document.getElementById("share").onclick=function(){
   else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){toast("링크를 복사했어요");});}
   else{prompt("아래 링크를 복사하세요",url);}
 };
+
+{% if t.compare %}
+// ── 둘이 비교하기 ─────────────────────────────────────────
+// 상대의 축별 점수만 주소의 # 뒤에 담는다. # 뒤는 서버로 전송되지 않아
+// 접속 기록에도 남지 않고, 응답 내용 자체는 애초에 담기지 않는다.
+var PEER=null;
+function initPeer(){
+  PEER=null;
+  var bar=document.getElementById('cmpbar');bar.style.display='none';
+  var m=location.hash.match(/(?:^#|&)p=([0-9-]+)/);
+  if(!m)return;
+  var v=m[1].split('-').map(Number);
+  if(v.length!==T.dims.length)return;
+  if(v.some(function(x){return isNaN(x);}))return;
+  PEER=v;
+  bar.style.display='block';
+  bar.innerHTML='<b>상대방의 결과가 담긴 링크로 들어오셨습니다.</b>'+
+    '<span>검사를 마치면 두 사람의 결과를 같은 축 위에 겹쳐 보여드립니다. '+
+    '링크에는 축별 점수만 들어 있고, 어떤 문항에 어떻게 답했는지는 담기지 않습니다.</span>';
+}
+initPeer();
+// 같은 페이지에 머문 채 비교 링크를 열면 주소만 바뀌고 새로 고쳐지지 않는다.
+window.addEventListener('hashchange',function(){initPeer();if(LASTSUMS)renderCompare(LASTSUMS);});
+function renderCompare(mine){
+  var host=document.getElementById('cmp');
+  if(!PEER){host.style.display='none';return;}
+  host.innerHTML='';host.style.display='block';
+  var h=document.createElement('h3');h.textContent='둘이 비교하기';host.appendChild(h);
+  var lg=document.createElement('div');lg.className='cmp-legend';
+  lg.innerHTML='<span class="k me"></span>나<span class="k you"></span>상대';
+  host.appendChild(lg);
+  var gaps=[];
+  T.dims.forEach(function(d,i){
+    var range=(d.max-d.min)||1;
+    var a=mine[i],b=PEER[i],gap=Math.abs(a-b);
+    gaps.push({name:d.name,gap:gap});
+    var row=document.createElement('div');row.className='cmp-row';
+    var t1=document.createElement('div');t1.className='cmp-t';
+    t1.innerHTML='<b>'+d.name+'</b><span>나 '+a+' · 상대 '+b+' · 차이 '+gap+'</span>';
+    row.appendChild(t1);
+    var bar=document.createElement('div');bar.className='cmp-bar';
+    var me=document.createElement('i');me.className='me';
+    me.style.left=Math.round((a-d.min)*100/range)+'%';
+    var you=document.createElement('i');you.className='you';
+    you.style.left=Math.round((b-d.min)*100/range)+'%';
+    bar.appendChild(you);bar.appendChild(me);row.appendChild(bar);
+    var e=document.createElement('div');e.className='cmp-ends';
+    e.innerHTML='<span>'+d.low_label+'</span><span>'+d.high_label+'</span>';
+    row.appendChild(e);host.appendChild(row);
+  });
+  gaps.sort(function(x,y){return x.gap-y.gap;});
+  var p=document.createElement('p');p.className='cmp-sum';
+  p.innerHTML='가장 비슷한 축은 <b>'+gaps[0].name+'</b>(차이 '+gaps[0].gap+'점), '+
+    '가장 갈리는 축은 <b>'+gaps[gaps.length-1].name+'</b>(차이 '+gaps[gaps.length-1].gap+'점)입니다.';
+  host.appendChild(p);
+  var n=document.createElement('p');n.className='cmp-note';
+  n.innerHTML='차이가 크다고 해서 맞지 않는다는 뜻이 아닙니다. 성격이 얼마나 비슷한지는 '+
+    '관계 만족을 잘 예측하지 못한다는 것이 여러 연구의 결론입니다. 이 화면은 궁합을 매기지 않습니다. '+
+    '<b>어느 자리에서 서로 다르게 보고 있는지</b>를 확인하는 용도입니다.';
+  host.appendChild(n);
+}
+document.getElementById('cmpmake').onclick=function(){
+  if(!LASTSUMS){toast('먼저 검사를 마쳐 주세요');return;}
+  var url=location.href.split('#')[0]+'#p='+LASTSUMS.join('-');
+  if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){
+    toast('비교 링크를 복사했어요. 상대에게 보내세요');});}
+  else{prompt('이 링크를 상대에게 보내세요',url);}
+};
+{% else %}
+function renderCompare(){}
+{% endif %}
 </script>
 </body>
 </html>

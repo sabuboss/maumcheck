@@ -261,7 +261,16 @@ def main():
                 tool["combo"] = t["combo"]
         else:
             tool = {k: t[k] for k in ("items", "labels", "bands", "short_name", "minutes")}
-            tool["offset"] = t.get("offset", 0)
+            off = t.get("offset", 0)
+            # 문항마다 가능한 최소/최대 점수를 실제로 더해 범위를 구한다.
+            # scores가 따로 지정된 문항(AUDIT 등)도 섞여 있어서 문항 수로 추정하면 틀린다.
+            lo = sum(min(it["scores"]) if "scores" in it else 1 for it in t["items"]) - off
+            hi = sum(max(it["scores"]) if "scores" in it else len(it.get("labels", t["labels"]))
+                     for it in t["items"]) - off
+            if hi != t["max_score"]:
+                print(f"  ! {t['slug']}: max_score {t['max_score']} != 실제 {hi}")
+            tool["offset"] = off
+            tool["min"] = lo
             tool["max"] = t["max_score"]
         write(t["slug"], (mtpl if multi else tpl).render(
             t=t, site=site, related=related, ad=AD, year=year,
