@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Sat, 26 Sep 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 27 Sep 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>주장성 검사 — 10문항으로 보는 나서는 힘과 물러나는 힘</title>
+      <link>https://maumcheck.com/assertiveness/speaking-up/</link>
+      <guid isPermaLink="true">https://maumcheck.com/assertiveness/speaking-up/</guid>
+      <description>회의에서 말을 삼키고 나와 후회한 적이 있다면. 앞에 나서고 의견을 내는 성향을 재는 검사입니다. 주장성이 공격성과 어떻게 다른지, 낮은 점수가 왜 결함이 아닌지까지 정리했습니다.</description>
+      <category>주장성</category>
+      <pubDate>Sun, 27 Sep 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>완벽주의 검사 — 9문항으로 보는 나와 남에게 요구하는 기준</title>
       <link>https://maumcheck.com/perfectionism/standards/</link>
