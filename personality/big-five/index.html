@@ -53,6 +53,7 @@
 <p>성격은 하루아침에 바뀌지 않기 때문에, 자주 할 필요는 없는 검사입니다. 다음과 같은 때에 한 번씩 해볼 만합니다.</p><ul><li>나를 설명할 언어가 필요할 때 — 면접, 자기소개서, 상담의 출발점으로</li><li>사람과 반복해서 부딪칠 때 — 갈등이 상황 때문인지 기질 차이 때문인지 가늠해 보는 용도</li><li>큰 변화를 겪은 뒤 — 이직, 이사, 관계의 변화 이후 몇 년 만에 다시</li></ul><p>성격은 20대 이후 비교적 안정적이지만 전혀 변하지 않는 것은 아닙니다. 여러 장기 연구에서 나이가 들수록 성실성과 친화성은 완만히 오르고 정서적 민감성은 내려가는 경향이 보고됩니다.</p>
 
 
+<div class="cmpbar" id="cmpbar" style="display:none"></div>
 <h2 id="test">자가진단 하기</h2>
 <div class="tool">
   <p class="hint">각 문항에 가장 가까운 답을 고르세요. 결과는 저장되지 않습니다.</p>
@@ -63,12 +64,13 @@
   <div class="err" id="err"></div>
   <div class="res" id="res">
     <div class="combo" id="combo"></div>
+    <div class="cmp" id="cmp" style="display:none"></div>
     <h3 style="margin-top:0">결과</h3>
     <p class="hint" style="margin-bottom:16px">높고 낮음에 좋고 나쁨은 없습니다.</p>
     <div id="dims"></div>
     
     <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 채용, 평가, 진로 결정의 근거로 쓰기에 적합하지 않습니다.</p>
-    <button class="share" id="share">결과 링크 공유하기</button>
+    <div class="sharebar"><button class="share" id="share">결과 링크 공유하기</button><button class="copy" id="cmpmake">둘이 비교할 링크 만들기</button></div>
   </div>
 </div>
 
@@ -114,7 +116,7 @@
 <script>
 var T={"items": [{"text": "나는 모임에서 분위기를 띄우는 편이다.", "reverse": false, "d": 0}, {"text": "나는 다른 사람의 감정에 공감한다.", "reverse": false, "d": 1}, {"text": "나는 해야 할 일을 바로 처리한다.", "reverse": false, "d": 2}, {"text": "나는 기분이 자주 오르내린다.", "reverse": false, "d": 3}, {"text": "나는 상상력이 풍부하다.", "reverse": false, "d": 4}, {"text": "나는 말수가 적은 편이다.", "reverse": true, "d": 0}, {"text": "나는 다른 사람의 문제에 별 관심이 없다.", "reverse": true, "d": 1}, {"text": "나는 물건을 제자리에 두지 않는 일이 잦다.", "reverse": true, "d": 2}, {"text": "나는 대체로 편안한 상태를 유지한다.", "reverse": true, "d": 3}, {"text": "나는 추상적인 개념에 관심이 없다.", "reverse": true, "d": 4}, {"text": "나는 모임에서 여러 사람과 두루 이야기한다.", "reverse": false, "d": 0}, {"text": "나는 다른 사람의 기분을 잘 알아챈다.", "reverse": false, "d": 1}, {"text": "나는 정돈된 상태를 좋아한다.", "reverse": false, "d": 2}, {"text": "나는 쉽게 속상해진다.", "reverse": false, "d": 3}, {"text": "나는 추상적인 개념을 이해하기 어렵다.", "reverse": true, "d": 4}, {"text": "나는 눈에 띄지 않게 뒤로 물러나 있는 편이다.", "reverse": true, "d": 0}, {"text": "나는 다른 사람에게 그다지 관심이 없다.", "reverse": true, "d": 1}, {"text": "나는 일을 어수선하게 벌여 놓는 편이다.", "reverse": true, "d": 2}, {"text": "나는 우울한 기분을 거의 느끼지 않는다.", "reverse": true, "d": 3}, {"text": "나는 상상력이 부족한 편이다.", "reverse": true, "d": 4}], "labels": ["매우 그렇다", "그렇다", "보통이다", "아니다", "전혀 아니다"], "short_name": "성격 5요인 검사", "minutes": 5, "dims": [{"name": "외향성", "desc": "사람과 자극에서 에너지를 얻는 정도", "low_label": "내향적", "high_label": "외향적", "bands": [{"max": 9, "label": "내향적인 편", "tone": "accent", "eval": "혼자 있는 시간에 에너지가 차오르는 쪽입니다. 사람을 싫어한다는 뜻이 아니라, 깊고 좁은 관계에서 편안함을 느끼고 많은 자극에 쉽게 소모된다는 뜻에 가깝습니다.", "advice": ["회복 시간을 일정에 미리 넣어 두세요. 내향적인 사람에게 혼자 있는 시간은 사치가 아니라 연료입니다.", "여러 사람이 있는 자리보다 한두 명과 만나는 자리를 의도적으로 늘려 보세요. 같은 시간을 써도 남는 것이 다릅니다."]}, {"max": 14, "label": "중간", "tone": "accent", "eval": "상황에 따라 외향적이기도 내향적이기도 한 쪽입니다. 사람 만나는 일도 혼자 있는 일도 둘 다 괜찮게 느낍니다. 실제로 가장 많은 사람이 이 구간에 있습니다.", "advice": ["오늘 어느 쪽이 필요한지 그때그때 판단할 수 있다는 것이 강점입니다. 억지로 한쪽에 자신을 맞추지 마세요.", "에너지가 떨어졌을 때 사람을 만나 회복되는 편인지, 혼자 있어야 회복되는 편인지 한번 관찰해 보세요."]}, {"max": 20, "label": "외향적인 편", "tone": "accent", "eval": "사람과 활동에서 에너지를 얻는 쪽입니다. 새로운 사람과 만나는 일이 부담보다 즐거움에 가깝고, 조용한 시간이 길어지면 오히려 가라앉기 쉽습니다.", "advice": ["혼자 집중해야 하는 일은 카페처럼 적당한 자극이 있는 곳에서 해보세요. 완전한 고요가 오히려 방해가 될 수 있습니다.", "말하면서 생각을 정리하는 편이라면, 중요한 결정 전에 한 번은 혼자 적어 보는 절차를 넣어 두세요."]}], "offset": 0, "min": 4, "max": 20}, {"name": "친화성", "desc": "타인의 감정과 입장에 마음을 쓰는 정도", "low_label": "독립적", "high_label": "배려적", "bands": [{"max": 9, "label": "독립적인 편", "tone": "accent", "eval": "타인의 감정보다 사실과 논리를 먼저 보는 쪽입니다. 냉정하다는 뜻이 아니라, 분위기에 휩쓸리지 않고 할 말을 하는 힘이 있다는 뜻입니다. 협상이나 판단이 필요한 자리에서 강점이 됩니다.", "advice": ["옳은 말을 할 때 상대가 받아들일 수 있는 형태인지 한 번만 더 보세요. 내용이 맞아도 전달에서 막히면 결과는 같습니다.", "가까운 사람에게는 판단보다 듣기를 먼저 해보세요. 해결을 원하지 않는 이야기도 있습니다."]}, {"max": 14, "label": "중간", "tone": "accent", "eval": "상대를 배려하면서도 필요할 때 선을 긋는 쪽입니다. 대체로 원만하게 지내지만 무리한 요구에는 거절할 수 있습니다.", "advice": ["거절이 유난히 어려운 상대가 누구인지 떠올려 보세요. 사람에 따라 달라지는 지점이 자신을 이해하는 단서가 됩니다.", "배려가 습관인지 선택인지 가끔 점검해 보세요."]}, {"max": 20, "label": "배려하는 편", "tone": "accent", "eval": "다른 사람의 감정을 잘 알아채고 마음을 쓰는 쪽입니다. 함께 있으면 편한 사람이라는 말을 자주 들었을 가능성이 큽니다. 다만 타인의 감정이 너무 잘 느껴지면 자기 감정이 뒤로 밀리기 쉽습니다.", "advice": ["부탁을 받았을 때 바로 답하지 말고 생각해 보고 알려드릴게요라고 한 박자 쉬는 연습을 해보세요.", "오늘 내가 원한 것이 무엇이었는지 하루에 한 번 적어 보세요. 남의 마음을 읽는 데 익숙할수록 자기 마음은 흐려집니다."]}], "offset": 0, "min": 4, "max": 20}, {"name": "성실성", "desc": "계획하고 정돈하고 끝까지 해내는 정도", "low_label": "유연함", "high_label": "체계적", "bands": [{"max": 9, "label": "유연한 편", "tone": "accent", "eval": "계획보다 그때그때의 흐름을 따르는 쪽입니다. 정리정돈이나 마감 관리는 약할 수 있지만, 상황이 바뀔 때 빠르게 방향을 트는 데는 강합니다.", "advice": ["의지로 버티기보다 환경을 바꾸세요. 알림, 자동이체, 눈에 보이는 곳에 두기 같은 장치가 결심보다 오래갑니다.", "마감을 스스로 정하지 말고 다른 사람과 약속으로 만들어 보세요. 외부 마감이 훨씬 잘 작동합니다."]}, {"max": 14, "label": "중간", "tone": "accent", "eval": "필요할 때는 계획적으로, 그렇지 않을 때는 느슨하게 지내는 쪽입니다. 중요한 일에는 힘을 주고 사소한 일은 넘길 줄 압니다.", "advice": ["어떤 종류의 일에서 체계가 무너지는지 살펴보세요. 관심이 없는 영역인지, 부담이 큰 영역인지에 따라 대처가 다릅니다.", "잘 되고 있는 루틴 하나는 건드리지 말고 그대로 두세요."]}, {"max": 20, "label": "체계적인 편", "tone": "accent", "eval": "계획을 세우고 지키는 데 강한 쪽입니다. 성실성은 여러 연구에서 학업 성취와 직무 성과를 가장 꾸준히 예측하는 특성으로 보고됩니다. 다만 기준이 높으면 자신에게 가혹해지기 쉽습니다.", "advice": ["계획대로 되지 않은 날에 스스로를 어떻게 대하는지 살펴보세요. 성실성이 높을수록 자책도 함께 높아지는 경우가 많습니다.", "일부러 계획 없는 시간을 만들어 보세요. 쉬는 것까지 계획하면 쉼이 또 하나의 과제가 됩니다."]}], "offset": 0, "min": 4, "max": 20}, {"name": "정서적 민감성", "desc": "스트레스와 부정적 감정에 반응하는 정도 (학술 용어로는 신경성)", "low_label": "안정적", "high_label": "민감함", "bands": [{"max": 9, "label": "안정적인 편", "tone": "accent", "eval": "감정의 기복이 크지 않고 스트레스 상황에서도 비교적 평정을 유지하는 쪽입니다. 위기 상황에서 주변이 기대는 사람이 되기 쉽습니다.", "advice": ["주변 사람의 동요를 과장으로 보지 않도록 주의하세요. 같은 일도 사람마다 강도가 다르게 옵니다.", "감정이 잘 올라오지 않는 것과 감정을 누르고 있는 것은 다릅니다. 가끔 구분해 보세요."]}, {"max": 14, "label": "중간", "tone": "accent", "eval": "상황에 따라 흔들리기도 하고 금방 회복하기도 하는 쪽입니다. 대부분의 사람이 이 구간에 있습니다.", "advice": ["어떤 종류의 일에 특히 흔들리는지 기록해 보세요. 사람인지, 평가인지, 불확실함인지에 따라 대비가 달라집니다.", "흔들린 뒤 무엇이 회복을 도왔는지도 함께 적어 두면 다음에 훨씬 빠릅니다."]}, {"max": 20, "label": "민감한 편", "tone": "accent", "eval": "감정의 진폭이 큰 쪽입니다. 이 특성 자체는 병이 아닙니다. 세밀하게 느끼는 만큼 위험을 빨리 감지하고 타인의 미묘한 변화를 잘 알아채는 쪽이기도 합니다. 다만 스트레스가 쌓이면 다른 사람보다 먼저, 크게 반응합니다.", "advice": ["감정이 올라올 때 사실과 해석을 나눠 적어 보세요. 일어난 일과 그것에 대한 내 생각을 두 줄로 구분하는 것만으로 강도가 줄어듭니다.", "잠과 식사가 무너지면 이 특성은 훨씬 크게 나타납니다. 기본을 지키는 것이 어떤 기법보다 효과가 큽니다.", "일상이 흔들릴 정도라면 불안이나 우울 쪽을 따로 살펴보시길 권합니다."]}], "offset": 0, "min": 4, "max": 20}, {"name": "개방성", "desc": "새로운 생각과 경험에 열려 있는 정도", "low_label": "현실적", "high_label": "탐구적", "bands": [{"max": 9, "label": "현실적인 편", "tone": "accent", "eval": "추상적인 논의보다 구체적이고 검증된 것을 선호하는 쪽입니다. 실용적이고 발을 땅에 붙이고 있다는 강점이 있습니다.", "advice": ["새로운 방식을 시도할 때는 작게 실험해 보세요. 전면 교체보다 한 부분만 바꿔 보는 쪽이 맞습니다.", "관심 없는 분야의 이야기를 판단 없이 끝까지 들어 보는 연습이 시야를 넓혀 줍니다."]}, {"max": 14, "label": "중간", "tone": "accent", "eval": "새로운 것에 호기심을 갖되 현실적인 판단도 함께 하는 쪽입니다. 아이디어와 실행 사이의 균형이 잡혀 있습니다.", "advice": ["흥미가 생긴 것 중 실제로 해본 것이 얼마나 되는지 세어 보세요.", "익숙한 방식이 편해지는 시기가 오면 의도적으로 낯선 것을 하나 넣어 보세요."]}, {"max": 20, "label": "탐구적인 편", "tone": "accent", "eval": "새로운 생각과 경험에 열려 있는 쪽입니다. 상상력이 풍부하고 추상적인 주제를 즐기며, 관심의 폭이 넓습니다. 다만 흥미가 빨리 옮겨 다녀 끝맺음이 약해질 수 있습니다.", "advice": ["벌여 놓은 것 중 하나를 골라 끝까지 가보세요. 개방성이 높은 사람에게 가장 큰 자산은 완성 경험입니다.", "새 아이디어가 떠오르면 바로 시작하지 말고 적어만 두는 목록을 하나 만드세요. 일주일 뒤에도 하고 싶은 것만 시작합니다."]}], "offset": 0, "min": 4, "max": 20}]};
 var ans=new Array(T.items.length).fill(null);
-var SUBJ=0;var LASTTYPE=null;
+var SUBJ=0;var LASTTYPE=null;var LASTSUMS=null;
 (function(){
   if(!T.combo||!T.combo.subjects||T.combo.subjects.length<2)return;
   var host=document.getElementById("subj");
@@ -200,6 +202,7 @@ document.getElementById("go").onclick=function(){
     w.appendChild(ul);
     host.appendChild(w);
   });
+  LASTSUMS=sums;renderCompare(sums);
   var r=document.getElementById("res");r.style.display="block";
   setTimeout(function(){r.scrollIntoView({behavior:"smooth",block:"start"});},100);
 };
@@ -220,6 +223,75 @@ document.getElementById("share").onclick=function(){
   else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){toast("링크를 복사했어요");});}
   else{prompt("아래 링크를 복사하세요",url);}
 };
+
+
+// ── 둘이 비교하기 ─────────────────────────────────────────
+// 상대의 축별 점수만 주소의 # 뒤에 담는다. # 뒤는 서버로 전송되지 않아
+// 접속 기록에도 남지 않고, 응답 내용 자체는 애초에 담기지 않는다.
+var PEER=null;
+function initPeer(){
+  PEER=null;
+  var bar=document.getElementById('cmpbar');bar.style.display='none';
+  var m=location.hash.match(/(?:^#|&)p=([0-9-]+)/);
+  if(!m)return;
+  var v=m[1].split('-').map(Number);
+  if(v.length!==T.dims.length)return;
+  if(v.some(function(x){return isNaN(x);}))return;
+  PEER=v;
+  bar.style.display='block';
+  bar.innerHTML='<b>상대방의 결과가 담긴 링크로 들어오셨습니다.</b>'+
+    '<span>검사를 마치면 두 사람의 결과를 같은 축 위에 겹쳐 보여드립니다. '+
+    '링크에는 축별 점수만 들어 있고, 어떤 문항에 어떻게 답했는지는 담기지 않습니다.</span>';
+}
+initPeer();
+// 같은 페이지에 머문 채 비교 링크를 열면 주소만 바뀌고 새로 고쳐지지 않는다.
+window.addEventListener('hashchange',function(){initPeer();if(LASTSUMS)renderCompare(LASTSUMS);});
+function renderCompare(mine){
+  var host=document.getElementById('cmp');
+  if(!PEER){host.style.display='none';return;}
+  host.innerHTML='';host.style.display='block';
+  var h=document.createElement('h3');h.textContent='둘이 비교하기';host.appendChild(h);
+  var lg=document.createElement('div');lg.className='cmp-legend';
+  lg.innerHTML='<span class="k me"></span>나<span class="k you"></span>상대';
+  host.appendChild(lg);
+  var gaps=[];
+  T.dims.forEach(function(d,i){
+    var range=(d.max-d.min)||1;
+    var a=mine[i],b=PEER[i],gap=Math.abs(a-b);
+    gaps.push({name:d.name,gap:gap});
+    var row=document.createElement('div');row.className='cmp-row';
+    var t1=document.createElement('div');t1.className='cmp-t';
+    t1.innerHTML='<b>'+d.name+'</b><span>나 '+a+' · 상대 '+b+' · 차이 '+gap+'</span>';
+    row.appendChild(t1);
+    var bar=document.createElement('div');bar.className='cmp-bar';
+    var me=document.createElement('i');me.className='me';
+    me.style.left=Math.round((a-d.min)*100/range)+'%';
+    var you=document.createElement('i');you.className='you';
+    you.style.left=Math.round((b-d.min)*100/range)+'%';
+    bar.appendChild(you);bar.appendChild(me);row.appendChild(bar);
+    var e=document.createElement('div');e.className='cmp-ends';
+    e.innerHTML='<span>'+d.low_label+'</span><span>'+d.high_label+'</span>';
+    row.appendChild(e);host.appendChild(row);
+  });
+  gaps.sort(function(x,y){return x.gap-y.gap;});
+  var p=document.createElement('p');p.className='cmp-sum';
+  p.innerHTML='가장 비슷한 축은 <b>'+gaps[0].name+'</b>(차이 '+gaps[0].gap+'점), '+
+    '가장 갈리는 축은 <b>'+gaps[gaps.length-1].name+'</b>(차이 '+gaps[gaps.length-1].gap+'점)입니다.';
+  host.appendChild(p);
+  var n=document.createElement('p');n.className='cmp-note';
+  n.innerHTML='차이가 크다고 해서 맞지 않는다는 뜻이 아닙니다. 성격이 얼마나 비슷한지는 '+
+    '관계 만족을 잘 예측하지 못한다는 것이 여러 연구의 결론입니다. 이 화면은 궁합을 매기지 않습니다. '+
+    '<b>어느 자리에서 서로 다르게 보고 있는지</b>를 확인하는 용도입니다.';
+  host.appendChild(n);
+}
+document.getElementById('cmpmake').onclick=function(){
+  if(!LASTSUMS){toast('먼저 검사를 마쳐 주세요');return;}
+  var url=location.href.split('#')[0]+'#p='+LASTSUMS.join('-');
+  if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){
+    toast('비교 링크를 복사했어요. 상대에게 보내세요');});}
+  else{prompt('이 링크를 상대에게 보내세요',url);}
+};
+
 </script>
 </body>
 </html>

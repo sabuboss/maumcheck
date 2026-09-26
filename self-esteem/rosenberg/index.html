@@ -53,6 +53,7 @@
 <p>1·3·4·7·10번은 <em>긍정 문항</em>으로 동의할수록 점수가 높고, 2·5·6·8·9번은 <em>부정 문항</em>으로 동의할수록 점수가 낮습니다. 아래 도구는 자동으로 계산하니 답만 고르면 됩니다.</p><table class="tbl"><tr><th>총점</th><th>구간</th><th>의미</th></tr><tr><td>10–19점</td><td>낮은 편</td><td>자신을 실제보다 박하게 보는 경향</td></tr><tr><td>20–29점</td><td>보통</td><td>대부분의 사람이 속하는 범위</td></tr><tr><td>30–40점</td><td>건강함</td><td>안정적이고 바람직한 자존감</td></tr></table><p>오래 생각하지 말고 처음 떠오른 답을 고르세요. "이상적인 나"가 아니라 "요즘의 나"를 기준으로 답할수록 정확합니다.</p>
 
 
+
 <h2 id="test">자가진단 하기</h2>
 
 <div class="tool">
@@ -64,6 +65,7 @@
   <div class="res" id="res">
     <div class="score"><b id="sc">0</b><span>/ 40점</span></div>
     <span class="tag" id="tag"></span>
+    
     <div class="scale"><i style="flex:10;background:var(--danger-soft)"></i><i style="flex:10;background:var(--warn-soft)"></i><i style="flex:11;background:var(--ok-soft)"></i></div>
     <div class="scale-l"><span>10</span><span>20</span><span>30</span><span>40</span></div>
     <p class="ev" id="ev"></p>
@@ -119,7 +121,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-var T={"items": [{"text": "나는 전반적으로 자신에게 만족한다.", "reverse": false}, {"text": "때때로 나는 완전히 훌륭하지 않다는 생각이 든다.", "reverse": true}, {"text": "나는 여러 장점이 있다고 생각한다.", "reverse": false}, {"text": "나는 대부분의 다른 사람만큼 일을 할 수 있다.", "reverse": false}, {"text": "나는 자랑할 것이 많지 않다.", "reverse": true}, {"text": "나는 때때로 내가 쓸모없다고 느낀다.", "reverse": true}, {"text": "나는 다른 사람과 동등한 가치가 있는 사람이라고 생각한다.", "reverse": false}, {"text": "나는 내가 더 존중받길 원한다.", "reverse": true}, {"text": "나는 내가 결국 실패했다고 느낀다.", "reverse": true}, {"text": "나는 스스로에 대해 긍정적인 태도를 갖는다.", "reverse": false}], "labels": ["매우 그렇다", "그렇다", "아니다", "전혀 아니다"], "bands": [{"max": 14, "label": "낮음 · 주의", "tone": "danger", "eval": "스스로를 사랑하기 힘든 상태일 수 있습니다. 자랑거리도, 쓸모도, 존중받을 자격도 없다고 느끼기 쉬운 구간입니다. 다만 이 검사에서 10점 이하는 없습니다. 살아 있는 사람은 누구나 10점을 넘고, 완벽한 실패자는 없습니다.", "advice": ["오늘 해낸 아주 작은 일 세 가지를 매일 적어 보세요. 크기가 아니라 기록이 중요합니다.", "'나는 쓸모없다' 같은 생각이 들면 '지금 그런 기분이 든다'로 바꿔 말해 보세요. 기분과 사실을 구분하는 연습입니다.", "혼자 버티기보다 믿을 수 있는 사람이나 상담 전문가와 이야기 나눠 보는 것을 권합니다."]}, {"max": 19, "label": "낮은 편", "tone": "warn", "eval": "자존감이 낮은 편에 속합니다. 자신을 실제보다 박하게 평가하는 습관이 있을 가능성이 큽니다. 능력의 문제가 아니라 자신을 대하는 태도의 문제인 경우가 많습니다.", "advice": ["타인에게 하듯 자신에게도 말해 보세요. 친구가 같은 실수를 했다면 뭐라고 했을지 떠올리면 됩니다.", "'잘한 일'과 '잘못한 일'을 같은 비중으로 돌아보는 습관을 들이세요. 잘한 일은 쉽게 잊힙니다.", "작게라도 스스로 결정하고 끝까지 해 보는 경험을 늘리세요. 자존감은 성취의 크기보다 '내가 해냈다'는 반복에서 자랍니다."]}, {"max": 29, "label": "보통", "tone": "accent", "eval": "보통 수준의 자존감입니다. 대체로 자신을 괜찮은 사람으로 여기지만, 상황이나 타인의 평가에 따라 흔들리는 날도 있습니다. 대부분의 사람이 이 구간에 있습니다.", "advice": ["점수를 깎아 먹은 문항이 무엇인지 확인해 보세요. 그 부분이 지금 자신을 흔드는 지점입니다.", "비교 대상을 남이 아니라 '어제의 나'로 두는 연습을 하세요.", "칭찬을 들으면 부정하지 말고 '고맙습니다'로 받아 보세요. 받아들이는 것도 훈련입니다."]}, {"max": 40, "label": "건강함", "tone": "ok", "eval": "건강하고 바람직한 자존감입니다. 점수가 높다고 나르시시스트는 아닙니다. 자기애는 어른의 필수 조건이며, 상황에서 자신을 보호하는 '이기적임'과 타인을 기꺼이 희생시키는 '이기주의'는 다릅니다.", "advice": ["이 안정감을 자기 방어가 아니라 타인을 환대하는 데 써 보세요. 자존감이 높은 사람이 여유가 있습니다.", "다만 스스로를 '완벽한 성공가'로 여긴다면 한 번쯤 점검이 필요합니다. 완벽한 성공가도 없습니다.", "자신을 존중하는 방식이 무엇이었는지 정리해 두세요. 힘든 시기에 꺼내 쓸 수 있는 자산입니다."]}], "short_name": "자존감 자가진단", "minutes": 1, "offset": 0, "max": 40};
+var T={"items": [{"text": "나는 전반적으로 자신에게 만족한다.", "reverse": false}, {"text": "때때로 나는 완전히 훌륭하지 않다는 생각이 든다.", "reverse": true}, {"text": "나는 여러 장점이 있다고 생각한다.", "reverse": false}, {"text": "나는 대부분의 다른 사람만큼 일을 할 수 있다.", "reverse": false}, {"text": "나는 자랑할 것이 많지 않다.", "reverse": true}, {"text": "나는 때때로 내가 쓸모없다고 느낀다.", "reverse": true}, {"text": "나는 다른 사람과 동등한 가치가 있는 사람이라고 생각한다.", "reverse": false}, {"text": "나는 내가 더 존중받길 원한다.", "reverse": true}, {"text": "나는 내가 결국 실패했다고 느낀다.", "reverse": true}, {"text": "나는 스스로에 대해 긍정적인 태도를 갖는다.", "reverse": false}], "labels": ["매우 그렇다", "그렇다", "아니다", "전혀 아니다"], "bands": [{"max": 14, "label": "낮음 · 주의", "tone": "danger", "eval": "스스로를 사랑하기 힘든 상태일 수 있습니다. 자랑거리도, 쓸모도, 존중받을 자격도 없다고 느끼기 쉬운 구간입니다. 다만 이 검사에서 10점 이하는 없습니다. 살아 있는 사람은 누구나 10점을 넘고, 완벽한 실패자는 없습니다.", "advice": ["오늘 해낸 아주 작은 일 세 가지를 매일 적어 보세요. 크기가 아니라 기록이 중요합니다.", "'나는 쓸모없다' 같은 생각이 들면 '지금 그런 기분이 든다'로 바꿔 말해 보세요. 기분과 사실을 구분하는 연습입니다.", "혼자 버티기보다 믿을 수 있는 사람이나 상담 전문가와 이야기 나눠 보는 것을 권합니다."]}, {"max": 19, "label": "낮은 편", "tone": "warn", "eval": "자존감이 낮은 편에 속합니다. 자신을 실제보다 박하게 평가하는 습관이 있을 가능성이 큽니다. 능력의 문제가 아니라 자신을 대하는 태도의 문제인 경우가 많습니다.", "advice": ["타인에게 하듯 자신에게도 말해 보세요. 친구가 같은 실수를 했다면 뭐라고 했을지 떠올리면 됩니다.", "'잘한 일'과 '잘못한 일'을 같은 비중으로 돌아보는 습관을 들이세요. 잘한 일은 쉽게 잊힙니다.", "작게라도 스스로 결정하고 끝까지 해 보는 경험을 늘리세요. 자존감은 성취의 크기보다 '내가 해냈다'는 반복에서 자랍니다."]}, {"max": 29, "label": "보통", "tone": "accent", "eval": "보통 수준의 자존감입니다. 대체로 자신을 괜찮은 사람으로 여기지만, 상황이나 타인의 평가에 따라 흔들리는 날도 있습니다. 대부분의 사람이 이 구간에 있습니다.", "advice": ["점수를 깎아 먹은 문항이 무엇인지 확인해 보세요. 그 부분이 지금 자신을 흔드는 지점입니다.", "비교 대상을 남이 아니라 '어제의 나'로 두는 연습을 하세요.", "칭찬을 들으면 부정하지 말고 '고맙습니다'로 받아 보세요. 받아들이는 것도 훈련입니다."]}, {"max": 40, "label": "건강함", "tone": "ok", "eval": "건강하고 바람직한 자존감입니다. 점수가 높다고 나르시시스트는 아닙니다. 자기애는 어른의 필수 조건이며, 상황에서 자신을 보호하는 '이기적임'과 타인을 기꺼이 희생시키는 '이기주의'는 다릅니다.", "advice": ["이 안정감을 자기 방어가 아니라 타인을 환대하는 데 써 보세요. 자존감이 높은 사람이 여유가 있습니다.", "다만 스스로를 '완벽한 성공가'로 여긴다면 한 번쯤 점검이 필요합니다. 완벽한 성공가도 없습니다.", "자신을 존중하는 방식이 무엇이었는지 정리해 두세요. 힘든 시기에 꺼내 쓸 수 있는 자산입니다."]}], "short_name": "자존감 자가진단", "minutes": 1, "offset": 0, "min": 10, "max": 40};
 var ans=new Array(T.items.length).fill(null);
 var box=document.getElementById("qs");
 T.items.forEach(function(it,i){
@@ -159,6 +161,7 @@ document.getElementById("go").onclick=function(){
   var tg=document.getElementById("tag");tg.textContent=b.label;tg.style.background="var(--"+b.tone+"-soft)";tg.style.color="var(--"+b.tone+")";
   document.getElementById("ev").innerHTML=b.eval;
   LAST={score:s,label:b.label};
+  renderCompare(s);
   var ul=document.getElementById("ad");ul.innerHTML="";
   b.advice.forEach(function(a){var li=document.createElement("li");li.innerHTML=a;ul.appendChild(li);});
   var r=document.getElementById("res");r.style.display="block";
@@ -190,6 +193,10 @@ document.getElementById("copy").onclick=function(){
   if(navigator.clipboard){navigator.clipboard.writeText(summary()).then(function(){toast("복사했어요");});}
   else{prompt("아래 내용을 복사하세요",summary());}
 };
+
+
+function renderCompare(){}
+
 </script>
 </body>
 </html>

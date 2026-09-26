@@ -53,6 +53,7 @@
 <p>돌봄 12문항, 과보호 13문항이며 각 문항 0~3점입니다. 돌봄은 0~36점, 과보호는 0~39점이 나옵니다. 문항의 절반 가까이가 역채점이라, 방향을 반대로 물어보는 문항들이 섞여 있습니다.</p><p>주의할 점이 있습니다.</p><ul><li><b>회상입니다.</b> 지금의 기분과 지금의 관계가 기억에 영향을 줍니다. 부모와 사이가 나쁜 시기에는 어린 시절도 더 차갑게 기억되는 경향이 있습니다.</li><li><b>부모 판정이 아닙니다.</b> 낮게 나왔다고 해서 나쁜 부모였다는 뜻이 아니고, 높게 나왔다고 좋은 부모였다는 증명도 아닙니다.</li><li><b>원인을 말해주지 않습니다.</b> 지금 내가 겪는 어려움이 양육 때문이라고 이 검사가 말해 주지는 않습니다. 상관이 보고된 것이지 인과가 확인된 것이 아닙니다.</li></ul>
 
 
+<div class="cmpbar" id="cmpbar" style="display:none"></div>
 <h2 id="test">자가진단 하기</h2>
 <div class="tool">
   <p class="hint">정답은 없습니다. 지금 생각하는 부모가 아니라 어릴 때 느꼈던 그대로 답해 주세요. 결과는 저장되지 않습니다.</p>
@@ -63,12 +64,13 @@
   <div class="err" id="err"></div>
   <div class="res" id="res">
     <div class="combo" id="combo"></div>
+    <div class="cmp" id="cmp" style="display:none"></div>
     <h3 style="margin-top:0">두 축으로 본 결과</h3>
     <p class="hint" style="margin-bottom:16px">돌봄은 높을수록, 과보호는 낮을수록 아이에게 좋은 것으로 보고됩니다.</p>
     <div id="dims"></div>
     
     <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 채용, 평가, 진로 결정의 근거로 쓰기에 적합하지 않습니다.</p>
-    <button class="share" id="share">결과 링크 공유하기</button>
+    <div class="sharebar"><button class="share" id="share">결과 링크 공유하기</button><button class="copy" id="cmpmake">둘이 비교할 링크 만들기</button></div>
   </div>
 </div>
 
@@ -118,7 +120,7 @@
 <script>
 var T={"items": [{"text": "따뜻하고 다정한 목소리로 나에게 말했다.", "reverse": false, "d": 0}, {"text": "내가 하고 싶어 하는 일을 하게 내버려 두었다.", "reverse": true, "d": 1}, {"text": "내가 필요한 만큼 나를 도와주지 않았다.", "reverse": true, "d": 0}, {"text": "내가 스스로 결정하는 것을 좋아했다.", "reverse": true, "d": 1}, {"text": "내 고민과 걱정을 이해해 주는 것 같았다.", "reverse": false, "d": 0}, {"text": "내가 자라는 것을 원하지 않는 것 같았다.", "reverse": false, "d": 1}, {"text": "나에게 애정을 표현했다.", "reverse": false, "d": 0}, {"text": "내가 하는 모든 일을 통제하려 했다.", "reverse": false, "d": 1}, {"text": "나에게 정서적으로 차갑게 대했다.", "reverse": true, "d": 0}, {"text": "나의 사생활을 침범했다.", "reverse": false, "d": 1}, {"text": "나와 이야기 나누는 것을 즐거워했다.", "reverse": false, "d": 0}, {"text": "나를 어린아이 취급하는 편이었다.", "reverse": false, "d": 1}, {"text": "나를 보며 자주 웃어 주었다.", "reverse": false, "d": 0}, {"text": "내 일은 스스로 정하게 했다.", "reverse": true, "d": 1}, {"text": "내가 무엇을 필요로 하는지 잘 모르는 것 같았다.", "reverse": true, "d": 0}, {"text": "내가 자기에게 의존하게 만들려고 했다.", "reverse": false, "d": 1}, {"text": "내가 원하지 않는 존재라는 느낌을 주었다.", "reverse": true, "d": 0}, {"text": "자기가 곁에 없으면 내가 나를 돌보지 못할 거라고 여겼다.", "reverse": false, "d": 1}, {"text": "내가 속상할 때 나를 나아지게 해줄 수 있었다.", "reverse": false, "d": 0}, {"text": "내가 원하는 만큼 자유를 주었다.", "reverse": true, "d": 1}, {"text": "나와 별로 이야기를 하지 않았다.", "reverse": true, "d": 0}, {"text": "내가 원할 때 나가 놀게 해주었다.", "reverse": true, "d": 1}, {"text": "나를 칭찬하지 않았다.", "reverse": true, "d": 0}, {"text": "나를 지나치게 보호했다.", "reverse": false, "d": 1}, {"text": "내가 원하는 대로 옷을 입게 해주었다.", "reverse": true, "d": 1}], "labels": ["매우 그랬다", "그런 편이었다", "아닌 편이었다", "전혀 아니었다"], "short_name": "부모 양육 태도", "minutes": 4, "dims": [{"name": "돌봄", "desc": "따뜻하게 대하고, 이해해 주고, 정서적으로 곁에 있어 준 정도", "low_label": "차가움", "high_label": "따뜻함", "bands": [{"max": 17, "label": "낮음", "tone": "warn", "eval": "따뜻함이나 이해받는 느낌이 부족했던 기억으로 보입니다. 부모가 나쁜 사람이었다는 뜻은 아닙니다. 그 시절의 형편, 부모 자신의 상태, 표현 방식의 차이 등 여러 이유가 있을 수 있습니다. 다만 아이 입장에서 충분히 받지 못했다고 느꼈다면, 그 느낌 자체는 사실입니다.", "advice": ["돌봄이 낮게 기억되는 것과 지금의 내가 괜찮지 않은 것은 다른 이야기입니다. 이 결과는 원인 판정이 아닙니다.", "어릴 때 채워지지 않은 것을 지금 부모에게서 받으려 하면 대개 실패합니다. 다른 관계에서 채우는 편이 현실적입니다."]}, {"max": 27, "label": "보통", "tone": "accent", "eval": "따뜻했던 기억과 그렇지 않았던 기억이 섞여 있는 편입니다. 대부분의 사람이 이 구간에 있습니다.", "advice": ["기억은 최근의 관계에 물듭니다. 요즘 부모와 사이가 나쁘면 어린 시절도 더 차갑게 기억됩니다.", "구체적인 장면 하나를 떠올려 보세요. 전체 인상보다 정확한 경우가 많습니다."]}, {"max": 36, "label": "높음", "tone": "ok", "eval": "따뜻하고 이해받았다고 기억하는 편입니다. 돌봄은 네 가지 유형을 가르는 두 축 중에서 성인기의 안녕과 가장 일관되게 연결되는 축입니다.", "advice": ["이 기억이 지금 내가 관계를 맺는 방식에 어떻게 남아 있는지 생각해 보세요.", "부모에게 고마웠던 일을 말로 전한 적이 있는지 떠올려 보시는 것도 좋습니다."]}], "offset": 12, "min": 0, "max": 36}, {"name": "과보호", "desc": "간섭하고, 통제하고, 스스로 하지 못하게 한 정도", "low_label": "자율 존중", "high_label": "통제적", "bands": [{"max": 12, "label": "낮음", "tone": "ok", "eval": "스스로 결정하고 움직일 자유가 있었던 편입니다. 과보호는 낮을수록 좋은 축이며, 이 구간은 자율을 존중받았다는 뜻입니다.", "advice": ["자율을 존중받은 경험은 성인기의 자기 결정 감각으로 이어지는 경우가 많습니다.", "방임과는 다릅니다. 돌봄 점수와 함께 봐야 정확합니다."]}, {"max": 20, "label": "보통", "tone": "accent", "eval": "간섭이 있었지만 숨 막힐 정도는 아니었던 편입니다. 시대와 문화에 따라 이 정도는 흔합니다.", "advice": ["한국처럼 가족의 결속을 중시하는 문화에서는 이 축이 서구 기준보다 높게 나오는 경향이 있습니다.", "당시에는 답답했지만 지금은 이해되는 부분이 있는지 떠올려 보세요."]}, {"max": 39, "label": "높음", "tone": "warn", "eval": "간섭과 통제가 강했던 것으로 기억하고 있습니다. 걱정에서 나온 행동이었더라도 아이 입장에서는 스스로 해볼 기회가 줄어듭니다. 연구에서 이 축이 높은 것은 성인기의 불안과 더 자주 연결됩니다.", "advice": ["지금도 부모의 간섭이 이어지고 있다면, 어린 시절의 패턴이 성인 관계로 옮겨 온 것일 수 있습니다. 경계를 새로 정하는 일이 필요할 수 있습니다.", "선택을 앞두고 유난히 불안하다면, 스스로 결정해 본 경험이 적었던 것과 무관하지 않을 수 있습니다."]}], "offset": 13, "min": 0, "max": 39}], "combo": {"ask": "누구를 떠올리며 답하시겠어요?", "title": "에 대한 결과", "subjects": [{"id": "m", "label": "어머니", "cuts": [27.0, 13.5]}, {"id": "f", "label": "아버지", "cuts": [24.0, 12.5]}], "types": {"10": {"name": "최적 양육", "desc": "따뜻하게 대해 주면서도 스스로 할 수 있게 놓아 주었던 것으로 기억합니다. 돌봄은 높고 과보호는 낮은, 연구에서 가장 바람직하게 보는 조합입니다.", "advice": ["이 조합이 성인기의 안정된 관계 맺기와 가장 자주 연결됩니다.", "다만 이 결과가 모든 것을 보장하지는 않습니다. 삶에는 양육 말고도 많은 변수가 있습니다."]}, "11": {"name": "애정적 속박", "desc": "따뜻했지만 동시에 간섭이 많았던 것으로 기억합니다. 사랑이 없는 것이 아니라 <b>사랑이 통제의 형태로</b> 왔던 경우입니다. 한국을 비롯한 가족 결속이 강한 문화에서 특히 흔한 유형입니다.", "advice": ["고마움과 답답함이 동시에 드는 것이 자연스럽습니다. 둘 중 하나를 고를 필요는 없습니다.", "지금도 같은 패턴이 이어지고 있다면, 관계를 끊는 것이 아니라 경계를 새로 정하는 쪽으로 생각해 보세요."]}, "00": {"name": "방임", "desc": "따뜻함도 간섭도 적었던 것으로 기억합니다. 자유로웠다고 느낄 수도, 혼자 남겨졌다고 느낄 수도 있는 조합입니다. 같은 점수라도 두 경험은 상당히 다릅니다.", "advice": ["자유였는지 방치였는지는 점수가 아니라 본인의 느낌이 더 정확합니다.", "어릴 때 기대어 본 경험이 적으면 성인이 되어서도 도움을 청하기 어려울 수 있습니다. 그건 성격이 아니라 익숙함의 문제입니다."]}, "01": {"name": "애정 없는 통제", "desc": "따뜻함은 적고 간섭은 많았던 것으로 기억합니다. 연구에서 성인기의 우울·불안과 가장 자주 연결되는 것으로 보고되는 조합입니다.", "advice": ["이 결과가 지금의 나를 설명해 주는 부분이 있다면, 그건 내가 약해서가 아니라는 뜻이기도 합니다.", "어린 시절의 관계가 지금 힘들게 한다면 전문가와 이야기해 볼 가치가 충분합니다. 이 영역은 상담에서 다루기 좋은 주제입니다.", "부모에게 인정이나 사과를 받아야 회복이 시작되는 것은 아닙니다. 대개는 그것 없이 시작됩니다."]}}}};
 var ans=new Array(T.items.length).fill(null);
-var SUBJ=0;var LASTTYPE=null;
+var SUBJ=0;var LASTTYPE=null;var LASTSUMS=null;
 (function(){
   if(!T.combo||!T.combo.subjects||T.combo.subjects.length<2)return;
   var host=document.getElementById("subj");
@@ -204,6 +206,7 @@ document.getElementById("go").onclick=function(){
     w.appendChild(ul);
     host.appendChild(w);
   });
+  LASTSUMS=sums;renderCompare(sums);
   var r=document.getElementById("res");r.style.display="block";
   setTimeout(function(){r.scrollIntoView({behavior:"smooth",block:"start"});},100);
 };
@@ -224,6 +227,75 @@ document.getElementById("share").onclick=function(){
   else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){toast("링크를 복사했어요");});}
   else{prompt("아래 링크를 복사하세요",url);}
 };
+
+
+// ── 둘이 비교하기 ─────────────────────────────────────────
+// 상대의 축별 점수만 주소의 # 뒤에 담는다. # 뒤는 서버로 전송되지 않아
+// 접속 기록에도 남지 않고, 응답 내용 자체는 애초에 담기지 않는다.
+var PEER=null;
+function initPeer(){
+  PEER=null;
+  var bar=document.getElementById('cmpbar');bar.style.display='none';
+  var m=location.hash.match(/(?:^#|&)p=([0-9-]+)/);
+  if(!m)return;
+  var v=m[1].split('-').map(Number);
+  if(v.length!==T.dims.length)return;
+  if(v.some(function(x){return isNaN(x);}))return;
+  PEER=v;
+  bar.style.display='block';
+  bar.innerHTML='<b>상대방의 결과가 담긴 링크로 들어오셨습니다.</b>'+
+    '<span>검사를 마치면 두 사람의 결과를 같은 축 위에 겹쳐 보여드립니다. '+
+    '링크에는 축별 점수만 들어 있고, 어떤 문항에 어떻게 답했는지는 담기지 않습니다.</span>';
+}
+initPeer();
+// 같은 페이지에 머문 채 비교 링크를 열면 주소만 바뀌고 새로 고쳐지지 않는다.
+window.addEventListener('hashchange',function(){initPeer();if(LASTSUMS)renderCompare(LASTSUMS);});
+function renderCompare(mine){
+  var host=document.getElementById('cmp');
+  if(!PEER){host.style.display='none';return;}
+  host.innerHTML='';host.style.display='block';
+  var h=document.createElement('h3');h.textContent='둘이 비교하기';host.appendChild(h);
+  var lg=document.createElement('div');lg.className='cmp-legend';
+  lg.innerHTML='<span class="k me"></span>나<span class="k you"></span>상대';
+  host.appendChild(lg);
+  var gaps=[];
+  T.dims.forEach(function(d,i){
+    var range=(d.max-d.min)||1;
+    var a=mine[i],b=PEER[i],gap=Math.abs(a-b);
+    gaps.push({name:d.name,gap:gap});
+    var row=document.createElement('div');row.className='cmp-row';
+    var t1=document.createElement('div');t1.className='cmp-t';
+    t1.innerHTML='<b>'+d.name+'</b><span>나 '+a+' · 상대 '+b+' · 차이 '+gap+'</span>';
+    row.appendChild(t1);
+    var bar=document.createElement('div');bar.className='cmp-bar';
+    var me=document.createElement('i');me.className='me';
+    me.style.left=Math.round((a-d.min)*100/range)+'%';
+    var you=document.createElement('i');you.className='you';
+    you.style.left=Math.round((b-d.min)*100/range)+'%';
+    bar.appendChild(you);bar.appendChild(me);row.appendChild(bar);
+    var e=document.createElement('div');e.className='cmp-ends';
+    e.innerHTML='<span>'+d.low_label+'</span><span>'+d.high_label+'</span>';
+    row.appendChild(e);host.appendChild(row);
+  });
+  gaps.sort(function(x,y){return x.gap-y.gap;});
+  var p=document.createElement('p');p.className='cmp-sum';
+  p.innerHTML='가장 비슷한 축은 <b>'+gaps[0].name+'</b>(차이 '+gaps[0].gap+'점), '+
+    '가장 갈리는 축은 <b>'+gaps[gaps.length-1].name+'</b>(차이 '+gaps[gaps.length-1].gap+'점)입니다.';
+  host.appendChild(p);
+  var n=document.createElement('p');n.className='cmp-note';
+  n.innerHTML='차이가 크다고 해서 맞지 않는다는 뜻이 아닙니다. 성격이 얼마나 비슷한지는 '+
+    '관계 만족을 잘 예측하지 못한다는 것이 여러 연구의 결론입니다. 이 화면은 궁합을 매기지 않습니다. '+
+    '<b>어느 자리에서 서로 다르게 보고 있는지</b>를 확인하는 용도입니다.';
+  host.appendChild(n);
+}
+document.getElementById('cmpmake').onclick=function(){
+  if(!LASTSUMS){toast('먼저 검사를 마쳐 주세요');return;}
+  var url=location.href.split('#')[0]+'#p='+LASTSUMS.join('-');
+  if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){
+    toast('비교 링크를 복사했어요. 상대에게 보내세요');});}
+  else{prompt('이 링크를 상대에게 보내세요',url);}
+};
+
 </script>
 </body>
 </html>

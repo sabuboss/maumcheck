@@ -53,6 +53,7 @@
 <p>10문항 각각 1~5점, 총점 10~50점입니다. <b>2·4·6·8·10번이 역채점</b>입니다.</p><p>주의할 점이 있습니다.</p><ul><li><b>상태와 성향을 구분하지 못합니다.</b> 요즘 힘든 일이 있으면 높게 나옵니다. 몇 주 간격으로 두 번 재보면 구분이 됩니다.</li><li><b>잠과 통증에 크게 좌우됩니다.</b> 수면 부족이나 만성 통증은 분노 역치를 눈에 띄게 낮춥니다. 이 경우 성격이 아니라 몸의 문제입니다.</li><li><b>우울과 겹칩니다.</b> 우울이 짜증과 분노로 나타나는 경우가 흔하며, 특히 남성에게서 자주 보고됩니다.</li></ul>
 
 
+
 <h2 id="test">자가진단 하기</h2>
 <div class="warnbox"><p><b>답하기 전에.</b> 특정한 한 사건이 아니라 <b>평소의 나</b>를 떠올리며 답해 주세요. 크게 다툰 직후라면 며칠 뒤에 하시는 편이 정확합니다.</p><p>문항 절반은 화가 잘 안 난다는 쪽을 묻습니다. 방향이 반대라는 점만 염두에 두시면 됩니다.</p></div>
 <div class="tool">
@@ -64,6 +65,7 @@
   <div class="res" id="res">
     <div class="score"><b id="sc">0</b><span>/ 50점</span></div>
     <span class="tag" id="tag"></span>
+    
     <div class="scale"><i style="flex:15;background:var(--ok-soft)"></i><i style="flex:11;background:var(--accent-soft)"></i><i style="flex:15;background:var(--warn-soft)"></i></div>
     <div class="scale-l"><span>10</span><span>25</span><span>36</span><span>50</span></div>
     <p class="ev" id="ev"></p>
@@ -123,7 +125,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-var T={"items": [{"text": "쉽게 화가 난다.", "reverse": false}, {"text": "좀처럼 짜증이 나지 않는다.", "reverse": true}, {"text": "쉽게 짜증이 난다.", "reverse": false}, {"text": "좀처럼 화를 내지 않는다.", "reverse": true}, {"text": "쉽게 속상해진다.", "reverse": false}, {"text": "웬만해서는 거슬리지 않는다.", "reverse": true}, {"text": "기분이 안 좋을 때가 잦다.", "reverse": false}, {"text": "침착함을 유지한다.", "reverse": true}, {"text": "화를 참지 못하고 터뜨린다.", "reverse": false}, {"text": "좀처럼 불평하지 않는다.", "reverse": true}], "labels": ["매우 그렇다", "그런 편이다", "보통이다", "아닌 편이다", "전혀 아니다"], "bands": [{"max": 24, "label": "낮은 편", "tone": "ok", "eval": "웬만한 일에는 화가 잘 올라오지 않는 편입니다. 상황이 흔들려도 비교적 평정을 유지합니다. 다만 화가 적게 나는 것과 화를 참는 것은 다릅니다. 실제로는 화가 나는데 표현하지 않는 쪽이라면, 점수는 낮게 나와도 몸과 관계에는 쌓입니다.", "advice": ["최근에 화가 났는데 넘어간 일이 있는지 떠올려 보세요. 없었다면 정말 낮은 것이고, 있었다면 참은 쪽일 수 있습니다.", "화를 잘 못 느끼는 편이라면, 부당한 일을 당했을 때 자신을 지키는 말이 늦게 나올 수 있습니다. 분노는 경계를 세우는 데 쓰이는 감정이기도 합니다."]}, {"max": 35, "label": "보통", "tone": "accent", "eval": "상황에 따라 화가 나기도 하고 넘어가기도 하는 편입니다. 대부분의 사람이 이 구간에 있습니다. 중요한 것은 평균이 아니라 <b>어떤 상황에서 유독 올라오는가</b>입니다.", "advice": ["최근 화가 났던 일 세 가지를 적고 공통점을 찾아 보세요. 무시당했을 때인지, 통제할 수 없을 때인지, 기대가 어긋났을 때인지에 따라 대처가 달라집니다.", "잠이 부족하면 분노 역치가 눈에 띄게 내려갑니다. 요즘 유난히 예민하다면 수면부터 확인해 보세요."]}, {"max": 50, "label": "높은 편", "tone": "warn", "eval": "화가 자주, 쉽게 올라오는 편입니다. 성격이 나쁘다는 뜻이 아닙니다. 분노 역치는 잠, 스트레스, 통증, 우울 같은 것들에 크게 좌우됩니다. 특히 남성에게서 <b>우울이 분노와 짜증의 형태로 나타나는</b> 경우가 드물지 않습니다.", "advice": ["화가 올라오는 순간의 몸 신호를 익혀 두세요. 턱에 힘이 들어가거나 가슴이 뜨거워지는 시점에 알아차리면 선택지가 생깁니다.", "그 자리를 잠깐 벗어나는 것은 회피가 아니라 기술입니다. 생리적 각성이 가라앉는 데 20분 정도 걸립니다.", "요즘 전반적으로 가라앉아 있거나 지쳐 있다면 <a href=\"/depression/ces-d/\">우울</a>이나 <a href=\"/burnout/cbi/\">번아웃</a>을 함께 확인해 보세요. 분노가 그쪽의 얼굴일 수 있습니다."]}], "short_name": "분노 자가진단", "minutes": 2, "offset": 0, "max": 50};
+var T={"items": [{"text": "쉽게 화가 난다.", "reverse": false}, {"text": "좀처럼 짜증이 나지 않는다.", "reverse": true}, {"text": "쉽게 짜증이 난다.", "reverse": false}, {"text": "좀처럼 화를 내지 않는다.", "reverse": true}, {"text": "쉽게 속상해진다.", "reverse": false}, {"text": "웬만해서는 거슬리지 않는다.", "reverse": true}, {"text": "기분이 안 좋을 때가 잦다.", "reverse": false}, {"text": "침착함을 유지한다.", "reverse": true}, {"text": "화를 참지 못하고 터뜨린다.", "reverse": false}, {"text": "좀처럼 불평하지 않는다.", "reverse": true}], "labels": ["매우 그렇다", "그런 편이다", "보통이다", "아닌 편이다", "전혀 아니다"], "bands": [{"max": 24, "label": "낮은 편", "tone": "ok", "eval": "웬만한 일에는 화가 잘 올라오지 않는 편입니다. 상황이 흔들려도 비교적 평정을 유지합니다. 다만 화가 적게 나는 것과 화를 참는 것은 다릅니다. 실제로는 화가 나는데 표현하지 않는 쪽이라면, 점수는 낮게 나와도 몸과 관계에는 쌓입니다.", "advice": ["최근에 화가 났는데 넘어간 일이 있는지 떠올려 보세요. 없었다면 정말 낮은 것이고, 있었다면 참은 쪽일 수 있습니다.", "화를 잘 못 느끼는 편이라면, 부당한 일을 당했을 때 자신을 지키는 말이 늦게 나올 수 있습니다. 분노는 경계를 세우는 데 쓰이는 감정이기도 합니다."]}, {"max": 35, "label": "보통", "tone": "accent", "eval": "상황에 따라 화가 나기도 하고 넘어가기도 하는 편입니다. 대부분의 사람이 이 구간에 있습니다. 중요한 것은 평균이 아니라 <b>어떤 상황에서 유독 올라오는가</b>입니다.", "advice": ["최근 화가 났던 일 세 가지를 적고 공통점을 찾아 보세요. 무시당했을 때인지, 통제할 수 없을 때인지, 기대가 어긋났을 때인지에 따라 대처가 달라집니다.", "잠이 부족하면 분노 역치가 눈에 띄게 내려갑니다. 요즘 유난히 예민하다면 수면부터 확인해 보세요."]}, {"max": 50, "label": "높은 편", "tone": "warn", "eval": "화가 자주, 쉽게 올라오는 편입니다. 성격이 나쁘다는 뜻이 아닙니다. 분노 역치는 잠, 스트레스, 통증, 우울 같은 것들에 크게 좌우됩니다. 특히 남성에게서 <b>우울이 분노와 짜증의 형태로 나타나는</b> 경우가 드물지 않습니다.", "advice": ["화가 올라오는 순간의 몸 신호를 익혀 두세요. 턱에 힘이 들어가거나 가슴이 뜨거워지는 시점에 알아차리면 선택지가 생깁니다.", "그 자리를 잠깐 벗어나는 것은 회피가 아니라 기술입니다. 생리적 각성이 가라앉는 데 20분 정도 걸립니다.", "요즘 전반적으로 가라앉아 있거나 지쳐 있다면 <a href=\"/depression/ces-d/\">우울</a>이나 <a href=\"/burnout/cbi/\">번아웃</a>을 함께 확인해 보세요. 분노가 그쪽의 얼굴일 수 있습니다."]}], "short_name": "분노 자가진단", "minutes": 2, "offset": 0, "min": 10, "max": 50};
 var ans=new Array(T.items.length).fill(null);
 var box=document.getElementById("qs");
 T.items.forEach(function(it,i){
@@ -163,6 +165,7 @@ document.getElementById("go").onclick=function(){
   var tg=document.getElementById("tag");tg.textContent=b.label;tg.style.background="var(--"+b.tone+"-soft)";tg.style.color="var(--"+b.tone+")";
   document.getElementById("ev").innerHTML=b.eval;
   LAST={score:s,label:b.label};
+  renderCompare(s);
   var ul=document.getElementById("ad");ul.innerHTML="";
   b.advice.forEach(function(a){var li=document.createElement("li");li.innerHTML=a;ul.appendChild(li);});
   var r=document.getElementById("res");r.style.display="block";
@@ -194,6 +197,10 @@ document.getElementById("copy").onclick=function(){
   if(navigator.clipboard){navigator.clipboard.writeText(summary()).then(function(){toast("복사했어요");});}
   else{prompt("아래 내용을 복사하세요",summary());}
 };
+
+
+function renderCompare(){}
+
 </script>
 </body>
 </html>

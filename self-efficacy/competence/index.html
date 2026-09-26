@@ -53,6 +53,7 @@
 <p>10문항 각각 1~5점, 총점 10~50점입니다. <b>2·4·6·8번이 역채점</b>입니다.</p><p>주의할 점이 있습니다.</p><ul><li><b>문화 차이가 큽니다.</b> 자신을 낮추는 것을 미덕으로 보는 문화에서는 점수가 실제보다 낮게 나오는 경향이 보고됩니다. 한국도 여기 해당할 수 있습니다.</li><li><b>영역을 구분하지 않습니다.</b> 전반적 경향만 봅니다. 특정 영역의 자신감은 따로 봐야 합니다.</li><li><b>상태에 영향을 받습니다.</b> 최근에 크게 실패했다면 낮게 나옵니다.</li></ul>
 
 
+
 <h2 id="test">자가진단 하기</h2>
 <div class="warnbox"><p><b>답하기 전에.</b> 겸손하게 답하지 마시고 <b>실제로 그런 편인지</b>로 답해 주세요. 자신을 낮추는 것이 예의인 문화에서는 이 검사의 점수가 실제보다 낮게 나오는 경향이 있습니다.</p><p>문항 절반은 방향이 반대입니다. 잘 못한다는 쪽을 묻는 문항에 그렇다고 답할수록 점수는 낮아집니다.</p></div>
 <div class="tool">
@@ -64,6 +65,7 @@
   <div class="res" id="res">
     <div class="score"><b id="sc">0</b><span>/ 50점</span></div>
     <span class="tag" id="tag"></span>
+    
     <div class="scale"><i style="flex:15;background:var(--warn-soft)"></i><i style="flex:11;background:var(--accent-soft)"></i><i style="flex:15;background:var(--ok-soft)"></i></div>
     <div class="scale-l"><span>10</span><span>25</span><span>36</span><span>50</span></div>
     <p class="ev" id="ev"></p>
@@ -123,7 +125,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-var T={"items": [{"text": "맡은 일을 성공적으로 끝낸다.", "reverse": false}, {"text": "상황을 잘못 판단한다.", "reverse": true}, {"text": "내가 하는 일에서 두각을 나타낸다.", "reverse": false}, {"text": "무언가를 잘 이해하지 못한다.", "reverse": true}, {"text": "일을 매끄럽게 처리한다.", "reverse": false}, {"text": "내가 기여할 수 있는 것이 별로 없다.", "reverse": true}, {"text": "내 입장에 확신이 있다.", "reverse": false}, {"text": "일이 어떤 결과로 이어질지 내다보지 못한다.", "reverse": true}, {"text": "좋은 해결책을 떠올린다.", "reverse": false}, {"text": "일을 되게 만드는 방법을 안다.", "reverse": false}], "labels": ["매우 그렇다", "그런 편이다", "보통이다", "아닌 편이다", "전혀 아니다"], "bands": [{"max": 24, "label": "낮은 편", "tone": "warn", "eval": "해낼 수 있다는 믿음이 약한 편입니다. 실제 능력이 부족하다는 뜻은 아닙니다. 자기효능감과 실제 성과는 생각보다 자주 어긋나고, 잘 해내면서도 자신을 믿지 못하는 사람이 많습니다. 이 믿음은 능력보다 <b>경험의 해석</b>에서 자랍니다.", "advice": ["최근에 해낸 일을 세 가지 적어 보세요. 그리고 그것을 운이나 남의 덕으로 돌리고 있지 않은지 살펴보세요. 낮은 자기효능감은 대개 성공을 자기 것으로 세지 않는 습관에서 옵니다.", "확실히 해낼 수 있는 작은 일부터 쌓으세요. 이 믿음을 키우는 가장 확실한 경로는 격려가 아니라 <b>직접 해낸 경험</b>입니다.", "긴장될 때의 두근거림을 못한다는 증거로 읽지 마세요. 같은 각성을 준비됐다고 해석하는 것만으로 수행이 달라진다는 연구가 있습니다."]}, {"max": 35, "label": "보통", "tone": "accent", "eval": "영역에 따라 자신 있기도 하고 그렇지 않기도 한 상태입니다. 대부분의 사람이 여기 있습니다. 자기효능감은 원래 전반적인 것이 아니라 <b>영역별</b>로 다르게 작동합니다.", "advice": ["자신 있는 영역과 그렇지 않은 영역을 나눠 적어 보세요. 잘하는 영역에서 무엇이 그 믿음을 만들었는지가 힌트가 됩니다.", "새로운 일을 맡을 때 비슷한 일을 해낸 경험을 먼저 떠올려 보세요. 뇌는 가까운 선례가 있으면 훨씬 덜 위협적으로 받아들입니다."]}, {"max": 50, "label": "높은 편", "tone": "ok", "eval": "해낼 수 있다는 믿음이 뚜렷한 편입니다. 자기효능감은 여러 연구에서 실제 성과, 어려운 일에 도전하는 정도, 실패 후 다시 시도하는 정도를 꾸준히 예측하는 것으로 보고됩니다. 믿음이 노력을 끌어내고 노력이 결과를 만드는 고리입니다.", "advice": ["이 믿음이 어느 영역에서 왔는지 알아 두세요. 한 영역의 자신감을 낯선 영역까지 그대로 가져가면 과신이 됩니다.", "잘 안 된 일에서 무엇이 부족했는지 구체적으로 짚는 습관을 유지하세요. 높은 자기효능감이 위험해지는 것은 피드백을 덜 받아들일 때입니다.", "주변에 능력은 충분한데 자신을 못 믿는 사람이 있다면, 잘한다는 말보다 <b>해낸 일을 구체적으로 짚어 주는 것</b>이 훨씬 효과적입니다."]}], "short_name": "자기효능감 자가진단", "minutes": 2, "offset": 0, "max": 50};
+var T={"items": [{"text": "맡은 일을 성공적으로 끝낸다.", "reverse": false}, {"text": "상황을 잘못 판단한다.", "reverse": true}, {"text": "내가 하는 일에서 두각을 나타낸다.", "reverse": false}, {"text": "무언가를 잘 이해하지 못한다.", "reverse": true}, {"text": "일을 매끄럽게 처리한다.", "reverse": false}, {"text": "내가 기여할 수 있는 것이 별로 없다.", "reverse": true}, {"text": "내 입장에 확신이 있다.", "reverse": false}, {"text": "일이 어떤 결과로 이어질지 내다보지 못한다.", "reverse": true}, {"text": "좋은 해결책을 떠올린다.", "reverse": false}, {"text": "일을 되게 만드는 방법을 안다.", "reverse": false}], "labels": ["매우 그렇다", "그런 편이다", "보통이다", "아닌 편이다", "전혀 아니다"], "bands": [{"max": 24, "label": "낮은 편", "tone": "warn", "eval": "해낼 수 있다는 믿음이 약한 편입니다. 실제 능력이 부족하다는 뜻은 아닙니다. 자기효능감과 실제 성과는 생각보다 자주 어긋나고, 잘 해내면서도 자신을 믿지 못하는 사람이 많습니다. 이 믿음은 능력보다 <b>경험의 해석</b>에서 자랍니다.", "advice": ["최근에 해낸 일을 세 가지 적어 보세요. 그리고 그것을 운이나 남의 덕으로 돌리고 있지 않은지 살펴보세요. 낮은 자기효능감은 대개 성공을 자기 것으로 세지 않는 습관에서 옵니다.", "확실히 해낼 수 있는 작은 일부터 쌓으세요. 이 믿음을 키우는 가장 확실한 경로는 격려가 아니라 <b>직접 해낸 경험</b>입니다.", "긴장될 때의 두근거림을 못한다는 증거로 읽지 마세요. 같은 각성을 준비됐다고 해석하는 것만으로 수행이 달라진다는 연구가 있습니다."]}, {"max": 35, "label": "보통", "tone": "accent", "eval": "영역에 따라 자신 있기도 하고 그렇지 않기도 한 상태입니다. 대부분의 사람이 여기 있습니다. 자기효능감은 원래 전반적인 것이 아니라 <b>영역별</b>로 다르게 작동합니다.", "advice": ["자신 있는 영역과 그렇지 않은 영역을 나눠 적어 보세요. 잘하는 영역에서 무엇이 그 믿음을 만들었는지가 힌트가 됩니다.", "새로운 일을 맡을 때 비슷한 일을 해낸 경험을 먼저 떠올려 보세요. 뇌는 가까운 선례가 있으면 훨씬 덜 위협적으로 받아들입니다."]}, {"max": 50, "label": "높은 편", "tone": "ok", "eval": "해낼 수 있다는 믿음이 뚜렷한 편입니다. 자기효능감은 여러 연구에서 실제 성과, 어려운 일에 도전하는 정도, 실패 후 다시 시도하는 정도를 꾸준히 예측하는 것으로 보고됩니다. 믿음이 노력을 끌어내고 노력이 결과를 만드는 고리입니다.", "advice": ["이 믿음이 어느 영역에서 왔는지 알아 두세요. 한 영역의 자신감을 낯선 영역까지 그대로 가져가면 과신이 됩니다.", "잘 안 된 일에서 무엇이 부족했는지 구체적으로 짚는 습관을 유지하세요. 높은 자기효능감이 위험해지는 것은 피드백을 덜 받아들일 때입니다.", "주변에 능력은 충분한데 자신을 못 믿는 사람이 있다면, 잘한다는 말보다 <b>해낸 일을 구체적으로 짚어 주는 것</b>이 훨씬 효과적입니다."]}], "short_name": "자기효능감 자가진단", "minutes": 2, "offset": 0, "min": 10, "max": 50};
 var ans=new Array(T.items.length).fill(null);
 var box=document.getElementById("qs");
 T.items.forEach(function(it,i){
@@ -163,6 +165,7 @@ document.getElementById("go").onclick=function(){
   var tg=document.getElementById("tag");tg.textContent=b.label;tg.style.background="var(--"+b.tone+"-soft)";tg.style.color="var(--"+b.tone+")";
   document.getElementById("ev").innerHTML=b.eval;
   LAST={score:s,label:b.label};
+  renderCompare(s);
   var ul=document.getElementById("ad");ul.innerHTML="";
   b.advice.forEach(function(a){var li=document.createElement("li");li.innerHTML=a;ul.appendChild(li);});
   var r=document.getElementById("res");r.style.display="block";
@@ -194,6 +197,10 @@ document.getElementById("copy").onclick=function(){
   if(navigator.clipboard){navigator.clipboard.writeText(summary()).then(function(){toast("복사했어요");});}
   else{prompt("아래 내용을 복사하세요",summary());}
 };
+
+
+function renderCompare(){}
+
 </script>
 </body>
 </html>
