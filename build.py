@@ -361,6 +361,27 @@ def main():
         f"  <url><loc>{site['url']}/{u}{'/' if u else ''}</loc></url>\n" for u in urls) + "</urlset>\n"
     (DIST / "sitemap.xml").write_text(sm, encoding="utf-8")
     (DIST / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {site['url']}/sitemap.xml\n", encoding="utf-8")
+
+    # 보안 헤더 — Cloudflare Pages는 출력 루트의 _headers 파일을 읽는다.
+    # CSP는 넣지 않는다. 애드센스가 광고를 iframe과 스크립트로 계속 바꿔 불러오기 때문에
+    # 잘못 조이면 광고가 통째로 안 뜬다. 클릭재킹(X-Frame-Options)은 애드센스에서
+    # 특히 중요하다 — 남이 이 사이트를 iframe으로 감싸 노출수를 만들면 무효 트래픽이 된다.
+    (DIST / "_headers").write_text(NL.join([
+        "/*",
+        "  Strict-Transport-Security: max-age=31536000; includeSubDomains",
+        "  X-Frame-Options: SAMEORIGIN",
+        "  X-Content-Type-Options: nosniff",
+        "  Referrer-Policy: strict-origin-when-cross-origin",
+        "  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "",
+    ]), encoding="utf-8")
+
+    # ads.txt — site.json에 adsense_client(ca-pub-...)가 들어오면 자동 생성된다.
+    # ID 없이 빈 파일을 올리면 오히려 경고가 뜨므로 있을 때만 쓴다.
+    pub = site.get("adsense_client", "").replace("ca-pub-", "")
+    if pub:
+        (DIST / "ads.txt").write_text(
+            "google.com, pub-%s, DIRECT, f08c47fec0942fa0%s" % (pub, NL), encoding="utf-8")
     print(f"완료: 검사 {len(tests)}개 · 갈래 {len(themes)}개 · 주제 {len(groups)}개(색인 {len(indexed_cats)}개)")
 
 
