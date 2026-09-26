@@ -18,13 +18,20 @@ PUBLISH_ALL = "--all" in sys.argv
 site = json.loads((ROOT / "site.json").read_text(encoding="utf-8"))
 env = Environment(loader=FileSystemLoader(ROOT / "templates"), autoescape=False)
 
-_SLOT = ('<ins class="adsbygoogle" style="display:block" data-ad-client="%s" data-ad-format="auto" data-full-width-responsive="true"></ins>'
+_SLOT = ('<ins class="adsbygoogle" style="display:block" data-ad-client="%s" data-ad-slot="%s"'
+         ' data-ad-format="auto" data-full-width-responsive="true"></ins>'
          '<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>')
 
-# 광고 ID가 없으면 운영 빌드에는 아무것도 넣지 않는다.
-# "광고 영역" 자리표시자는 --all(미리보기)에서만 보인다 — 방문자·애드센스 심사자에게 보이면 안 되므로.
-AD = (_SLOT % site["adsense_client"]) if site.get("adsense_client") else (
-    '<div class="ad">광고 영역 (AdSense)</div>' if PUBLISH_ALL else '')
+# 본문 안에 넣는 수동 광고 단위는 adsense_slot(광고 단위 ID)이 있을 때만 쓴다.
+# data-ad-slot 없는 <ins>는 채워지지 않고 콘솔 오류만 남긴다.
+# 슬롯이 없으면 <head>의 스크립트만 들어가고, 자동 광고가 위치를 알아서 정한다.
+# "광고 영역" 자리표시자는 --all(미리보기)에서만 보인다 — 방문자와 심사자에게 보이면 안 되므로.
+if site.get("adsense_client") and site.get("adsense_slot"):
+    AD = _SLOT % (site["adsense_client"], site["adsense_slot"])
+elif site.get("adsense_client"):
+    AD = ""
+else:
+    AD = '<div class="ad">광고 영역 (AdSense)</div>' if PUBLISH_ALL else ''
 
 
 _DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
