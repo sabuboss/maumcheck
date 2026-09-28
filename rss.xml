@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Sun, 27 Sep 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 28 Sep 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>낙관·희망 검사 — 8문항으로 보는 앞날을 대하는 태도</title>
+      <link>https://maumcheck.com/optimism/hope/</link>
+      <guid isPermaLink="true">https://maumcheck.com/optimism/hope/</guid>
+      <description>앞일을 어떻게 내다보는지를 재는 8문항 검사입니다. 낙관이 늘 정답은 아니라는 것, 최악을 예상하는 방식이 어떤 사람에게는 더 잘 작동한다는 것까지 함께 정리했습니다.</description>
+      <category>낙관</category>
+      <pubDate>Mon, 28 Sep 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>주장성 검사 — 10문항으로 보는 나서는 힘과 물러나는 힘</title>
       <link>https://maumcheck.com/assertiveness/speaking-up/</link>
