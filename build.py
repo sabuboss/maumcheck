@@ -5,7 +5,7 @@
   python build.py            # 오늘 날짜 기준, publish <= 오늘 인 검사만 발행
   python build.py --all      # 날짜 무시하고 전부 발행 (미리보기용)
 """
-import json, sys, shutil, datetime, pathlib
+import json, sys, shutil, datetime, pathlib, re
 from xml.sax.saxutils import escape
 NL = chr(10)
 from jinja2 import Environment, FileSystemLoader
@@ -193,6 +193,54 @@ def load_tests():
     return out, soon
 
 
+def load_articles():
+    """articles/*.md — 검사가 아닌 읽을거리. 검사와 똑같이 publish로 예약 발행한다."""
+    out, soon = [], []
+    d = ROOT / "articles"
+    if not d.exists():
+        return out, soon
+    for p in sorted(d.glob("*.md")):
+        head, body = p.read_text(encoding="utf-8").split("---", 1)
+        a = dict(line.split(":", 1) for line in head.strip().splitlines())
+        a = {k.strip(): v.strip() for k, v in a.items()}
+        a["slug"] = "articles/" + p.stem
+        a["body"] = body.strip()
+        a.setdefault("category", "읽을거리")
+        a["rel"] = [s.strip() for s in a.get("related", "").split(",") if s.strip()]
+        pub = datetime.date.fromisoformat(a["publish"])
+        if PUBLISH_ALL or pub <= TODAY:
+            out.append(a)
+        else:
+            soon.append(a)
+            print(f"  (예약) [글] {a['title'][:22]} → {pub}")
+    out.sort(key=lambda a: a["publish"], reverse=True)
+    soon.sort(key=lambda a: a["publish"])
+    return out, soon
+
+
+def article_cards_html(arts):
+    out = []
+    for a in arts:
+        badge = '<span class="new">NEW</span>' if is_new(a) else ""
+        out.append(
+            '<a class="card art" href="/%s/"><span class="chip">읽을거리</span>%s<b>%s</b>'
+            '<p>%s</p><small>%s</small></a>'
+            % (a["slug"], badge, a["title"], a.get("lead", a["description"]), a["publish"]))
+    return '<div class="cards">' + "".join(out) + "</div>"
+
+
+def article_jsonld(a):
+    url = f"{site['url']}/{a['slug']}/"
+    return json.dumps({
+        "@context": "https://schema.org", "@type": "Article",
+        "headline": a["title"], "description": a["description"],
+        "author": {"@type": "Person", "name": site["author"], "url": f"{site['url']}/about/"},
+        "publisher": {"@type": "Organization", "name": site["name"], "url": site["url"]},
+        "datePublished": a["publish"], "dateModified": a.get("updated", a["publish"]),
+        "mainEntityOfPage": url}, ensure_ascii=False)
+
+
+
 def cards_html(tests):
     out = []
     for t in tests:
@@ -235,6 +283,7 @@ def main():
     shutil.copytree(ROOT / "static", DIST / "static")
 
     tests, soon = load_tests()
+    articles, art_soon = load_articles()
     year = TODAY.year
     tpl = env.get_template("test.html")
     mtpl = env.get_template("test-multi.html")
@@ -288,6 +337,47 @@ def main():
         meta = {k.strip(): v.strip() for k, v in meta.items()}
         page_upd[p.stem] = meta.get("updated", "")
         write(p.stem, ptpl.render(site=site, year=year, slug=p.stem, body=body, ad="", **meta))
+
+    # 읽을거리 — 검사가 아닌 글. 검사 페이지만 30장이면 틀로 찍어낸 묶음처럼 보인다.
+    atpl = env.get_template("article.html")
+
+    # 글이 아직 발행 전인 검사를 링크하면 그날 404가 된다.
+    # 링크를 지우는 대신 <a>만 벗겨 두고, 그 검사가 발행되면 자동으로 링크가 살아난다.
+    pending = {t["slug"] for t in soon}
+    known = {t["slug"] for t in tests} | pending | {a["slug"] for a in articles}
+    known |= {"tests", "about", "privacy", "contact", "articles"}
+
+    def resolve_links(html, where):
+        for sl in pending:
+            html = re.sub(r'<a href="/%s/">(.*?)</a>' % re.escape(sl), lambda m: m.group(1), html, flags=re.S)
+        for href in set(re.findall(r'href="/([^"#]*?)/?"', html)):
+            if href and href not in known and not href.startswith(("static/", "articles/")):
+                print(f"  ! {where}: 없는 주소로 링크 — /{href}/")
+        return html
+
+    for a in articles:
+        a["body"] = resolve_links(a["body"], a["slug"])
+        rel = [t for t in tests if t["slug"] in a["rel"]]
+        write(a["slug"], atpl.render(site=site, year=year, a=a, related=rel,
+                                     ad=AD, jsonld=article_jsonld(a)))
+        print(f"  읽을거리  /{a['slug']}/")
+    if articles or art_soon:
+        body = [f'<p>검사 말고 읽을거리입니다. 쓸 수 없는 척도를 왜 못 쓰는지, '
+                f'검사로는 담기 어려운 주제는 어떻게 봐야 하는지를 다룹니다.</p>',
+                article_cards_html(articles)]
+        if art_soon:
+            body.append("<h2>준비 중인 글</h2>")
+            body.append('<div class="cards soon">' + "".join(
+                '<div class="card"><span class="chip">읽을거리</span><b>%s</b>'
+                '<small>%s 공개 예정</small></div>' % (a["title"], a["publish"])
+                for a in art_soon) + "</div>")
+        write("articles", ptpl.render(
+            site=site, year=year, slug="articles", title="읽을거리",
+            description=f"{site['name']}의 글 {len(articles)}편. 심리 척도의 저작권, "
+                        f"검사로는 담기 어려운 주제, 결과를 읽는 법을 다룹니다.",
+            body="".join(body), ad=AD,
+            # 발행된 글이 없는 동안은 목록만 있는 얇은 페이지라 색인에서 뺀다.
+            robots=None if articles else "noindex,follow"))
 
     # 주제 > 카테고리 > 검사, 세 층으로 묶는다
     groups = group_by_cat(tests)
@@ -369,12 +459,14 @@ def main():
     (DIST / "404.html").write_text(
         env.get_template("404.html").render(site=site, year=year, tests=tests, cards=cards), encoding="utf-8")
 
-    write_rss(tests, year)
+    write_rss(tests + articles, year)
 
     # sitemap / robots
     urls = ([""] + ["tests", "about", "privacy", "contact"]
+            + (["articles"] if articles else [])
             + [k for k, _, _ in themes]
-            + [pre for _, pre in indexed_cats] + [t["slug"] for t in tests])
+            + [pre for _, pre in indexed_cats] + [t["slug"] for t in tests]
+            + [a["slug"] for a in articles])
 
     # lastmod — 구글이 무엇을 다시 크롤링할지 정하는 데 쓴다. 매일 발행하는 사이트에서는
     # 이게 없으면 새 글이 올라온 사실을 알아차리는 데 시간이 더 걸린다.
@@ -389,6 +481,10 @@ def main():
     for stem, d in page_upd.items():
         if d:
             lm[stem] = d
+    for a in articles:
+        lm[a["slug"]] = a.get("updated", a["publish"])
+    if articles:
+        lm["articles"] = max(a.get("updated", a["publish"]) for a in articles)
 
     sm = ('<?xml version="1.0" encoding="UTF-8"?>' + NL
           + '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + NL
@@ -421,7 +517,7 @@ def main():
     if pub:
         (DIST / "ads.txt").write_text(
             "google.com, pub-%s, DIRECT, f08c47fec0942fa0%s" % (pub, NL), encoding="utf-8")
-    print(f"완료: 검사 {len(tests)}개 · 갈래 {len(themes)}개 · 주제 {len(groups)}개(색인 {len(indexed_cats)}개)")
+    print(f"완료: 검사 {len(tests)}개 · 글 {len(articles)}편 · 갈래 {len(themes)}개 · 주제 {len(groups)}개(색인 {len(indexed_cats)}개)")
 
 
 if __name__ == "__main__":
