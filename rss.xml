@@ -5,9 +5,25 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Mon, 28 Sep 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 29 Sep 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>공감·연민 검사 — 10문항으로 보는 남의 어려움에 마음이 움직이는 정도</title>
+      <link>https://maumcheck.com/empathy/sympathy/</link>
+      <guid isPermaLink="true">https://maumcheck.com/empathy/sympathy/</guid>
+      <description>다른 사람의 어려움에 마음이 얼마나 움직이는지를 재는 검사입니다. 공감에는 세 가지 다른 축이 있고 이 검사는 그중 하나만 잽니다. 높은 점수의 대가인 공감 피로까지 함께 다룹니다.</description>
+      <category>공감</category>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>심리 척도의 저작권 — 무료인 것, 아닌 것, 무료인 줄 알았던 것</title>
+      <link>https://maumcheck.com/articles/scale-licenses/</link>
+      <guid isPermaLink="true">https://maumcheck.com/articles/scale-licenses/</guid>
+      <description>심리검사 문항을 웹사이트나 블로그에 옮겨도 되는지 원 출처에서 하나씩 확인한 기록입니다. 자유롭게 쓸 수 있는 척도 여덟 가지와, 무료로 알려졌지만 실제로는 조건이 붙는 네 가지를 정리했습니다.</description>
+      <category>읽을거리</category>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>낙관·희망 검사 — 8문항으로 보는 앞날을 대하는 태도</title>
       <link>https://maumcheck.com/optimism/hope/</link>
