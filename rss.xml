@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Tue, 29 Sep 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 30 Sep 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>절제력 검사 — 10문항으로 보는 당기는 것을 참는 힘</title>
+      <link>https://maumcheck.com/self-control/moderation/</link>
+      <guid isPermaLink="true">https://maumcheck.com/self-control/moderation/</guid>
+      <description>먹고, 쓰고, 지르고 싶은 충동을 얼마나 참아내는지를 재는 검사입니다. 절제력이 미루지 않는 힘과 어떻게 다른지, 이 척도가 왜 먹는 이야기에 치우쳐 있는지까지 정직하게 정리했습니다.</description>
+      <category>자기조절</category>
+      <pubDate>Wed, 30 Sep 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>공감·연민 검사 — 10문항으로 보는 남의 어려움에 마음이 움직이는 정도</title>
       <link>https://maumcheck.com/empathy/sympathy/</link>
