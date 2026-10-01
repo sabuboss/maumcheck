@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Thu, 01 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 02 Oct 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>남의 시선 검사 — 10문항으로 보는 자의식의 크기</title>
+      <link>https://maumcheck.com/self-consciousness/social/</link>
+      <guid isPermaLink="true">https://maumcheck.com/self-consciousness/social/</guid>
+      <description>남들이 나를 어떻게 볼지 얼마나 신경 쓰는지를 재는 검사입니다. 자의식이 내향성과 어떻게 다른지, 사람들이 실제로는 나를 훨씬 덜 보고 있다는 연구까지 함께 정리했습니다.</description>
+      <category>자의식</category>
+      <pubDate>Fri, 02 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>스트레스 취약성 검사 — 10문항으로 보는 압박 앞에서 무너지는 정도</title>
       <link>https://maumcheck.com/stress/vulnerability/</link>
@@ -158,14 +166,6 @@
       <guid isPermaLink="true">https://maumcheck.com/anxiety/gad-7/</guid>
       <description>전 세계 진료실에서 가장 널리 쓰이는 불안 선별검사 GAD-7을 직접 해보세요. 무엇을 재는 검사인지, 점수의 기준선은 어디서 왔는지, 결과를 어떻게 읽어야 하는지까지 정리했습니다.</description>
       <category>불안</category>
-      <pubDate>Wed, 16 Sep 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>PCL-5 트라우마 자가진단 — 20문항으로 보는 외상후 스트레스 증상</title>
-      <link>https://maumcheck.com/trauma/pcl-5/</link>
-      <guid isPermaLink="true">https://maumcheck.com/trauma/pcl-5/</guid>
-      <description>미국 국가 PTSD 센터가 만들어 공공영역으로 공개한 외상후 스트레스 척도 PCL-5입니다. 어떤 사람에게 의미가 있는 검사인지, 네 가지 증상 묶음이 무엇인지, 33점이라는 기준선은 어디서 왔는지까지 정리했습니다.</description>
-      <category>트라우마</category>
       <pubDate>Wed, 16 Sep 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
