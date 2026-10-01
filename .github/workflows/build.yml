@@ -3,7 +3,10 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "0 0 * * *"    # 매일 09:00 KST — 예약일이 된 검사를 자동 발행
+    # 00:00 정각 UTC는 전 세계 크론이 몰리는 슬롯이라 2~3시간씩 밀리고,
+    # 고부하 시간대에는 GitHub이 예약 실행을 건너뛸 수도 있다.
+    # 붐비지 않는 분으로 옮겨 둔다. 23:37 UTC = 08:37 KST.
+    - cron: "37 23 * * *"   # 매일 08:37 KST 예정 — 예약일이 된 검사와 글을 자동 발행
   workflow_dispatch:
 jobs:
   build:
