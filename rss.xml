@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Fri, 02 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 03 Oct 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>사교성 검사 — 10문항으로 보는 혼자와 여럿 사이의 내 자리</title>
+      <link>https://maumcheck.com/sociability/gregariousness/</link>
+      <guid isPermaLink="true">https://maumcheck.com/sociability/gregariousness/</guid>
+      <description>사람이 많은 자리를 즐기는지, 혼자가 편한지를 재는 검사입니다. 어느 쪽이 좋다는 검사가 아닙니다. 사교성이 친화력과 어떻게 다른지, 혼자 좋아하는 것과 외로운 것이 왜 별개인지 정리했습니다.</description>
+      <category>사교성</category>
+      <pubDate>Sat, 03 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>남의 시선 검사 — 10문항으로 보는 자의식의 크기</title>
       <link>https://maumcheck.com/self-consciousness/social/</link>
@@ -158,14 +166,6 @@
       <guid isPermaLink="true">https://maumcheck.com/depression/ces-d/</guid>
       <description>전 세계 역학조사에서 가장 널리 쓰인 우울 척도 CES-D를 직접 해보세요. 무엇을 재는 검사인지, 16점이라는 기준선은 어디서 왔는지, 결과를 어떻게 읽어야 하는지까지 정리했습니다.</description>
       <category>우울</category>
-      <pubDate>Wed, 16 Sep 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>GAD-7 불안 자가진단 — 7문항으로 보는 지난 2주간의 불안</title>
-      <link>https://maumcheck.com/anxiety/gad-7/</link>
-      <guid isPermaLink="true">https://maumcheck.com/anxiety/gad-7/</guid>
-      <description>전 세계 진료실에서 가장 널리 쓰이는 불안 선별검사 GAD-7을 직접 해보세요. 무엇을 재는 검사인지, 점수의 기준선은 어디서 왔는지, 결과를 어떻게 읽어야 하는지까지 정리했습니다.</description>
-      <category>불안</category>
       <pubDate>Wed, 16 Sep 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
