@@ -17,4 +17,5 @@
 <p style="margin-top:28px"><a href="/">홈으로 가기</a> · <a href="/tests/">전체 검사 보기</a> · <a href="/contact/">문의하기</a></p>
 </div>
 <footer><a href="/about/">소개</a>·<a href="/privacy/">개인정보처리방침</a>·<a href="/contact/">문의</a><br>© {{ year }} {{ site.name }}. 이 사이트의 검사는 참고용이며 전문적 진단을 대신하지 않습니다.</footer>
+{% if site.cf_beacon_token %}<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ site.cf_beacon_token }}"}'></script>{% endif %}
 </body></html>
