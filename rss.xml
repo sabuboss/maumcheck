@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Sat, 03 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 04 Oct 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>신뢰 검사 — 10문항으로 보는 사람을 믿는 정도</title>
+      <link>https://maumcheck.com/trust/others/</link>
+      <guid isPermaLink="true">https://maumcheck.com/trust/others/</guid>
+      <description>처음 만난 사람을 어느 쪽으로 가정하는지를 재는 검사입니다. 잘 믿는 사람이 잘 속는 사람은 아니라는 연구, 한국인의 점수가 낮게 나오는 이유까지 함께 정리했습니다.</description>
+      <category>신뢰</category>
+      <pubDate>Sun, 04 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>사교성 검사 — 10문항으로 보는 혼자와 여럿 사이의 내 자리</title>
       <link>https://maumcheck.com/sociability/gregariousness/</link>
@@ -158,14 +166,6 @@
       <guid isPermaLink="true">https://maumcheck.com/burnout/cbi/</guid>
       <description>덴마크 국립산업보건연구원이 만든 무료 번아웃 척도 CBI의 일 관련 번아웃 7문항입니다. 번아웃이 무엇이고 무엇이 아닌지, 점수를 어떻게 읽어야 하는지까지 정리했습니다.</description>
       <category>번아웃</category>
-      <pubDate>Wed, 16 Sep 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>CES-D 우울 자가진단 — 20문항으로 보는 지난 일주일의 우울</title>
-      <link>https://maumcheck.com/depression/ces-d/</link>
-      <guid isPermaLink="true">https://maumcheck.com/depression/ces-d/</guid>
-      <description>전 세계 역학조사에서 가장 널리 쓰인 우울 척도 CES-D를 직접 해보세요. 무엇을 재는 검사인지, 16점이라는 기준선은 어디서 왔는지, 결과를 어떻게 읽어야 하는지까지 정리했습니다.</description>
-      <category>우울</category>
       <pubDate>Wed, 16 Sep 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
