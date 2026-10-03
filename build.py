@@ -218,6 +218,38 @@ def load_articles():
     return out, soon
 
 
+def load_tasks():
+    """tasks/*.json — 설문이 아니라 직접 해보는 인지 과제. 검사와 같은 publish 예약을 탄다.
+    반응시간·기억 폭처럼 시간과 입력을 다루는 과제라 items/labels가 없고,
+    과제 종류(kind)와 설정(task)을 엔진(static/task.js)에 넘긴다."""
+    out, soon = [], []
+    d = ROOT / "tasks"
+    if not d.exists():
+        return out, soon
+    for p in sorted(d.glob("*.json")):
+        t = json.loads(p.read_text(encoding="utf-8"))
+        t["rel"] = [x.strip() for x in t.get("related", "").split(",") if x.strip()]
+        pub = datetime.date.fromisoformat(t["publish"])
+        if PUBLISH_ALL or pub <= TODAY:
+            out.append(t)
+        else:
+            soon.append(t)
+            print(f"  (예약) [과제] {t['short_name']} → {pub}")
+    soon.sort(key=lambda t: t["publish"])
+    return out, soon
+
+
+def task_jsonld(t):
+    url = f"{site['url']}/{t['slug']}/"
+    return json.dumps({
+        "@context": "https://schema.org", "@type": "Article",
+        "headline": t["title"], "description": t["description"],
+        "author": {"@type": "Person", "name": site["author"], "url": f"{site['url']}/about/"},
+        "publisher": {"@type": "Organization", "name": site["name"], "url": site["url"]},
+        "datePublished": t["publish"], "dateModified": t["publish"],
+        "mainEntityOfPage": url}, ensure_ascii=False)
+
+
 def article_cards_html(arts):
     out = []
     for a in arts:
@@ -249,9 +281,11 @@ def cards_html(tests):
         badge = '<span class="new">NEW</span>' if is_new(t) else ""
         out.append(
             '<a class="card" href="/%s/"%s><span class="chip">%s</span>%s<b>%s</b>'
-            '<p>%s</p><small>%d문항 · 약 %d분</small></a>'
+            '<p>%s</p><small>%s · 약 %d분</small></a>'
             % (t["slug"], attr, t["category"], badge, t["short_name"],
-               t["description"], len(t["items"]), t["minutes"]))
+               t["description"],
+               ("%d문항" % len(t["items"])) if "items" in t else "직접 해보는 과제",
+               t["minutes"]))
     return '<div class="cards">' + "".join(out) + "</div>"
 
 
@@ -284,6 +318,7 @@ def main():
 
     tests, soon = load_tests()
     articles, art_soon = load_articles()
+    tasks, task_soon = load_tasks()
     year = TODAY.year
     tpl = env.get_template("test.html")
     mtpl = env.get_template("test-multi.html")
@@ -338,13 +373,25 @@ def main():
         page_upd[p.stem] = meta.get("updated", "")
         write(p.stem, ptpl.render(site=site, year=year, slug=p.stem, body=body, ad="", **meta))
 
+    # 인지 과제 — 설문이 아니라 직접 해보는 페이지. 엔진은 static/task.js 하나를 공유한다.
+    ttpl = env.get_template("task.html")
+    for t in tasks:
+        rel = [r for r in tests if r["slug"] in t["rel"]]
+        tool = {"slug": t["slug"], "kind": t["kind"], "unit": t.get("unit", ""), "task": t["task"],
+                "warn": t.get("result_warn", "")}
+        write(t["slug"], ttpl.render(
+            t=t, site=site, related=rel, ad=("" if t.get("no_ads") else AD), year=year,
+            cat_url=t["slug"].split("/")[0], cat_style=cat_style(t),
+            jsonld=task_jsonld(t), task_json=json.dumps(tool, ensure_ascii=False)))
+        print(f"  과제  /{t['slug']}/")
+
     # 읽을거리 — 검사가 아닌 글. 검사 페이지만 30장이면 틀로 찍어낸 묶음처럼 보인다.
     atpl = env.get_template("article.html")
 
     # 글이 아직 발행 전인 검사를 링크하면 그날 404가 된다.
     # 링크를 지우는 대신 <a>만 벗겨 두고, 그 검사가 발행되면 자동으로 링크가 살아난다.
-    pending = {t["slug"] for t in soon}
-    known = {t["slug"] for t in tests} | pending | {a["slug"] for a in articles}
+    pending = {t["slug"] for t in soon} | {t["slug"] for t in task_soon}
+    known = {t["slug"] for t in tests} | {t["slug"] for t in tasks} | pending | {a["slug"] for a in articles}
     known |= {"tests", "about", "privacy", "contact", "articles"}
 
     def resolve_links(html, where):
@@ -380,7 +427,7 @@ def main():
             robots=None if articles else "noindex,follow"))
 
     # 주제 > 카테고리 > 검사, 세 층으로 묶는다
-    groups = group_by_cat(tests)
+    groups = group_by_cat(tests + tasks)
     themes = group_by_theme(groups)
     CAT_MIN = 2   # 검사가 이만큼 안 되는 카테고리는 내용이 얇아서 색인에서 뺀다 (링크는 그대로 동작)
     indexed_cats = [(c, pre) for c, pre, ts in groups if len(ts) >= CAT_MIN]
@@ -426,7 +473,7 @@ def main():
         print(f"  갈래  /{key}/  ({meta['name']}, 카테고리 {len(inner)}개 · 검사 {n}개)")
 
     # 3) 전체 검사 — 갈래별로 묶어서 보여 준다
-    cards = cards_html(tests)
+    cards = cards_html(tests + tasks)
     sections = [f'<p>{site["tagline"]}. 모든 검사는 무료이며 결과는 저장되지 않습니다. '
                 f'지금 <b>{len(tests)}종</b>이 <b>{len(themes)}개 갈래</b>, '
                 f'<b>{len(groups)}개 주제</b>로 나뉘어 있습니다.</p>',
@@ -450,7 +497,7 @@ def main():
     home_ld = json.dumps({"@context": "https://schema.org", "@type": "WebSite", "name": site["name"],
                           "url": site["url"], "description": site["tagline"]}, ensure_ascii=False)
     (DIST / "index.html").write_text(
-        env.get_template("home.html").render(site=site, year=year, tests=tests, soon=soon,
+        env.get_template("home.html").render(site=site, year=year, tests=tests, soon=sorted(soon + task_soon, key=lambda x: x["publish"]),
                                              cards=cards, themes=themes, theme_nav=theme_nav_html(themes),
                                              ad=AD, jsonld=home_ld), encoding="utf-8")
 
@@ -459,18 +506,19 @@ def main():
     (DIST / "404.html").write_text(
         env.get_template("404.html").render(site=site, year=year, tests=tests, cards=cards), encoding="utf-8")
 
-    write_rss(tests + articles, year)
+    write_rss(tests + tasks + articles, year)
 
     # sitemap / robots
     urls = ([""] + ["tests", "about", "privacy", "contact"]
             + (["articles"] if articles else [])
             + [k for k, _, _ in themes]
             + [pre for _, pre in indexed_cats] + [t["slug"] for t in tests]
+            + [t["slug"] for t in tasks]
             + [a["slug"] for a in articles])
 
     # lastmod — 구글이 무엇을 다시 크롤링할지 정하는 데 쓴다. 매일 발행하는 사이트에서는
     # 이게 없으면 새 글이 올라온 사실을 알아차리는 데 시간이 더 걸린다.
-    newest = max((t["publish"] for t in tests), default="")
+    newest = max((t["publish"] for t in tests + tasks), default="")
     lm = {"": newest, "tests": newest}
     for key, _meta, inner in themes:
         lm[key] = max(t["publish"] for _c, _p, ts in inner for t in ts)
@@ -481,6 +529,8 @@ def main():
     for stem, d in page_upd.items():
         if d:
             lm[stem] = d
+    for t in tasks:
+        lm[t["slug"]] = t["publish"]
     for a in articles:
         lm[a["slug"]] = a.get("updated", a["publish"])
     if articles:
@@ -517,7 +567,7 @@ def main():
     if pub:
         (DIST / "ads.txt").write_text(
             "google.com, pub-%s, DIRECT, f08c47fec0942fa0%s" % (pub, NL), encoding="utf-8")
-    print(f"완료: 검사 {len(tests)}개 · 글 {len(articles)}편 · 갈래 {len(themes)}개 · 주제 {len(groups)}개(색인 {len(indexed_cats)}개)")
+    print(f"완료: 검사 {len(tests)}개 · 과제 {len(tasks)}개 · 글 {len(articles)}편 · 갈래 {len(themes)}개 · 주제 {len(groups)}개(색인 {len(indexed_cats)}개)")
 
 
 if __name__ == "__main__":
