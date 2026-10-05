@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Sun, 04 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 05 Oct 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>정리정돈 검사 — 10문항으로 보는 어수선함을 견디는 정도</title>
+      <link>https://maumcheck.com/orderliness/tidiness/</link>
+      <guid isPermaLink="true">https://maumcheck.com/orderliness/tidiness/</guid>
+      <description>물건을 제자리에 두는 정도와 어수선함을 견디는 정도를 재는 검사입니다. 정돈이 성실함과 다른 이유, 아주 높은 점수에도 비용이 붙는 이유, 같이 사는 사람과 왜 부딪히는지를 정리했습니다.</description>
+      <category>정돈</category>
+      <pubDate>Mon, 05 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>신뢰 검사 — 10문항으로 보는 사람을 믿는 정도</title>
       <link>https://maumcheck.com/trust/others/</link>
@@ -158,14 +166,6 @@
       <guid isPermaLink="true">https://maumcheck.com/personality/big-five/</guid>
       <description>심리학이 가장 널리 인정하는 성격 모형인 빅파이브를 공공영역 문항으로 직접 해보세요. MBTI와 무엇이 다른지, 다섯 특성이 각각 무엇을 뜻하는지, 결과를 어떻게 읽어야 하는지까지 정리했습니다.</description>
       <category>성격</category>
-      <pubDate>Wed, 16 Sep 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>번아웃 자가진단(CBI) — 7문항으로 보는 일 때문에 닳은 정도</title>
-      <link>https://maumcheck.com/burnout/cbi/</link>
-      <guid isPermaLink="true">https://maumcheck.com/burnout/cbi/</guid>
-      <description>덴마크 국립산업보건연구원이 만든 무료 번아웃 척도 CBI의 일 관련 번아웃 7문항입니다. 번아웃이 무엇이고 무엇이 아닌지, 점수를 어떻게 읽어야 하는지까지 정리했습니다.</description>
-      <category>번아웃</category>
       <pubDate>Wed, 16 Sep 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
