@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Mon, 05 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 06 Oct 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>16유형 성격 검사 — 네 글자로 나오는 유형, 공공영역 문항으로</title>
+      <link>https://maumcheck.com/personality/16-types/</link>
+      <guid isPermaLink="true">https://maumcheck.com/personality/16-types/</guid>
+      <description>네 글자 유형이 나오는 40문항 검사입니다. 널리 알려진 그 검사는 저작권이 있어 쓸 수 없어서, 공공영역 빅파이브 문항으로 같은 네 축을 쟀습니다. 왜 그렇게 해도 되는지, 유형이 왜 다시 하면 바뀌는지까지 정리했습니다.</description>
+      <category>성격</category>
+      <pubDate>Tue, 06 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>정리정돈 검사 — 10문항으로 보는 어수선함을 견디는 정도</title>
       <link>https://maumcheck.com/orderliness/tidiness/</link>
@@ -159,14 +167,6 @@
       <description>심리학자 스턴버그의 사랑의 삼각형 이론을 재는 검사입니다. 친밀감·열정·헌신 세 가지가 지금 우리 관계에서 어떤 모양인지, 그 조합이 어떤 사랑인지까지 알려드립니다.</description>
       <category>연애</category>
       <pubDate>Fri, 18 Sep 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>빅파이브 성격검사(Mini-IPIP) — 20문항으로 보는 나의 다섯 가지 성격 특성</title>
-      <link>https://maumcheck.com/personality/big-five/</link>
-      <guid isPermaLink="true">https://maumcheck.com/personality/big-five/</guid>
-      <description>심리학이 가장 널리 인정하는 성격 모형인 빅파이브를 공공영역 문항으로 직접 해보세요. MBTI와 무엇이 다른지, 다섯 특성이 각각 무엇을 뜻하는지, 결과를 어떻게 읽어야 하는지까지 정리했습니다.</description>
-      <category>성격</category>
-      <pubDate>Wed, 16 Sep 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>
