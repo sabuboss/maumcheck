@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Thu, 08 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 09 Oct 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>자극 추구 검사 — 10문항으로 보는 지루함을 견디는 정도</title>
+      <link>https://maumcheck.com/excitement/seeking/</link>
+      <guid isPermaLink="true">https://maumcheck.com/excitement/seeking/</guid>
+      <description>새로움과 자극을 얼마나 찾아다니는지를 재는 검사입니다. 이 성향이 나이가 들면서 왜 낮아지는지, 문항이 한국 상황에서 왜 세게 느껴지는지까지 정리했습니다.</description>
+      <category>자극추구</category>
+      <pubDate>Fri, 09 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>성취 욕구 검사 — 10문항으로 보는 더 잘하고 싶은 마음의 크기</title>
       <link>https://maumcheck.com/achievement/striving/</link>
@@ -159,14 +167,6 @@
       <description>세계보건기구가 만들어 공개한 음주 선별검사 AUDIT입니다. 무엇을 재는 검사인지, 8점이라는 기준선은 어디서 왔는지, 한국인에게는 기준이 왜 다른지까지 정리했습니다.</description>
       <category>음주</category>
       <pubDate>Mon, 21 Sep 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>자기자비 척도(SCS) — 26문항으로 보는 나를 대하는 태도</title>
-      <link>https://maumcheck.com/self-compassion/scs/</link>
-      <guid isPermaLink="true">https://maumcheck.com/self-compassion/scs/</guid>
-      <description>힘들 때 나를 어떻게 대하는지를 재는 검사입니다. 자기자비가 자존감과 무엇이 다른지, 세 가지 구성 요소가 무엇인지, 점수를 어떻게 읽어야 하는지까지 정리했습니다.</description>
-      <category>자기자비</category>
-      <pubDate>Sun, 20 Sep 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>

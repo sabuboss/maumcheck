@@ -80,6 +80,15 @@
     return s.length % 2 ? s[m] : Math.round((s[m - 1] + s[m]) / 2);
   }
 
+  // 자극이 실제로 그려진 뒤 arm한다. RAF 두 프레임이 정석이지만 탭이 가려지거나
+  // 절전 상태면 RAF가 멈춰 영원히 열리지 않으므로, 120ms 뒤에는 무조건 연다.
+  function armStimulus(cb) {
+    var done = false;
+    function go() { if (!done) { done = true; cb(); } }
+    requestAnimationFrame(function () { requestAnimationFrame(go); });
+    setTimeout(go, 120);
+  }
+
   // ── 결과 공통 ────────────────────────────────────────────
   // metric: 이번 기록(비교에 쓰는 숫자), lowerIsBetter: 작을수록 좋은가
   function showResult(rows, metric, lowerIsBetter, note) {
@@ -109,18 +118,22 @@
     // 지난 기록과의 비교 — 남과 비교하지 않고 나하고만 비교한다
     if (last !== null) {
       var d = metric - last;
-      var improved = lowerIsBetter ? d < 0 : d > 0;
       var same = d === 0;
       var p = el("p", "task-cmp");
       if (same) {
         p.textContent = "지난번과 같습니다.";
+      } else if (lowerIsBetter === null) {
+        // 좋고 나쁨을 정하지 않는 지표(스트룹 간섭 등)는 방향만 말한다
+        p.textContent = "지난번(" + last + T.unit + ")보다 "
+          + Math.abs(d) + T.unit + " " + (d < 0 ? "줄었습니다." : "늘었습니다.");
       } else {
+        var improved = lowerIsBetter ? d < 0 : d > 0;
         p.textContent = "지난번(" + last + T.unit + ")보다 "
           + Math.abs(d) + T.unit + " " + (improved ? "나아졌습니다." : "떨어졌습니다.");
         p.className = "task-cmp " + (improved ? "up" : "down");
       }
       res.appendChild(p);
-      if (best !== null) {
+      if (best !== null && lowerIsBetter !== null) {
         res.appendChild(el("p", "task-best", "이 기기에 남은 최고 기록: " + best + T.unit));
       }
     } else {
@@ -194,17 +207,7 @@
         msg.textContent = "지금!";
         // 화면에 실제로 그려지는 프레임에서 시각을 잡는다.
         // setTimeout 시점과 실제 표시 사이에 한 프레임 이상 차이가 날 수 있다.
-        var armedBy = null;
-        function arm(how) {
-          if (armed) return;
-          shownAt = performance.now();
-          armed = true;
-          armedBy = how;
-        }
-        requestAnimationFrame(function () { requestAnimationFrame(function () { arm("raf"); }); });
-        // RAF는 탭이 가려지거나 절전 상태면 멈춘다. 그러면 영원히 arm되지 않아
-        // 모든 입력이 성급한 반응으로 처리되는 막다른 상태가 된다. 120ms 뒤에는 무조건 연다.
-        setTimeout(function () { arm("timeout"); }, 120);
+        armStimulus(function () { shownAt = performance.now(); armed = true; });
       }, delay);
     }
 
@@ -426,12 +429,148 @@
     stage.appendChild(intro);
   }
 
+  // ════════════════════════════════════════════════════════
+  //  스트룹 과제 (색 단어 간섭)
+  // ════════════════════════════════════════════════════════
+  function runStroop() {
+    var cfg = T.task;
+    var C = cfg.colors;                 // [[이름, 색코드], ...]
+    var n = C.length;
+    var queue = [];                     // {w: 단어, c: 색, cong: 일치?, practice: 연습?}
+    var doneCount = 0;
+    var rec = { cong: [], incong: [] }; // 정답 시행의 RT만
+    var errs = { cong: 0, incong: 0 };
+    var early = 0;
+    var armed = false, shownAt = 0, cur = null, lock = false;
+
+    function makeTrial(cong, practice) {
+      var w = Math.floor(Math.random() * n), c;
+      if (cong) { c = w; }
+      else { do { c = Math.floor(Math.random() * n); } while (c === w); }
+      return { w: w, c: c, cong: cong, practice: practice };
+    }
+    function shuffle(a) {
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+      }
+      return a;
+    }
+    // 연습도 본시행도 일치·불일치를 정확히 반반 넣고 섞는다.
+    var pr = [], mn = [];
+    for (var i = 0; i < cfg.practice; i++) pr.push(makeTrial(i % 2 === 0, true));
+    for (var k = 0; k < cfg.trials; k++) mn.push(makeTrial(k % 2 === 0, false));
+    queue = shuffle(pr).concat(shuffle(mn));
+
+    var wrap = el("div", "st-wrap");
+    var word = el("div", "st-word fix", "+");
+    var fb = el("div", "st-fb", "");
+    var btns = el("div", "st-btns");
+    C.forEach(function (col, idx) {
+      var b = el("button", "st-btn");
+      var sw = el("i"); sw.style.background = col[1];
+      b.appendChild(sw);
+      b.appendChild(el("span", null, col[0]));
+      b.setAttribute("aria-label", col[0]);
+      var h = function (e) { if (e) e.preventDefault(); answer(idx); };
+      b.addEventListener("touchstart", h, { passive: false });
+      b.addEventListener("mousedown", h);
+      btns.appendChild(b);
+    });
+    wrap.appendChild(word); wrap.appendChild(fb); wrap.appendChild(btns);
+
+    function onKey(e) {
+      var k = parseInt(e.key, 10);
+      if (k >= 1 && k <= n && stage.contains(wrap)) { e.preventDefault(); answer(k - 1); }
+    }
+    document.addEventListener("keydown", onKey);
+
+    function label() {
+      return doneCount < cfg.practice
+        ? "연습 " + (doneCount + 1) + " / " + cfg.practice
+        : "본시행 " + (doneCount - cfg.practice + 1) + " / " + cfg.trials;
+    }
+
+    function next() {
+      if (!queue.length) { finish(); return; }
+      cur = queue.shift();
+      armed = false;
+      fb.textContent = ""; fb.className = "st-fb";
+      word.textContent = "+"; word.style.color = ""; word.className = "st-word fix";
+      setHead(label());
+      if (document.hidden) {
+        word.textContent = "화면으로 돌아오면 이어집니다";
+        word.className = "st-word fix small";
+        queue.unshift(cur);
+        document.addEventListener("visibilitychange", function once() {
+          if (!document.hidden) { document.removeEventListener("visibilitychange", once); next(); }
+        });
+        return;
+      }
+      var isi = cfg.isiMin + Math.random() * (cfg.isiMax - cfg.isiMin);
+      setTimeout(function () {
+        word.textContent = C[cur.w][0];
+        word.style.color = C[cur.c][1];
+        word.className = "st-word";
+        armStimulus(function () { shownAt = performance.now(); armed = true; });
+      }, isi);
+    }
+
+    function answer(idx) {
+      if (!armed || lock) return;
+      lock = true; setTimeout(function () { lock = false; }, 80);
+      var rt = Math.round(performance.now() - shownAt);
+      armed = false;
+      var key = cur.cong ? "cong" : "incong";
+      // 150ms 미만은 색을 보고 고른 것이 아니다. 기록하지 않고 같은 조건을 하나 더 넣는다.
+      if (rt < 150) {
+        early++;
+        fb.textContent = "너무 빨랐습니다"; fb.className = "st-fb warn";
+        if (cur.practice) queue.unshift(makeTrial(cur.cong, true));
+        else queue.push(makeTrial(cur.cong, false));
+        setTimeout(next, 700);
+        return;
+      }
+      var ok = idx === cur.c;
+      if (!cur.practice) { if (ok) rec[key].push(rt); else errs[key]++; }
+      doneCount++;
+      if (cur.practice) {
+        fb.textContent = ok ? "맞았습니다" : "틀렸습니다 — 글자의 색을 고르세요";
+      } else {
+        fb.textContent = ok ? "" : "틀렸습니다";
+      }
+      fb.className = "st-fb " + (ok ? "ok" : "warn");
+      setTimeout(next, ok ? 250 : 900);
+    }
+
+    function finish() {
+      document.removeEventListener("keydown", onKey);
+      clear(stage); setHead("");
+      var mc = median(rec.cong), mi = median(rec.incong);
+      var eff = mi - mc;
+      showResult(
+        [["일치 중앙값", mc + " ms (" + rec.cong.length + "회)"],
+         ["불일치 중앙값", mi + " ms (" + rec.incong.length + "회)"],
+         ["간섭 (불일치 − 일치)", eff + " ms"],
+         ["오답", "일치 " + errs.cong + "회 · 불일치 " + errs.incong + "회"],
+         ["성급한 반응", early + "회"]],
+        eff, null,
+        "<b>간섭</b>이 이 과제의 핵심 숫자입니다. 양수가 정상이고 크다고 나쁜 것이 아닙니다. "
+        + "오답이 많으면 간섭이 작게 나올 수 있으니 오답 수를 함께 보세요."
+      );
+    }
+
+    clear(stage); stage.appendChild(wrap);
+    next();
+  }
+
   // ── 시작 ────────────────────────────────────────────────
   function start() {
     res.style.display = "none";
     clear(res);
     if (T.kind === "rt") runRT();
     else if (T.kind === "span") runSpan();
+    else if (T.kind === "stroop") runStroop();
   }
 
   var go = $("taskstart");

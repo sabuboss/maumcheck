@@ -265,3 +265,21 @@
   .span-fb.ok{color:var(--ok)}
   .span-fb.no{color:var(--warn)}
   @media(max-width:520px){.rt-pad{height:200px}.span-digit{font-size:60px}.span-key{font-size:20px;padding:12px 0}}
+
+  /* 스트룹 — 색 단어, 색 버튼 */
+  .st-wrap{width:100%;max-width:520px;text-align:center}
+  .st-word{font-size:64px;font-weight:800;letter-spacing:.04em;min-height:96px;line-height:96px;
+    user-select:none;-webkit-user-select:none}
+  .st-word.fix{color:var(--muted);font-weight:500;font-size:40px}
+  .st-word.fix.small{font-size:16px;line-height:1.6;display:flex;align-items:center;justify-content:center}
+  .st-fb{min-height:22px;font-size:14px;font-weight:600;margin:4px 0 12px}
+  .st-fb.ok{color:var(--ok)}
+  .st-fb.warn{color:var(--warn)}
+  .st-btns{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .st-btn{font:inherit;font-size:15px;font-weight:600;padding:12px 6px;border-radius:12px;
+    border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+  .st-btn i{display:block;width:34px;height:34px;border-radius:50%;border:2px solid rgba(0,0,0,.08)}
+  .st-btn:active{border-color:var(--accent);background:var(--accent-soft)}
+  @media(max-width:520px){.st-btns{grid-template-columns:repeat(2,1fr)}.st-btn{padding:14px 6px;min-height:72px}.st-word{font-size:52px}}
