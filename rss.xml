@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Wed, 07 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 08 Oct 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>성취 욕구 검사 — 10문항으로 보는 더 잘하고 싶은 마음의 크기</title>
+      <link>https://maumcheck.com/achievement/striving/</link>
+      <guid isPermaLink="true">https://maumcheck.com/achievement/striving/</guid>
+      <description>목표를 향해 얼마나 밀고 나가는지를 재는 검사입니다. 열심히 하는 것과 잘 해내는 것이 왜 다른지, 이 점수가 높을 때 번아웃으로 가는 길목이 어디인지 정리했습니다.</description>
+      <category>성취</category>
+      <pubDate>Thu, 08 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>친화력 검사 — 10문항으로 보는 사람과 가까워지는 속도</title>
       <link>https://maumcheck.com/friendliness/warmth/</link>
@@ -159,14 +167,6 @@
       <description>힘들 때 나를 어떻게 대하는지를 재는 검사입니다. 자기자비가 자존감과 무엇이 다른지, 세 가지 구성 요소가 무엇인지, 점수를 어떻게 읽어야 하는지까지 정리했습니다.</description>
       <category>자기자비</category>
       <pubDate>Sun, 20 Sep 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>부모 양육 태도 검사(PBI) — 내 기억 속 부모는 어떤 부모였나</title>
-      <link>https://maumcheck.com/family/parental-bonding/</link>
-      <guid isPermaLink="true">https://maumcheck.com/family/parental-bonding/</guid>
-      <description>성인이 어린 시절의 부모를 떠올려 답하는 25문항 검사입니다. 돌봄과 과보호 두 축으로 네 가지 양육 유형을 가려내며, 어머니와 아버지를 따로 볼 수 있습니다.</description>
-      <category>가족</category>
-      <pubDate>Sat, 19 Sep 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>
