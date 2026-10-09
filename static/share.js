@@ -39,8 +39,21 @@
     switch (kind) {
       case "kakao":
         loadKakao(bar.getAttribute("data-kakao")).then(function (K) {
-          // 페이지의 og:title / og:image 를 그대로 카드로 쓴다.
-          K.Share.sendScrap({ requestUrl: url });
+          // sendScrap(카카오 서버가 og 태그를 긁어오는 방식)은 "요청 실패"가 잦아서,
+          // 카드 내용을 직접 넘긴다. 그림은 빌드 때 만든 og:image.
+          var og = document.querySelector('meta[property="og:image"]');
+          var desc = document.querySelector('meta[property="og:description"]');
+          K.Share.sendDefault({
+            objectType: "feed",
+            content: {
+              title: title,
+              description: (desc && desc.content) || text,
+              imageUrl: og ? og.content : "",
+              imageWidth: 1200, imageHeight: 630,
+              link: { mobileWebUrl: url, webUrl: url }
+            },
+            buttons: [{ title: "해보기", link: { mobileWebUrl: url, webUrl: url } }]
+          });
         }).catch(function () { toast("카카오톡 창이 막혔어요. 팝업을 허용하거나 링크를 복사해 보내 주세요"); });
         break;
       case "naver": popup("https://share.naver.com/web/shareView?url=" + U + "&title=" + encodeURIComponent(title)); break;
