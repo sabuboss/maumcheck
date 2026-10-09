@@ -41,7 +41,7 @@
         loadKakao(bar.getAttribute("data-kakao")).then(function (K) {
           // 페이지의 og:title / og:image 를 그대로 카드로 쓴다.
           K.Share.sendScrap({ requestUrl: url });
-        }).catch(function () { toast("카카오톡 공유를 열 수 없어요. 링크를 복사해 보내 주세요"); });
+        }).catch(function () { toast("카카오톡 창이 막혔어요. 팝업을 허용하거나 링크를 복사해 보내 주세요"); });
         break;
       case "naver": popup("https://share.naver.com/web/shareView?url=" + U + "&title=" + encodeURIComponent(title)); break;
       case "band": popup("https://band.us/plugin/share?body=" + encodeURIComponent(text + "\n" + url) + "&route=" + U); break;
