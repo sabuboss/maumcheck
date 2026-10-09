@@ -9,6 +9,7 @@ import json, sys, shutil, datetime, pathlib, re
 from xml.sax.saxutils import escape
 NL = chr(10)
 from jinja2 import Environment, FileSystemLoader
+import og
 
 ROOT = pathlib.Path(__file__).parent
 DIST = ROOT / "dist"
@@ -310,6 +311,15 @@ def write(path, html):
     p.write_text(html, encoding="utf-8")
 
 
+def og_image(key, title, tag, sub, max_lines=2):
+    """페이지 하나당 공유 미리보기 PNG 한 장. /og/<key>.png 로 쓰고 절대 URL을 돌려준다."""
+    og.render(DIST / "og" / f"{key}.png", title, tag, sub, max_lines=max_lines)
+    return f"{site['url']}/og/{key}.png"
+
+
+OG_TEST, OG_TASK, OG_ART = "마음체크 · 무료 심리검사", "마음체크 · 인지 과제", "마음체크 · 읽을거리"
+
+
 def main():
     if DIST.exists():
         shutil.rmtree(DIST)
@@ -320,6 +330,9 @@ def main():
     articles, art_soon = load_articles()
     tasks, task_soon = load_tasks()
     year = TODAY.year
+    # 홈 그림은 고정 페이지(소개·문의 등)에서도 같이 쓴다.
+    home_og = og_image("home", site["name"], site["tagline"],
+                       f"심리검사 {len(tests)}종 · 인지 과제 {len(tasks)}종")
     tpl = env.get_template("test.html")
     mtpl = env.get_template("test-multi.html")
     for t in tests:
@@ -360,7 +373,9 @@ def main():
             t=t, site=site, related=related, ad=AD, year=year,
             cat_url=t["slug"].split("/")[0],
             jsonld=jsonld(t), tool_json=json.dumps(tool, ensure_ascii=False),
-            cat_style=cat_style(t)))
+            cat_style=cat_style(t),
+            og_image=og_image(t["slug"].replace("/", "-"), t["short_name"], OG_TEST,
+                              f"{len(t['items'])}문항 · 약 {t['minutes']}분")))
         print(f"  발행  /{t['slug']}/")
 
     # 고정 페이지
@@ -371,7 +386,7 @@ def main():
         meta = dict(line.split(":", 1) for line in head.strip().splitlines())
         meta = {k.strip(): v.strip() for k, v in meta.items()}
         page_upd[p.stem] = meta.get("updated", "")
-        write(p.stem, ptpl.render(site=site, year=year, slug=p.stem, body=body, ad="", **meta))
+        write(p.stem, ptpl.render(site=site, year=year, slug=p.stem, body=body, ad="", og_image=home_og, **meta))
 
     # 인지 과제 — 설문이 아니라 직접 해보는 페이지. 엔진은 static/task.js 하나를 공유한다.
     ttpl = env.get_template("task.html")
@@ -382,7 +397,9 @@ def main():
         write(t["slug"], ttpl.render(
             t=t, site=site, related=rel, ad=("" if t.get("no_ads") else AD), year=year,
             cat_url=t["slug"].split("/")[0], cat_style=cat_style(t),
-            jsonld=task_jsonld(t), task_json=json.dumps(tool, ensure_ascii=False)))
+            jsonld=task_jsonld(t), task_json=json.dumps(tool, ensure_ascii=False),
+            og_image=og_image(t["slug"].replace("/", "-"), t["short_name"], OG_TASK,
+                              f"직접 해보는 과제 · 약 {t['minutes']}분")))
         print(f"  과제  /{t['slug']}/")
 
     # 읽을거리 — 검사가 아닌 글. 검사 페이지만 30장이면 틀로 찍어낸 묶음처럼 보인다.
@@ -406,7 +423,10 @@ def main():
         a["body"] = resolve_links(a["body"], a["slug"])
         rel = [t for t in tests if t["slug"] in a["rel"]]
         write(a["slug"], atpl.render(site=site, year=year, a=a, related=rel,
-                                     ad=AD, jsonld=article_jsonld(a)))
+                                     ad=AD, jsonld=article_jsonld(a),
+                                     og_image=og_image(a["slug"].replace("/", "-"),
+                                                       a.get("og_title") or a["title"].split(" — ")[0],
+                                                       OG_ART, "", max_lines=3)))
         print(f"  읽을거리  /{a['slug']}/")
     if articles or art_soon:
         body = [f'<p>검사 말고 읽을거리입니다. 쓸 수 없는 척도를 왜 못 쓰는지, '
@@ -422,6 +442,7 @@ def main():
             site=site, year=year, slug="articles", title="읽을거리",
             description=f"{site['name']}의 글 {len(articles)}편. 심리 척도의 저작권, "
                         f"검사로는 담기 어려운 주제, 결과를 읽는 법을 다룹니다.",
+            og_image=home_og,
             body="".join(body), ad=AD,
             # 발행된 글이 없는 동안은 목록만 있는 얇은 페이지라 색인에서 뺀다.
             robots=None if articles else "noindex,follow"))
@@ -450,6 +471,7 @@ def main():
             site=site, year=year, slug=pre, title=f"{cat} 검사",
             description=f"{cat} 관련 무료 심리 자가진단 {len(ts)}종. {d}",
             crumb=crumb, cat_style=cat_style_of(cat), body="".join(body), ad=AD,
+            og_image=og_image(pre.replace("/", "-"), f"{cat} 검사", OG_TEST, f"검사 {len(ts)}종"),
             robots=None if len(ts) >= CAT_MIN else "noindex,follow"))
 
     # 2) 주제 페이지 — 카테고리 여러 개를 묶어 실제로 읽을거리가 되는 층
@@ -469,7 +491,8 @@ def main():
             site=site, year=year, slug=key, title=meta["name"],
             description=f"{meta['name']} — 무료 심리 자가진단 {n}종을 모았습니다. "
                         f"{', '.join(c for c, _, _ in inner)} 주제를 다룹니다.",
-            crumb=crumb, cat_style=theme_style(key), body="".join(body), ad=AD))
+            crumb=crumb, cat_style=theme_style(key), body="".join(body), ad=AD,
+            og_image=og_image(key, meta["name"], OG_TEST, f"검사 {n}종 · 주제 {len(inner)}개")))
         print(f"  갈래  /{key}/  ({meta['name']}, 카테고리 {len(inner)}개 · 검사 {n}개)")
 
     # 3) 전체 검사 — 갈래별로 묶어서 보여 준다
@@ -491,7 +514,9 @@ def main():
     write("tests", ptpl.render(site=site, year=year, slug="tests", title="전체 검사",
         description=f"{site['name']}의 심리 자가진단 {len(tests)}종을 {len(themes)}개 갈래로 묶었습니다. "
                     f"우울·불안 같은 지금의 상태부터 성격, 관계까지 학계에서 검증되고 무료로 공개된 척도만 다룹니다.",
-        body="".join(sections), ad=AD))
+        body="".join(sections), ad=AD,
+        og_image=og_image("tests", "전체 검사", OG_TEST,
+                          f"심리검사 {len(tests)}종 · 인지 과제 {len(tasks)}종")))
 
     # 홈
     home_ld = json.dumps({"@context": "https://schema.org", "@type": "WebSite", "name": site["name"],
@@ -499,7 +524,7 @@ def main():
     (DIST / "index.html").write_text(
         env.get_template("home.html").render(site=site, year=year, tests=tests, soon=sorted(soon + task_soon, key=lambda x: x["publish"]),
                                              cards=cards, themes=themes, theme_nav=theme_nav_html(themes),
-                                             ad=AD, jsonld=home_ld), encoding="utf-8")
+                                             ad=AD, jsonld=home_ld, og_image=home_og), encoding="utf-8")
 
     # 404 — Cloudflare Pages가 없는 경로에 이 파일을 404 상태로 돌려준다.
     # 없으면 홈이 200으로 나가서 검색엔진이 소프트 404로 본다.

@@ -3,7 +3,7 @@
 <title>{{ a.title }} | {{ site.name }}</title><meta name="description" content="{{ a.description }}">
 <link rel="canonical" href="{{ site.url }}/{{ a.slug }}/">{% if site.google_verification %}<meta name="google-site-verification" content="{{ site.google_verification }}">{% endif %}
 {% if site.naver_verification %}<meta name="naver-site-verification" content="{{ site.naver_verification }}">{% endif %}
-<meta property="og:type" content="article"><meta property="og:title" content="{{ a.title }}"><meta property="og:description" content="{{ a.og_description|default(a.description) }}"><meta property="og:url" content="{{ site.url }}/{{ a.slug }}/"><meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:type" content="article"><meta property="og:title" content="{{ a.title }}"><meta property="og:description" content="{{ a.og_description|default(a.description) }}"><meta property="og:url" content="{{ site.url }}/{{ a.slug }}/"><meta property="og:image" content="{{ og_image }}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{{ og_image }}"><meta property="og:site_name" content="{{ site.name }}">
 <meta property="article:published_time" content="{{ a.publish }}"><meta property="article:author" content="{{ site.author }}">
 <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="/rss.xml">
 <link rel="stylesheet" href="/static/site.css">
