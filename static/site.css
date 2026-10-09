@@ -141,8 +141,15 @@
   .snsl{font-size:13px;color:var(--muted);flex:none}
   .snsbtns{display:flex;flex-wrap:wrap;gap:6px}
   .snsbar button{font:inherit;font-size:14px;padding:9px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:7px;line-height:1}
-  .snsbar button i{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none}
+  .snsbar button i{width:22px;height:22px;border-radius:50%;background:var(--c);color:var(--ic,#fff);flex:none;
+    display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-weight:800;font-size:12px;line-height:1}
+  .snsbar button i svg{width:13px;height:13px;fill:currentColor}
+  .snsbar button{padding-left:8px}
   .snsbar button:hover{border-color:var(--c)}
+  /* 모바일 OS 공유창(카톡·인스타·틱톡·문자…) — 지원 브라우저에서만 보이고, 보이면 맨 앞 큰 버튼 */
+  .snsbar .sns-more{width:100%;justify-content:center;background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600;padding:12px 14px;font-size:15px}
+  .snsbar .sns-more i{background:rgba(255,255,255,.2);color:#fff}
+  .snsbar .sns-more small{font-weight:400;opacity:.85;font-size:12px}
   .res .snsbar{margin-top:12px}
   /* ---- 대상 선택 · 유형 결과 ---- */
   .subj{margin:0 0 16px}
