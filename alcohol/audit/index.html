@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -29,6 +30,18 @@
 <h1>AUDIT 음주 자가진단 — WHO가 만든 10문항 음주 선별검사</h1>
 <p class="lead">지난 1년간의 음주를 재는 10문항짜리 검사입니다. 술을 끊으라고 말하는 검사가 아니라, 지금의 음주가 어느 지점에 있는지 보여 주는 도구입니다. 배경을 먼저 읽어도 좋고, 바로 검사로 건너뛰어도 됩니다.</p>
 <p class="meta">작성 2026-09-21 · 검사 시간 약 3분 · <a href="#refs">출처 보기</a></p>
+<div class="snsbar" data-url="https://maumcheck.com/alcohol/audit/" data-title="음주 자가진단 | 마음체크" data-text="음주 자가진단 — 10문항, 약 3분. 무료 심리검사 마음체크">
+<span class="snsl">이 검사 공유하기</span>
+<div class="snsbtns">
+
+<button type="button" data-sns="naver" style="--c:#03c75a"><i></i>네이버</button>
+<button type="button" data-sns="band" style="--c:#21c531"><i></i>밴드</button>
+<button type="button" data-sns="facebook" style="--c:#1877f2"><i></i>페이스북</button>
+<button type="button" data-sns="x" style="--c:#111"><i></i>X</button>
+<button type="button" data-sns="line" style="--c:#06c755"><i></i>라인</button>
+<button type="button" data-sns="copy" style="--c:#9aa3a0"><i></i>링크 복사</button>
+<button type="button" data-sns="more" style="--c:var(--accent);display:none"><i></i>기기 공유</button>
+</div></div>
 
 <div class="toc"><b>목차</b><ol>
 <li><a href="#what">AUDIT이란</a></li><li><a href="#why">왜 만들어졌나</a></li><li><a href="#korea">한국인에게는 기준이 다를 수 있다</a></li><li><a href="#how">채점 방법과 주의점</a></li>
@@ -79,6 +92,18 @@
     <div class="crisis"><b>도움받을 수 있는 곳</b><p>혼자 줄이기 어렵다면 상담부터 받아 보실 수 있습니다. 치료를 결정하지 않아도 상담만 가능합니다.</p><p><b>정신건강 위기상담전화 <a href="tel:15770199">1577-0199</a></b> — 24시간</p><p><b>보건복지상담센터 <a href="tel:129">129</a></b> — 우리 지역 중독관리통합지원센터를 안내받을 수 있습니다</p><p>중독관리통합지원센터는 전국 시·군·구에 설치된 공공기관이며 상담은 무료입니다.</p></div>
     <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 지속적인 무기력이나 우울감이 있다면 전문가와 상담하세요.</p>
     <div class="sharebar"><button class="share" id="share">결과 공유하기</button><button class="copy" id="copy">결과 복사</button></div>
+    <div class="snsbar" id="snsres" data-url="https://maumcheck.com/alcohol/audit/" data-title="음주 자가진단 | 마음체크" data-text="음주 자가진단 결과를 봤어요 — 나도 해보기">
+<span class="snsl">결과를 SNS에 올리기</span>
+<div class="snsbtns">
+
+<button type="button" data-sns="naver" style="--c:#03c75a"><i></i>네이버</button>
+<button type="button" data-sns="band" style="--c:#21c531"><i></i>밴드</button>
+<button type="button" data-sns="facebook" style="--c:#1877f2"><i></i>페이스북</button>
+<button type="button" data-sns="x" style="--c:#111"><i></i>X</button>
+<button type="button" data-sns="line" style="--c:#06c755"><i></i>라인</button>
+<button type="button" data-sns="copy" style="--c:#9aa3a0"><i></i>링크 복사</button>
+<button type="button" data-sns="more" style="--c:var(--accent);display:none"><i></i>기기 공유</button>
+</div></div>
   </div>
 </div>
 
@@ -166,6 +191,8 @@ document.getElementById("go").onclick=function(){
   var tg=document.getElementById("tag");tg.textContent=b.label;tg.style.background="var(--"+b.tone+"-soft)";tg.style.color="var(--"+b.tone+")";
   document.getElementById("ev").innerHTML=b.eval;
   LAST={score:s,label:b.label};
+  // 주소는 share.js가 따로 붙이므로 여기엔 점수 문구만
+  document.getElementById("snsres").setAttribute("data-text",T.short_name+" 결과: "+s+"점 / "+T.max+"점 ("+b.label+") — 나도 해보기");
   renderCompare(s);
   var ul=document.getElementById("ad");ul.innerHTML="";
   b.advice.forEach(function(a){var li=document.createElement("li");li.innerHTML=a;ul.appendChild(li);});
@@ -204,5 +231,5 @@ function renderCompare(){}
 
 </script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "2c81695383d64335ac9127317b21b246"}'></script>
-</body>
-</html>
+<script src="/static/share.js"></script>
+</body></html>

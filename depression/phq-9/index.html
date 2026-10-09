@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -29,6 +30,18 @@
 <h1>PHQ-9 우울증 선별검사 — 진료실이 쓰는 9문항 표준 도구</h1>
 <p class="lead">지난 2주 동안의 우울 증상을 재는 9문항짜리 검사입니다. 우울증 진단 기준의 아홉 항목을 그대로 묻기 때문에, 병원에서 가장 많이 쓰이는 선별 도구입니다.</p>
 <p class="meta">작성 2026-09-22 · 검사 시간 약 2분 · <a href="#refs">출처 보기</a></p>
+<div class="snsbar" data-url="https://maumcheck.com/depression/phq-9/" data-title="우울증 선별검사 | 마음체크" data-text="우울증 선별검사 — 9문항, 약 2분. 무료 심리검사 마음체크">
+<span class="snsl">이 검사 공유하기</span>
+<div class="snsbtns">
+
+<button type="button" data-sns="naver" style="--c:#03c75a"><i></i>네이버</button>
+<button type="button" data-sns="band" style="--c:#21c531"><i></i>밴드</button>
+<button type="button" data-sns="facebook" style="--c:#1877f2"><i></i>페이스북</button>
+<button type="button" data-sns="x" style="--c:#111"><i></i>X</button>
+<button type="button" data-sns="line" style="--c:#06c755"><i></i>라인</button>
+<button type="button" data-sns="copy" style="--c:#9aa3a0"><i></i>링크 복사</button>
+<button type="button" data-sns="more" style="--c:var(--accent);display:none"><i></i>기기 공유</button>
+</div></div>
 
 <div class="toc"><b>목차</b><ol>
 <li><a href="#what">PHQ-9이란</a></li><li><a href="#ces">CES-D와 무엇이 다른가</a></li><li><a href="#who">누가, 왜 만들었나</a></li><li><a href="#how">채점 방법과 주의점</a></li>
@@ -79,6 +92,18 @@
     <div class="crisis"><b>지금 많이 힘드시다면</b><p>9번 문항에 <b>전혀 아니다</b> 외의 답을 하셨다면, 점수와 상관없이 이 연락처를 기억해 두세요. 혼자 견디지 않으셔도 됩니다.</p><p><b>자살예방 상담전화 <a href="tel:109">109</a></b> — 24시간, 전화·문자 모두 가능</p><p><b>정신건강 위기상담전화 <a href="tel:15770199">1577-0199</a></b> — 24시간</p><p>지금 당장 위험하다고 느끼신다면 <a href="tel:119">119</a>로 연락하세요. 도움을 청하는 것은 약한 것이 아닙니다.</p></div>
     <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 지속적인 무기력이나 우울감이 있다면 전문가와 상담하세요.</p>
     <div class="sharebar"><button class="share" id="share">결과 공유하기</button><button class="copy" id="copy">결과 복사</button></div>
+    <div class="snsbar" id="snsres" data-url="https://maumcheck.com/depression/phq-9/" data-title="우울증 선별검사 | 마음체크" data-text="우울증 선별검사 결과를 봤어요 — 나도 해보기">
+<span class="snsl">결과를 SNS에 올리기</span>
+<div class="snsbtns">
+
+<button type="button" data-sns="naver" style="--c:#03c75a"><i></i>네이버</button>
+<button type="button" data-sns="band" style="--c:#21c531"><i></i>밴드</button>
+<button type="button" data-sns="facebook" style="--c:#1877f2"><i></i>페이스북</button>
+<button type="button" data-sns="x" style="--c:#111"><i></i>X</button>
+<button type="button" data-sns="line" style="--c:#06c755"><i></i>라인</button>
+<button type="button" data-sns="copy" style="--c:#9aa3a0"><i></i>링크 복사</button>
+<button type="button" data-sns="more" style="--c:var(--accent);display:none"><i></i>기기 공유</button>
+</div></div>
   </div>
 </div>
 
@@ -166,6 +191,8 @@ document.getElementById("go").onclick=function(){
   var tg=document.getElementById("tag");tg.textContent=b.label;tg.style.background="var(--"+b.tone+"-soft)";tg.style.color="var(--"+b.tone+")";
   document.getElementById("ev").innerHTML=b.eval;
   LAST={score:s,label:b.label};
+  // 주소는 share.js가 따로 붙이므로 여기엔 점수 문구만
+  document.getElementById("snsres").setAttribute("data-text",T.short_name+" 결과: "+s+"점 / "+T.max+"점 ("+b.label+") — 나도 해보기");
   renderCompare(s);
   var ul=document.getElementById("ad");ul.innerHTML="";
   b.advice.forEach(function(a){var li=document.createElement("li");li.innerHTML=a;ul.appendChild(li);});
@@ -204,5 +231,5 @@ function renderCompare(){}
 
 </script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "2c81695383d64335ac9127317b21b246"}'></script>
-</body>
-</html>
+<script src="/static/share.js"></script>
+</body></html>

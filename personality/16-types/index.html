@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -29,6 +30,18 @@
 <h1>16유형 성격 검사 — 네 글자로 나오는 유형, 공공영역 문항으로</h1>
 <p class="lead">네 가지 축에서 내가 어느 쪽으로 기울어 있는지를 재고, 그 조합으로 16가지 유형 중 하나를 알려주는 검사입니다. <b>이 검사는 MBTI가 아닙니다.</b> 그 검사는 저작권이 있어 쓸 수 없고, 여기서는 공공영역으로 공개된 성격 5요인 문항을 씁니다. 왜 그렇게 해도 같은 네 축이 나오는지는 아래에 적어 두었습니다.</p>
 <p class="meta">작성 2026-10-06 · 검사 시간 약 6분 · <a href="#refs">출처 보기</a></p>
+<div class="snsbar" data-url="https://maumcheck.com/personality/16-types/" data-title="16유형 성격 검사 | 마음체크" data-text="16유형 성격 검사 — 40문항, 약 6분. 무료 심리검사 마음체크">
+<span class="snsl">이 검사 공유하기</span>
+<div class="snsbtns">
+
+<button type="button" data-sns="naver" style="--c:#03c75a"><i></i>네이버</button>
+<button type="button" data-sns="band" style="--c:#21c531"><i></i>밴드</button>
+<button type="button" data-sns="facebook" style="--c:#1877f2"><i></i>페이스북</button>
+<button type="button" data-sns="x" style="--c:#111"><i></i>X</button>
+<button type="button" data-sns="line" style="--c:#06c755"><i></i>라인</button>
+<button type="button" data-sns="copy" style="--c:#9aa3a0"><i></i>링크 복사</button>
+<button type="button" data-sns="more" style="--c:var(--accent);display:none"><i></i>기기 공유</button>
+</div></div>
 
 <div class="toc"><b>목차</b><ol>
 <li><a href="#notmbti">이 검사는 MBTI가 아닙니다</a></li><li><a href="#how">그런데 어떻게 네 글자가 나오나</a></li><li><a href="#cut">유형이 다시 하면 바뀌는 이유</a></li><li><a href="#what">채점 방법</a></li>
@@ -72,6 +85,18 @@
     
     <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 채용, 평가, 진로 결정의 근거로 쓰기에 적합하지 않습니다.</p>
     <div class="sharebar"><button class="share" id="share">결과 링크 공유하기</button><button class="copy" id="cmpmake">둘이 비교할 링크 만들기</button></div>
+    <div class="snsbar" id="snsres" data-url="https://maumcheck.com/personality/16-types/" data-title="16유형 성격 검사 | 마음체크" data-text="16유형 성격 검사 결과를 봤어요 — 나도 해보기">
+<span class="snsl">결과를 SNS에 올리기</span>
+<div class="snsbtns">
+
+<button type="button" data-sns="naver" style="--c:#03c75a"><i></i>네이버</button>
+<button type="button" data-sns="band" style="--c:#21c531"><i></i>밴드</button>
+<button type="button" data-sns="facebook" style="--c:#1877f2"><i></i>페이스북</button>
+<button type="button" data-sns="x" style="--c:#111"><i></i>X</button>
+<button type="button" data-sns="line" style="--c:#06c755"><i></i>라인</button>
+<button type="button" data-sns="copy" style="--c:#9aa3a0"><i></i>링크 복사</button>
+<button type="button" data-sns="more" style="--c:var(--accent);display:none"><i></i>기기 공유</button>
+</div></div>
   </div>
 </div>
 
@@ -174,6 +199,7 @@ document.getElementById("go").onclick=function(){
       k.textContent=T.combo.subjects.length>1?(T.combo.subjects[SUBJ].label+T.combo.title):T.combo.title;
       cb.appendChild(k);
       var nm=document.createElement("b");nm.className="combo-n";nm.textContent=ty.name;cb.appendChild(nm);
+      document.getElementById("snsres").setAttribute("data-text",T.short_name+" 결과: "+ty.name+" — 나도 해보기");
       var ds=document.createElement("p");ds.className="combo-d";ds.innerHTML=ty.desc;cb.appendChild(ds);
       if(ty.advice){var au=document.createElement("ul");au.className="dim-adv";
         ty.advice.forEach(function(a){var li=document.createElement("li");li.innerHTML=a;au.appendChild(li);});
@@ -299,5 +325,5 @@ document.getElementById('cmpmake').onclick=function(){
 
 </script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "2c81695383d64335ac9127317b21b246"}'></script>
-</body>
-</html>
+<script src="/static/share.js"></script>
+</body></html>

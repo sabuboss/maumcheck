@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -29,6 +30,18 @@
 <h1>분노 성향 검사 — 10문항으로 보는 얼마나 쉽게 화가 나는가</h1>
 <p class="lead">화가 얼마나 쉽게 올라오는지를 재는 검사입니다. 화를 내는 것이 나쁘다고 말하는 도구가 아닙니다. 분노는 무언가 잘못됐다는 신호이고, 문제는 감정 자체가 아니라 그것이 오는 빈도와 다루는 방식입니다.</p>
 <p class="meta">작성 2026-09-24 · 검사 시간 약 2분 · <a href="#refs">출처 보기</a></p>
+<div class="snsbar" data-url="https://maumcheck.com/anger/irritability/" data-title="분노 자가진단 | 마음체크" data-text="분노 자가진단 — 10문항, 약 2분. 무료 심리검사 마음체크">
+<span class="snsl">이 검사 공유하기</span>
+<div class="snsbtns">
+
+<button type="button" data-sns="naver" style="--c:#03c75a"><i></i>네이버</button>
+<button type="button" data-sns="band" style="--c:#21c531"><i></i>밴드</button>
+<button type="button" data-sns="facebook" style="--c:#1877f2"><i></i>페이스북</button>
+<button type="button" data-sns="x" style="--c:#111"><i></i>X</button>
+<button type="button" data-sns="line" style="--c:#06c755"><i></i>라인</button>
+<button type="button" data-sns="copy" style="--c:#9aa3a0"><i></i>링크 복사</button>
+<button type="button" data-sns="more" style="--c:var(--accent);display:none"><i></i>기기 공유</button>
+</div></div>
 
 <div class="toc"><b>목차</b><ol>
 <li><a href="#what">이 검사가 재는 것</a></li><li><a href="#signal">분노는 나쁜 감정이 아니다</a></li><li><a href="#suppress">참는 것은 해결이 아니다</a></li><li><a href="#how">채점 방법과 주의점</a></li>
@@ -79,6 +92,18 @@
     
     <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 지속적인 무기력이나 우울감이 있다면 전문가와 상담하세요.</p>
     <div class="sharebar"><button class="share" id="share">결과 공유하기</button><button class="copy" id="copy">결과 복사</button></div>
+    <div class="snsbar" id="snsres" data-url="https://maumcheck.com/anger/irritability/" data-title="분노 자가진단 | 마음체크" data-text="분노 자가진단 결과를 봤어요 — 나도 해보기">
+<span class="snsl">결과를 SNS에 올리기</span>
+<div class="snsbtns">
+
+<button type="button" data-sns="naver" style="--c:#03c75a"><i></i>네이버</button>
+<button type="button" data-sns="band" style="--c:#21c531"><i></i>밴드</button>
+<button type="button" data-sns="facebook" style="--c:#1877f2"><i></i>페이스북</button>
+<button type="button" data-sns="x" style="--c:#111"><i></i>X</button>
+<button type="button" data-sns="line" style="--c:#06c755"><i></i>라인</button>
+<button type="button" data-sns="copy" style="--c:#9aa3a0"><i></i>링크 복사</button>
+<button type="button" data-sns="more" style="--c:var(--accent);display:none"><i></i>기기 공유</button>
+</div></div>
   </div>
 </div>
 
@@ -166,6 +191,8 @@ document.getElementById("go").onclick=function(){
   var tg=document.getElementById("tag");tg.textContent=b.label;tg.style.background="var(--"+b.tone+"-soft)";tg.style.color="var(--"+b.tone+")";
   document.getElementById("ev").innerHTML=b.eval;
   LAST={score:s,label:b.label};
+  // 주소는 share.js가 따로 붙이므로 여기엔 점수 문구만
+  document.getElementById("snsres").setAttribute("data-text",T.short_name+" 결과: "+s+"점 / "+T.max+"점 ("+b.label+") — 나도 해보기");
   renderCompare(s);
   var ul=document.getElementById("ad");ul.innerHTML="";
   b.advice.forEach(function(a){var li=document.createElement("li");li.innerHTML=a;ul.appendChild(li);});
@@ -204,5 +231,5 @@ function renderCompare(){}
 
 </script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "2c81695383d64335ac9127317b21b246"}'></script>
-</body>
-</html>
+<script src="/static/share.js"></script>
+</body></html>
