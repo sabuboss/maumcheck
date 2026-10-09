@@ -19,6 +19,17 @@ PUBLISH_ALL = "--all" in sys.argv
 site = json.loads((ROOT / "site.json").read_text(encoding="utf-8"))
 env = Environment(loader=FileSystemLoader(ROOT / "templates"), autoescape=False)
 
+
+def asset(name):
+    """/static/<name>?v=<내용 해시>. Cloudflare가 정적 파일을 4시간 캐시하므로, 내용이 바뀌면
+    주소도 바뀌어야 새 HTML에 옛 CSS가 붙는 일이 없다."""
+    import hashlib
+    h = hashlib.md5((ROOT / "static" / name).read_bytes()).hexdigest()[:8]
+    return f"/static/{name}?v={h}"
+
+
+env.globals["asset"] = asset
+
 _SLOT = ('<ins class="adsbygoogle" style="display:block" data-ad-client="%s" data-ad-slot="%s"'
          ' data-ad-format="auto" data-full-width-responsive="true"></ins>'
          '<script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>')
