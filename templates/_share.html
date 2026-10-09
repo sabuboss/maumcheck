@@ -1,15 +1,23 @@
-{# SNS 공유 띠. 쓰는 쪽: {% from "_share.html" import snsbar with context %} {{ snsbar(url, title, text, "이 검사 공유하기") }} #}
+{# SNS 공유 띠. 쓰는 쪽: {% from "_share.html" import snsbar with context %} {{ snsbar(url, title, text, "이 검사 공유하기") }}
+   순서는 한국에서 많이 쓰는 순. 틱톡·인스타는 웹 공유 주소가 없어서 모바일 OS 공유창(기기 공유)으로만 간다.
+   아이콘은 공식 로고(상표)가 아니라 브랜드 색 원 + 글자/간단한 그림. #}
+{% set _share = '<svg viewBox="0 0 24 24"><path d="M18 16a3 3 0 0 0-2.4 1.2l-7-3.5a3 3 0 0 0 0-1.4l7-3.5A3 3 0 1 0 15 7a3 3 0 0 0 .1.7l-7 3.5a3 3 0 1 0 0 3.6l7 3.5A3 3 0 1 0 18 16z"/></svg>' %}
+{% set _bubble = '<svg viewBox="0 0 24 24"><path d="M12 4C7 4 3 7.1 3 11c0 2.4 1.6 4.5 4 5.8L6.2 20l4-2.4c.6.1 1.2.2 1.8.2 5 0 9-3.1 9-7s-4-7-9-7z"/></svg>' %}
+{% set _plane = '<svg viewBox="0 0 24 24"><path d="M21 4 3 11l6 2 2 6 3-4 5 3z"/></svg>' %}
+{% set _link = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>' %}
 {% macro snsbar(url, title, text, label, id=None) -%}
 <div class="snsbar"{% if id %} id="{{ id }}"{% endif %} data-url="{{ url }}" data-title="{{ title }}" data-text="{{ text }}"{% if site.kakao_js_key %} data-kakao="{{ site.kakao_js_key }}"{% endif %}>
 <span class="snsl">{{ label }}</span>
 <div class="snsbtns">
-{% if site.kakao_js_key %}<button type="button" data-sns="kakao" style="--c:#fee500"><i></i>카카오톡</button>{% endif %}
-<button type="button" data-sns="naver" style="--c:#03c75a"><i></i>네이버</button>
-<button type="button" data-sns="band" style="--c:#21c531"><i></i>밴드</button>
-<button type="button" data-sns="facebook" style="--c:#1877f2"><i></i>페이스북</button>
-<button type="button" data-sns="x" style="--c:#111"><i></i>X</button>
-<button type="button" data-sns="line" style="--c:#06c755"><i></i>라인</button>
-<button type="button" data-sns="copy" style="--c:#9aa3a0"><i></i>링크 복사</button>
-<button type="button" data-sns="more" style="--c:var(--accent);display:none"><i></i>기기 공유</button>
+<button type="button" class="sns-more" data-sns="more" style="display:none"><i>{{ _share|safe }}</i>공유하기 <small>카톡 · 인스타 · 문자 등</small></button>
+{% if site.kakao_js_key %}<button type="button" data-sns="kakao" style="--c:#fee500;--ic:#191919"><i>{{ _bubble|safe }}</i>카카오톡</button>{% endif %}
+<button type="button" data-sns="naver" style="--c:#03c75a"><i>N</i>네이버</button>
+<button type="button" data-sns="band" style="--c:#21c531"><i>b</i>밴드</button>
+<button type="button" data-sns="facebook" style="--c:#1877f2"><i>f</i>페이스북</button>
+<button type="button" data-sns="x" style="--c:#111"><i>X</i>X</button>
+<button type="button" data-sns="threads" style="--c:#333"><i>@</i>스레드</button>
+<button type="button" data-sns="telegram" style="--c:#2aabee"><i>{{ _plane|safe }}</i>텔레그램</button>
+<button type="button" data-sns="line" style="--c:#06c755"><i>{{ _bubble|safe }}</i>라인</button>
+<button type="button" data-sns="copy" style="--c:#6b7572"><i>{{ _link|safe }}</i>링크 복사</button>
 </div></div>
 {%- endmacro %}

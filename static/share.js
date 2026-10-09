@@ -48,6 +48,8 @@
       case "facebook": popup("https://www.facebook.com/sharer/sharer.php?u=" + U); break;
       case "x": popup("https://twitter.com/intent/tweet?url=" + U + "&text=" + T); break;
       case "line": popup("https://social-plugins.line.me/lineit/share?url=" + U + "&text=" + T); break;
+      case "threads": popup("https://www.threads.net/intent/post?text=" + encodeURIComponent(text + "\n" + url)); break;
+      case "telegram": popup("https://t.me/share/url?url=" + U + "&text=" + T); break;
       case "copy":
         if (navigator.clipboard) navigator.clipboard.writeText(url).then(function () { toast("링크를 복사했어요"); });
         else prompt("아래 링크를 복사하세요", url);
