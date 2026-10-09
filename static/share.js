@@ -67,8 +67,10 @@
     share(b.getAttribute("data-sns"), b.closest(".snsbar"));
   });
 
-  // 기기 공유 시트(카톡·문자·메일 등)는 지원하는 브라우저에서만 보여 준다. 대부분 모바일.
-  if (navigator.share) {
+  // 기기 공유 시트(카톡·문자·메일 등)는 지원하는 브라우저에서만 보여 준다.
+  // 윈도우 데스크탑 크롬도 navigator.share가 있지만 거기서 뜨는 창엔 카톡이 없어서, 터치 기기로 한정한다.
+  var touch = window.matchMedia && window.matchMedia("(pointer:coarse)").matches;
+  if (navigator.share && touch) {
     var more = document.querySelectorAll('.snsbar button[data-sns="more"]');
     for (var i = 0; i < more.length; i++) more[i].style.display = "";
   }
