@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Fri, 09 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 10 Oct 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>겸손 검사 — 10문항으로 보는 자기를 내세우는 정도</title>
+      <link>https://maumcheck.com/modesty/humility/</link>
+      <guid isPermaLink="true">https://maumcheck.com/modesty/humility/</guid>
+      <description>자기를 얼마나 드러내고 얼마나 낮추는지를 재는 검사입니다. 겸손이 미덕인 문화에서 이 점수가 왜 높게 나오는지, 겸손과 자기 저평가를 어떻게 구분하는지 정리했습니다.</description>
+      <category>겸손</category>
+      <pubDate>Sat, 10 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>자극 추구 검사 — 10문항으로 보는 지루함을 견디는 정도</title>
       <link>https://maumcheck.com/excitement/seeking/</link>
@@ -159,14 +167,6 @@
       <description>전 세계 진료실에서 우울증 선별에 가장 널리 쓰이는 PHQ-9입니다. 진단 기준 아홉 항목을 그대로 묻는 구조와 점수별 의미, 그리고 CES-D와 무엇이 다른지까지 정리했습니다.</description>
       <category>우울</category>
       <pubDate>Tue, 22 Sep 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>AUDIT 음주 자가진단 — WHO가 만든 10문항 음주 선별검사</title>
-      <link>https://maumcheck.com/alcohol/audit/</link>
-      <guid isPermaLink="true">https://maumcheck.com/alcohol/audit/</guid>
-      <description>세계보건기구가 만들어 공개한 음주 선별검사 AUDIT입니다. 무엇을 재는 검사인지, 8점이라는 기준선은 어디서 왔는지, 한국인에게는 기준이 왜 다른지까지 정리했습니다.</description>
-      <category>음주</category>
-      <pubDate>Mon, 21 Sep 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>
