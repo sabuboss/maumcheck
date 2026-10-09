@@ -136,6 +136,14 @@
   .sharebar{display:flex;gap:8px;margin-top:16px}
   .sharebar .share{flex:1;margin-top:0}
   .sharebar .copy{font:inherit;font-size:15px;padding:14px 18px;border-radius:12px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;flex:none}
+  /* ---- SNS 공유 띠 ---- */
+  .snsbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:14px 0 0}
+  .snsl{font-size:13px;color:var(--muted);flex:none}
+  .snsbtns{display:flex;flex-wrap:wrap;gap:6px}
+  .snsbar button{font:inherit;font-size:14px;padding:9px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:7px;line-height:1}
+  .snsbar button i{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none}
+  .snsbar button:hover{border-color:var(--c)}
+  .res .snsbar{margin-top:12px}
   /* ---- 대상 선택 · 유형 결과 ---- */
   .subj{margin:0 0 16px}
   .subj-q{font-size:14px;font-weight:600;margin:0 0 8px}

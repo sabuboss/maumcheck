@@ -1,0 +1,73 @@
+/* SNS 공유 띠 — .snsbar[data-url][data-title][data-text] 안의 button[data-sns] 를 처리한다.
+   서버 없이 각 서비스의 공유 URL 만 연다. 카카오톡만 JS SDK 가 필요해서 키가 있을 때만 버튼이 나온다. */
+(function () {
+  var KAKAO_SDK = "https://t1.kakaocdn.net/kakao_js_sdk/2.7.6/kakao.min.js";
+  var kakaoReady = null;
+
+  function toast(m) {
+    var t = document.getElementById("toast");
+    if (!t) { t = document.createElement("div"); t.id = "toast"; t.className = "toast"; document.body.appendChild(t); }
+    t.textContent = m; t.className = "toast show";
+    setTimeout(function () { t.className = "toast"; }, 1800);
+  }
+
+  function popup(u) {
+    var w = window.open(u, "snsshare", "width=620,height=580,menubar=no,toolbar=no");
+    if (!w) location.href = u;
+  }
+
+  function loadKakao(key) {
+    if (kakaoReady) return kakaoReady;
+    kakaoReady = new Promise(function (ok, no) {
+      var s = document.createElement("script");
+      s.src = KAKAO_SDK; s.crossOrigin = "anonymous";
+      s.onload = function () {
+        try { if (!window.Kakao.isInitialized()) window.Kakao.init(key); ok(window.Kakao); }
+        catch (e) { no(e); }
+      };
+      s.onerror = no;
+      document.head.appendChild(s);
+    });
+    return kakaoReady;
+  }
+
+  function share(kind, bar) {
+    var url = bar.getAttribute("data-url") || location.href.split("#")[0];
+    var title = bar.getAttribute("data-title") || document.title;
+    var text = bar.getAttribute("data-text") || title;
+    var U = encodeURIComponent(url), T = encodeURIComponent(text);
+    switch (kind) {
+      case "kakao":
+        loadKakao(bar.getAttribute("data-kakao")).then(function (K) {
+          // 페이지의 og:title / og:image 를 그대로 카드로 쓴다.
+          K.Share.sendScrap({ requestUrl: url });
+        }).catch(function () { toast("카카오톡 공유를 열 수 없어요. 링크를 복사해 보내 주세요"); });
+        break;
+      case "naver": popup("https://share.naver.com/web/shareView?url=" + U + "&title=" + encodeURIComponent(title)); break;
+      case "band": popup("https://band.us/plugin/share?body=" + encodeURIComponent(text + "\n" + url) + "&route=" + U); break;
+      case "facebook": popup("https://www.facebook.com/sharer/sharer.php?u=" + U); break;
+      case "x": popup("https://twitter.com/intent/tweet?url=" + U + "&text=" + T); break;
+      case "line": popup("https://social-plugins.line.me/lineit/share?url=" + U + "&text=" + T); break;
+      case "copy":
+        if (navigator.clipboard) navigator.clipboard.writeText(url).then(function () { toast("링크를 복사했어요"); });
+        else prompt("아래 링크를 복사하세요", url);
+        break;
+      case "more":
+        if (navigator.share) navigator.share({ title: title, text: text, url: url }).catch(function () {});
+        break;
+    }
+  }
+
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest(".snsbar button[data-sns]");
+    if (!b) return;
+    e.preventDefault();
+    share(b.getAttribute("data-sns"), b.closest(".snsbar"));
+  });
+
+  // 기기 공유 시트(카톡·문자·메일 등)는 지원하는 브라우저에서만 보여 준다. 대부분 모바일.
+  if (navigator.share) {
+    var more = document.querySelectorAll('.snsbar button[data-sns="more"]');
+    for (var i = 0; i < more.length; i++) more[i].style.display = "";
+  }
+})();

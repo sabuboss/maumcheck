@@ -1,0 +1,15 @@
+{# SNS 공유 띠. 쓰는 쪽: {% from "_share.html" import snsbar with context %} {{ snsbar(url, title, text, "이 검사 공유하기") }} #}
+{% macro snsbar(url, title, text, label, id=None) -%}
+<div class="snsbar"{% if id %} id="{{ id }}"{% endif %} data-url="{{ url }}" data-title="{{ title }}" data-text="{{ text }}"{% if site.kakao_js_key %} data-kakao="{{ site.kakao_js_key }}"{% endif %}>
+<span class="snsl">{{ label }}</span>
+<div class="snsbtns">
+{% if site.kakao_js_key %}<button type="button" data-sns="kakao" style="--c:#fee500"><i></i>카카오톡</button>{% endif %}
+<button type="button" data-sns="naver" style="--c:#03c75a"><i></i>네이버</button>
+<button type="button" data-sns="band" style="--c:#21c531"><i></i>밴드</button>
+<button type="button" data-sns="facebook" style="--c:#1877f2"><i></i>페이스북</button>
+<button type="button" data-sns="x" style="--c:#111"><i></i>X</button>
+<button type="button" data-sns="line" style="--c:#06c755"><i></i>라인</button>
+<button type="button" data-sns="copy" style="--c:#9aa3a0"><i></i>링크 복사</button>
+<button type="button" data-sns="more" style="--c:var(--accent);display:none"><i></i>기기 공유</button>
+</div></div>
+{%- endmacro %}

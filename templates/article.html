@@ -1,3 +1,4 @@
+{% from "_share.html" import snsbar with context %}
 <!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ a.title }} | {{ site.name }}</title><meta name="description" content="{{ a.description }}">
@@ -17,6 +18,7 @@
 <h1>{{ a.title }}</h1>
 {% if a.lead %}<p class="lead">{{ a.lead }}</p>{% endif %}
 <p class="meta">작성 {{ a.publish }}{% if a.updated and a.updated != a.publish %} · 최종 수정 {{ a.updated }}{% endif %} · {{ site.author }}</p>
+{{ snsbar(site.url ~ "/" ~ a.slug ~ "/", a.title ~ " | " ~ site.name, a.title ~ " — " ~ site.name, "이 글 공유하기") }}
 
 {{ a.body|safe }}
 
@@ -39,4 +41,5 @@
 
 <footer><a href="/about/">소개</a>·<a href="/privacy/">개인정보처리방침</a>·<a href="/contact/">문의</a><br>© {{ year }} {{ site.name }}. 이 사이트의 검사는 참고용이며 전문적 진단을 대신하지 않습니다.</footer>
 {% if site.cf_beacon_token %}<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ site.cf_beacon_token }}"}'></script>{% endif %}
+<script src="/static/share.js"></script>
 </body></html>
