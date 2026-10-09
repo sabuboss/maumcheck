@@ -15,7 +15,7 @@
 <meta name="google-site-verification" content="bNudH88F3qxg7vc-fsyt5lLou6f8ocoKEAzb_Pfif3c">
 <meta name="naver-site-verification" content="f445a96f43e7465777d85d9cac1d7a2fc62fce5a">
 <link rel="alternate" type="application/rss+xml" title="마음체크" href="/rss.xml">
-<link rel="stylesheet" href="/static/site.css?v=c2f8a0eb">
+<link rel="stylesheet" href="/static/site.css?v=79654bab">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3199321666541334" crossorigin="anonymous"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "로젠버그 자존감 척도(RSES) 자가진단 — 10문항으로 보는 나의 자존감", "description": "세계에서 가장 널리 쓰이는 자존감 검사, 로젠버그 자존감 척도를 직접 해보세요. 누가 왜 만들었는지, 점수를 어떻게 읽어야 하는지, 언제 해보면 좋은지까지 정리했습니다.", "author": {"@type": "Person", "name": "부름쌤", "url": "https://maumcheck.com/about/"}, "publisher": {"@type": "Organization", "name": "마음체크", "url": "https://maumcheck.com"}, "datePublished": "2026-09-14", "dateModified": "2026-09-14", "mainEntityOfPage": "https://maumcheck.com/self-esteem/rosenberg/"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "로젠버그 자존감 척도는 무료로 사용할 수 있나요?", "acceptedAnswer": {"@type": "Answer", "text": "네. 저작권자가 교육·연구·개인 용도로 별도 허락 없이 사용하도록 공개해 둔 대표적인 무료 척도입니다. 다만 특정 출판물의 번역 문구나 해설은 그 저자의 저작물이므로 별개입니다."}}, {"@type": "Question", "name": "점수가 높으면 나르시시스트인가요?", "acceptedAnswer": {"@type": "Answer", "text": "아닙니다. 이 척도는 건강한 자존감을 측정하며, 자기애성 성격 특성은 별도의 도구로 평가합니다."}}, {"@type": "Question", "name": "얼마나 자주 해보면 좋나요?", "acceptedAnswer": {"@type": "Answer", "text": "자존감은 비교적 안정적인 특성이라 매일 잴 필요는 없습니다. 삶의 국면이 바뀔 때, 또는 분기에 한 번 정도면 충분합니다."}}, {"@type": "Question", "name": "이 검사로 우울증을 진단할 수 있나요?", "acceptedAnswer": {"@type": "Answer", "text": "없습니다. 자존감과 우울은 관련이 있지만 다른 개념이며, 이 척도는 진단 도구가 아닙니다."}}, {"@type": "Question", "name": "결과가 저장되나요?", "acceptedAnswer": {"@type": "Answer", "text": "아니요. 응답과 점수는 브라우저 안에서만 계산되고 서버로 전송되지 않습니다."}}]}]}</script>
 </head>
@@ -93,7 +93,7 @@
     
     
     <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 지속적인 무기력이나 우울감이 있다면 전문가와 상담하세요.</p>
-    <div class="sharebar"><button class="share" id="share">결과 공유하기</button><button class="copy" id="copy">결과 복사</button></div>
+    <div class="sharebar"><button class="share" id="share">결과 공유하기</button><button class="copy" id="copy">결과 복사</button><button class="copy" id="cardsave">결과 이미지 저장</button></div>
     <div class="snsbar" id="snsres" data-url="https://maumcheck.com/self-esteem/rosenberg/" data-title="자존감 자가진단 | 마음체크" data-text="자존감 자가진단 결과를 봤어요 — 나도 해보기" data-kakao="bc6674292087c86f5931bff69d97cc59">
 <span class="snsl">결과를 SNS에 올리기</span>
 <div class="snsbtns">
@@ -191,7 +191,7 @@ document.getElementById("go").onclick=function(){
   document.getElementById("sc").textContent=s;
   var tg=document.getElementById("tag");tg.textContent=b.label;tg.style.background="var(--"+b.tone+"-soft)";tg.style.color="var(--"+b.tone+")";
   document.getElementById("ev").innerHTML=b.eval;
-  LAST={score:s,label:b.label};
+  LAST={score:s,label:b.label,tone:b.tone,eval:b.eval};
   // 주소는 share.js가 따로 붙이므로 여기엔 점수 문구만
   document.getElementById("snsres").setAttribute("data-text",T.short_name+" 결과: "+s+"점 / "+T.max+"점 ("+b.label+") — 나도 해보기");
   renderCompare(s);
@@ -226,11 +226,28 @@ document.getElementById("copy").onclick=function(){
   if(navigator.clipboard){navigator.clipboard.writeText(summary()).then(function(){toast("복사했어요");});}
   else{prompt("아래 내용을 복사하세요",summary());}
 };
+document.getElementById("cardsave").onclick=function(){
+  if(!LAST)return;
+  var cs=getComputedStyle(document.body);
+  var first=(LAST.eval||"").replace(/<[^>]+>/g,"").split(". ")[0];
+  if(first&&!/[.!?]$/.test(first))first+=".";
+  window.resultCard({
+    title:"마음체크 · "+T.short_name,
+    headline:LAST.score+" / "+T.max+"점",
+    sub:LAST.label,
+    note:first,
+    bars:[{pct:Math.round((LAST.score-T.min)*100/((T.max-T.min)||1)),lo:T.min+"점",hi:T.max+"점",
+           color:cs.getPropertyValue("--"+(LAST.tone||"accent")).trim()}],
+    url:"maumcheck.com"+location.pathname,
+    accent:cs.getPropertyValue("--accent").trim(),accentSoft:cs.getPropertyValue("--accent-soft").trim(),
+    fileName:"마음체크 "+T.short_name+" 결과"});
+};
 
 
 function renderCompare(){}
 
 </script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "2c81695383d64335ac9127317b21b246"}'></script>
+<script src="/static/card.js?v=edaaf903"></script>
 <script src="/static/share.js?v=2b794fa9"></script>
 </body></html>

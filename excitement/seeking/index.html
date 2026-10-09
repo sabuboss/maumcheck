@@ -15,7 +15,7 @@
 <meta name="google-site-verification" content="bNudH88F3qxg7vc-fsyt5lLou6f8ocoKEAzb_Pfif3c">
 <meta name="naver-site-verification" content="f445a96f43e7465777d85d9cac1d7a2fc62fce5a">
 <link rel="alternate" type="application/rss+xml" title="마음체크" href="/rss.xml">
-<link rel="stylesheet" href="/static/site.css?v=c2f8a0eb">
+<link rel="stylesheet" href="/static/site.css?v=79654bab">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3199321666541334" crossorigin="anonymous"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "자극 추구 검사 — 10문항으로 보는 지루함을 견디는 정도", "description": "새로움과 자극을 얼마나 찾아다니는지를 재는 검사입니다. 이 성향이 나이가 들면서 왜 낮아지는지, 문항이 한국 상황에서 왜 세게 느껴지는지까지 정리했습니다.", "author": {"@type": "Person", "name": "부름쌤", "url": "https://maumcheck.com/about/"}, "publisher": {"@type": "Organization", "name": "마음체크", "url": "https://maumcheck.com"}, "datePublished": "2026-10-09", "dateModified": "2026-10-09", "mainEntityOfPage": "https://maumcheck.com/excitement/seeking/"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "이 검사는 무료로 사용할 수 있나요?", "acceptedAnswer": {"@type": "Answer", "text": "네. 문항 출처인 IPIP는 문항을 의도적으로 저작권 없이 공개했고, 연구와 상업적 용도 모두에서 자유롭게 사용·수정·번역·웹 게재가 가능하다고 명시하고 있습니다."}}, {"@type": "Question", "name": "문항이 너무 세게 느껴집니다.", "acceptedAnswer": {"@type": "Answer", "text": "원문 그대로 옮긴 것입니다. 위험, 무모함 같은 표현이 그대로 들어 있어서 한국에서는 그렇다고 답하기가 심리적으로 어렵고, 그래서 실제 성향보다 점수가 낮게 나오는 경향이 있습니다. 실제로 그렇게 행동하는가가 아니라 그런 쪽에 끌리는가로 읽으시면 됩니다."}}, {"@type": "Question", "name": "점수가 높으면 위험한 사람인가요?", "acceptedAnswer": {"@type": "Answer", "text": "성향일 뿐이지만 따라오는 위험은 실제로 보고됩니다. 자극 추구는 사고, 과음, 충동적 결정과 연결되는 것으로 반복해서 확인됐습니다. 다만 대처 방향은 성향을 줄이는 것이 아니라 그 에너지가 빠져나갈 안전한 통로를 만들어 두는 쪽입니다."}}, {"@type": "Question", "name": "나이가 들면 바뀌나요?", "acceptedAnswer": {"@type": "Answer", "text": "바뀝니다. 여러 나라의 조사에서 자극 추구는 10대 후반에서 20대 초반에 가장 높고 이후 꾸준히 낮아지는 모습을 보입니다. 과거의 선택이 지금 기준으로 이해되지 않는다면 그때는 실제로 다른 지점에 서 있었기 때문일 수 있습니다."}}, {"@type": "Question", "name": "결과가 저장되거나 어딘가로 전송되나요?", "acceptedAnswer": {"@type": "Answer", "text": "아니요. 모든 계산은 이용자의 브라우저 안에서만 이루어지며, 응답이나 점수는 서버로 전송되지도, 저장되지도 않습니다. 페이지를 닫으면 사라집니다."}}]}]}</script>
 </head>
@@ -93,7 +93,7 @@
     
     
     <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 지속적인 무기력이나 우울감이 있다면 전문가와 상담하세요.</p>
-    <div class="sharebar"><button class="share" id="share">결과 공유하기</button><button class="copy" id="copy">결과 복사</button><button class="copy" id="cmpmake">둘이 비교할 링크 만들기</button></div>
+    <div class="sharebar"><button class="share" id="share">결과 공유하기</button><button class="copy" id="copy">결과 복사</button><button class="copy" id="cardsave">결과 이미지 저장</button><button class="copy" id="cmpmake">둘이 비교할 링크 만들기</button></div>
     <div class="snsbar" id="snsres" data-url="https://maumcheck.com/excitement/seeking/" data-title="자극 추구 자가진단 | 마음체크" data-text="자극 추구 자가진단 결과를 봤어요 — 나도 해보기" data-kakao="bc6674292087c86f5931bff69d97cc59">
 <span class="snsl">결과를 SNS에 올리기</span>
 <div class="snsbtns">
@@ -194,7 +194,7 @@ document.getElementById("go").onclick=function(){
   document.getElementById("sc").textContent=s;
   var tg=document.getElementById("tag");tg.textContent=b.label;tg.style.background="var(--"+b.tone+"-soft)";tg.style.color="var(--"+b.tone+")";
   document.getElementById("ev").innerHTML=b.eval;
-  LAST={score:s,label:b.label};
+  LAST={score:s,label:b.label,tone:b.tone,eval:b.eval};
   // 주소는 share.js가 따로 붙이므로 여기엔 점수 문구만
   document.getElementById("snsres").setAttribute("data-text",T.short_name+" 결과: "+s+"점 / "+T.max+"점 ("+b.label+") — 나도 해보기");
   renderCompare(s);
@@ -228,6 +228,22 @@ document.getElementById("share").onclick=function(){
 document.getElementById("copy").onclick=function(){
   if(navigator.clipboard){navigator.clipboard.writeText(summary()).then(function(){toast("복사했어요");});}
   else{prompt("아래 내용을 복사하세요",summary());}
+};
+document.getElementById("cardsave").onclick=function(){
+  if(!LAST)return;
+  var cs=getComputedStyle(document.body);
+  var first=(LAST.eval||"").replace(/<[^>]+>/g,"").split(". ")[0];
+  if(first&&!/[.!?]$/.test(first))first+=".";
+  window.resultCard({
+    title:"마음체크 · "+T.short_name,
+    headline:LAST.score+" / "+T.max+"점",
+    sub:LAST.label,
+    note:first,
+    bars:[{pct:Math.round((LAST.score-T.min)*100/((T.max-T.min)||1)),lo:T.min+"점",hi:T.max+"점",
+           color:cs.getPropertyValue("--"+(LAST.tone||"accent")).trim()}],
+    url:"maumcheck.com"+location.pathname,
+    accent:cs.getPropertyValue("--accent").trim(),accentSoft:cs.getPropertyValue("--accent-soft").trim(),
+    fileName:"마음체크 "+T.short_name+" 결과"});
 };
 
 
@@ -292,5 +308,6 @@ document.getElementById('cmpmake').onclick=function(){
 
 </script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "2c81695383d64335ac9127317b21b246"}'></script>
+<script src="/static/card.js?v=edaaf903"></script>
 <script src="/static/share.js?v=2b794fa9"></script>
 </body></html>

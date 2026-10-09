@@ -15,7 +15,7 @@
 <meta name="google-site-verification" content="bNudH88F3qxg7vc-fsyt5lLou6f8ocoKEAzb_Pfif3c">
 <meta name="naver-site-verification" content="f445a96f43e7465777d85d9cac1d7a2fc62fce5a">
 <link rel="alternate" type="application/rss+xml" title="마음체크" href="/rss.xml">
-<link rel="stylesheet" href="/static/site.css?v=c2f8a0eb">
+<link rel="stylesheet" href="/static/site.css?v=79654bab">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3199321666541334" crossorigin="anonymous"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "절제력 검사 — 10문항으로 보는 당기는 것을 참는 힘", "description": "먹고, 쓰고, 지르고 싶은 충동을 얼마나 참아내는지를 재는 검사입니다. 절제력이 미루지 않는 힘과 어떻게 다른지, 이 척도가 왜 먹는 이야기에 치우쳐 있는지까지 정직하게 정리했습니다.", "author": {"@type": "Person", "name": "부름쌤", "url": "https://maumcheck.com/about/"}, "publisher": {"@type": "Organization", "name": "마음체크", "url": "https://maumcheck.com"}, "datePublished": "2026-09-30", "dateModified": "2026-09-30", "mainEntityOfPage": "https://maumcheck.com/self-control/moderation/"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "이 검사는 무료로 사용할 수 있나요?", "acceptedAnswer": {"@type": "Answer", "text": "네. 문항 출처인 IPIP는 문항을 의도적으로 저작권 없이 공개했고, 연구와 상업적 용도 모두에서 자유롭게 사용·수정·번역·웹 게재가 가능하다고 명시하고 있습니다."}}, {"@type": "Question", "name": "실행력 검사와 무엇이 다른가요?", "acceptedAnswer": {"@type": "Answer", "text": "실행력은 해야 할 일을 시작하고 끝내는 힘이고, 절제력은 당기는 것을 참는 힘입니다. 성격 모형에서도 실행력은 성실성에, 절제력은 신경증에 속합니다. 한쪽만 높은 조합이 흔하고, 필요한 대처도 서로 다릅니다."}}, {"@type": "Question", "name": "먹는 것에 관한 문항이 너무 많은데요.", "acceptedAnswer": {"@type": "Answer", "text": "정확한 지적이고 이 척도의 알려진 약점입니다. 10문항 중 넷이 먹기와 관련되고, 특히 먹는 것을 무척 좋아한다는 문항은 절제력과 별 상관없이 식도락을 즐기는 사람의 점수를 깎습니다. 결과를 볼 때 그 문항은 덜어내고 읽으셔도 됩니다."}}, {"@type": "Question", "name": "절제력은 기를 수 있나요?", "acceptedAnswer": {"@type": "Answer", "text": "기를 수 있지만 방향이 중요합니다. 의지를 다잡는 방식은 효율이 낮습니다. 유혹과 저항을 실제로 기록한 연구들에서 절제를 잘하는 사람들은 더 잘 버틴 것이 아니라 애초에 유혹을 덜 마주쳤습니다. 참는 훈련보다 환경을 바꾸는 쪽이 훨씬 잘 듣습니다."}}, {"@type": "Question", "name": "결과가 저장되거나 어딘가로 전송되나요?", "acceptedAnswer": {"@type": "Answer", "text": "아니요. 모든 계산은 이용자의 브라우저 안에서만 이루어지며, 응답이나 점수는 서버로 전송되지도, 저장되지도 않습니다. 페이지를 닫으면 사라집니다."}}]}]}</script>
 </head>
@@ -93,7 +93,7 @@
     
     
     <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 지속적인 무기력이나 우울감이 있다면 전문가와 상담하세요.</p>
-    <div class="sharebar"><button class="share" id="share">결과 공유하기</button><button class="copy" id="copy">결과 복사</button></div>
+    <div class="sharebar"><button class="share" id="share">결과 공유하기</button><button class="copy" id="copy">결과 복사</button><button class="copy" id="cardsave">결과 이미지 저장</button></div>
     <div class="snsbar" id="snsres" data-url="https://maumcheck.com/self-control/moderation/" data-title="절제력 자가진단 | 마음체크" data-text="절제력 자가진단 결과를 봤어요 — 나도 해보기" data-kakao="bc6674292087c86f5931bff69d97cc59">
 <span class="snsl">결과를 SNS에 올리기</span>
 <div class="snsbtns">
@@ -194,7 +194,7 @@ document.getElementById("go").onclick=function(){
   document.getElementById("sc").textContent=s;
   var tg=document.getElementById("tag");tg.textContent=b.label;tg.style.background="var(--"+b.tone+"-soft)";tg.style.color="var(--"+b.tone+")";
   document.getElementById("ev").innerHTML=b.eval;
-  LAST={score:s,label:b.label};
+  LAST={score:s,label:b.label,tone:b.tone,eval:b.eval};
   // 주소는 share.js가 따로 붙이므로 여기엔 점수 문구만
   document.getElementById("snsres").setAttribute("data-text",T.short_name+" 결과: "+s+"점 / "+T.max+"점 ("+b.label+") — 나도 해보기");
   renderCompare(s);
@@ -229,11 +229,28 @@ document.getElementById("copy").onclick=function(){
   if(navigator.clipboard){navigator.clipboard.writeText(summary()).then(function(){toast("복사했어요");});}
   else{prompt("아래 내용을 복사하세요",summary());}
 };
+document.getElementById("cardsave").onclick=function(){
+  if(!LAST)return;
+  var cs=getComputedStyle(document.body);
+  var first=(LAST.eval||"").replace(/<[^>]+>/g,"").split(". ")[0];
+  if(first&&!/[.!?]$/.test(first))first+=".";
+  window.resultCard({
+    title:"마음체크 · "+T.short_name,
+    headline:LAST.score+" / "+T.max+"점",
+    sub:LAST.label,
+    note:first,
+    bars:[{pct:Math.round((LAST.score-T.min)*100/((T.max-T.min)||1)),lo:T.min+"점",hi:T.max+"점",
+           color:cs.getPropertyValue("--"+(LAST.tone||"accent")).trim()}],
+    url:"maumcheck.com"+location.pathname,
+    accent:cs.getPropertyValue("--accent").trim(),accentSoft:cs.getPropertyValue("--accent-soft").trim(),
+    fileName:"마음체크 "+T.short_name+" 결과"});
+};
 
 
 function renderCompare(){}
 
 </script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "2c81695383d64335ac9127317b21b246"}'></script>
+<script src="/static/card.js?v=edaaf903"></script>
 <script src="/static/share.js?v=2b794fa9"></script>
 </body></html>

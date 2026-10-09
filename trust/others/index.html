@@ -15,7 +15,7 @@
 <meta name="google-site-verification" content="bNudH88F3qxg7vc-fsyt5lLou6f8ocoKEAzb_Pfif3c">
 <meta name="naver-site-verification" content="f445a96f43e7465777d85d9cac1d7a2fc62fce5a">
 <link rel="alternate" type="application/rss+xml" title="마음체크" href="/rss.xml">
-<link rel="stylesheet" href="/static/site.css?v=c2f8a0eb">
+<link rel="stylesheet" href="/static/site.css?v=79654bab">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3199321666541334" crossorigin="anonymous"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "신뢰 검사 — 10문항으로 보는 사람을 믿는 정도", "description": "처음 만난 사람을 어느 쪽으로 가정하는지를 재는 검사입니다. 잘 믿는 사람이 잘 속는 사람은 아니라는 연구, 한국인의 점수가 낮게 나오는 이유까지 함께 정리했습니다.", "author": {"@type": "Person", "name": "부름쌤", "url": "https://maumcheck.com/about/"}, "publisher": {"@type": "Organization", "name": "마음체크", "url": "https://maumcheck.com"}, "datePublished": "2026-10-04", "dateModified": "2026-10-04", "mainEntityOfPage": "https://maumcheck.com/trust/others/"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "이 검사는 무료로 사용할 수 있나요?", "acceptedAnswer": {"@type": "Answer", "text": "네. 문항 출처인 IPIP는 문항을 의도적으로 저작권 없이 공개했고, 연구와 상업적 용도 모두에서 자유롭게 사용·수정·번역·웹 게재가 가능하다고 명시하고 있습니다."}}, {"@type": "Question", "name": "점수가 높으면 잘 속는 건가요?", "acceptedAnswer": {"@type": "Answer", "text": "연구는 오히려 반대를 가리킵니다. 신뢰 성향이 높은 사람들은 상대를 판단할 단서에 더 민감했고 부정적 신호가 나타나면 더 빨리 물러났습니다. 관계를 많이 시도한 만큼 겪은 표본이 많기 때문입니다. 실제로 갈리는 지점은 신뢰와 순진함 사이인데, 정보가 와도 판단을 고치지 않는 쪽이 순진함입니다."}}, {"@type": "Question", "name": "점수가 낮게 나왔습니다. 문제인가요?", "acceptedAnswer": {"@type": "Answer", "text": "낮은 신뢰는 대개 겪어서 배운 결과입니다. 실제로 위험한 환경에 있다면 정확한 반응이기도 합니다. 문제가 되는 것은 환경이 바뀐 뒤에도 기본값이 그대로 남아, 괜찮았을 관계까지 밀어낼 때입니다."}}, {"@type": "Question", "name": "한국인은 원래 점수가 낮나요?", "acceptedAnswer": {"@type": "Answer", "text": "낮게 나오는 경향이 있습니다. 다만 이 척도가 재는 것은 낯선 사람에 대한 일반 신뢰이고, 아는 사람에 대한 신뢰는 재지 않습니다. 관계망이 촘촘한 사회에서는 안쪽의 신뢰가 높은 대신 바깥쪽 기본값이 낮게 설정되는 경향이 보고됩니다."}}, {"@type": "Question", "name": "결과가 저장되거나 어딘가로 전송되나요?", "acceptedAnswer": {"@type": "Answer", "text": "아니요. 모든 계산은 이용자의 브라우저 안에서만 이루어지며, 응답이나 점수는 서버로 전송되지도, 저장되지도 않습니다. 페이지를 닫으면 사라집니다."}}]}]}</script>
 </head>
@@ -93,7 +93,7 @@
     
     
     <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 지속적인 무기력이나 우울감이 있다면 전문가와 상담하세요.</p>
-    <div class="sharebar"><button class="share" id="share">결과 공유하기</button><button class="copy" id="copy">결과 복사</button><button class="copy" id="cmpmake">둘이 비교할 링크 만들기</button></div>
+    <div class="sharebar"><button class="share" id="share">결과 공유하기</button><button class="copy" id="copy">결과 복사</button><button class="copy" id="cardsave">결과 이미지 저장</button><button class="copy" id="cmpmake">둘이 비교할 링크 만들기</button></div>
     <div class="snsbar" id="snsres" data-url="https://maumcheck.com/trust/others/" data-title="대인 신뢰 자가진단 | 마음체크" data-text="대인 신뢰 자가진단 결과를 봤어요 — 나도 해보기" data-kakao="bc6674292087c86f5931bff69d97cc59">
 <span class="snsl">결과를 SNS에 올리기</span>
 <div class="snsbtns">
@@ -194,7 +194,7 @@ document.getElementById("go").onclick=function(){
   document.getElementById("sc").textContent=s;
   var tg=document.getElementById("tag");tg.textContent=b.label;tg.style.background="var(--"+b.tone+"-soft)";tg.style.color="var(--"+b.tone+")";
   document.getElementById("ev").innerHTML=b.eval;
-  LAST={score:s,label:b.label};
+  LAST={score:s,label:b.label,tone:b.tone,eval:b.eval};
   // 주소는 share.js가 따로 붙이므로 여기엔 점수 문구만
   document.getElementById("snsres").setAttribute("data-text",T.short_name+" 결과: "+s+"점 / "+T.max+"점 ("+b.label+") — 나도 해보기");
   renderCompare(s);
@@ -228,6 +228,22 @@ document.getElementById("share").onclick=function(){
 document.getElementById("copy").onclick=function(){
   if(navigator.clipboard){navigator.clipboard.writeText(summary()).then(function(){toast("복사했어요");});}
   else{prompt("아래 내용을 복사하세요",summary());}
+};
+document.getElementById("cardsave").onclick=function(){
+  if(!LAST)return;
+  var cs=getComputedStyle(document.body);
+  var first=(LAST.eval||"").replace(/<[^>]+>/g,"").split(". ")[0];
+  if(first&&!/[.!?]$/.test(first))first+=".";
+  window.resultCard({
+    title:"마음체크 · "+T.short_name,
+    headline:LAST.score+" / "+T.max+"점",
+    sub:LAST.label,
+    note:first,
+    bars:[{pct:Math.round((LAST.score-T.min)*100/((T.max-T.min)||1)),lo:T.min+"점",hi:T.max+"점",
+           color:cs.getPropertyValue("--"+(LAST.tone||"accent")).trim()}],
+    url:"maumcheck.com"+location.pathname,
+    accent:cs.getPropertyValue("--accent").trim(),accentSoft:cs.getPropertyValue("--accent-soft").trim(),
+    fileName:"마음체크 "+T.short_name+" 결과"});
 };
 
 
@@ -292,5 +308,6 @@ document.getElementById('cmpmake').onclick=function(){
 
 </script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "2c81695383d64335ac9127317b21b246"}'></script>
+<script src="/static/card.js?v=edaaf903"></script>
 <script src="/static/share.js?v=2b794fa9"></script>
 </body></html>

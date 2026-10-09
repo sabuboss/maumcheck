@@ -15,7 +15,7 @@
 <meta name="google-site-verification" content="bNudH88F3qxg7vc-fsyt5lLou6f8ocoKEAzb_Pfif3c">
 <meta name="naver-site-verification" content="f445a96f43e7465777d85d9cac1d7a2fc62fce5a">
 <link rel="alternate" type="application/rss+xml" title="마음체크" href="/rss.xml">
-<link rel="stylesheet" href="/static/site.css?v=c2f8a0eb">
+<link rel="stylesheet" href="/static/site.css?v=79654bab">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3199321666541334" crossorigin="anonymous"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "자기효능감 검사 — 10문항으로 보는 해낼 수 있다는 믿음", "description": "일을 잘 해낼 수 있다는 자신에 대한 믿음을 재는 검사입니다. 자존감과 무엇이 다른지, 이 믿음이 어디서 자라는지, 점수를 어떻게 읽어야 하는지까지 정리했습니다.", "author": {"@type": "Person", "name": "부름쌤", "url": "https://maumcheck.com/about/"}, "publisher": {"@type": "Organization", "name": "마음체크", "url": "https://maumcheck.com"}, "datePublished": "2026-09-25", "dateModified": "2026-09-25", "mainEntityOfPage": "https://maumcheck.com/self-efficacy/competence/"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "이 검사는 무료로 사용할 수 있나요?", "acceptedAnswer": {"@type": "Answer", "text": "네. 문항 출처인 IPIP는 문항을 의도적으로 저작권 없이 공개했고, 연구와 상업적 용도 모두에서 자유롭게 사용·수정·번역·웹 게재가 가능하다고 명시하고 있습니다."}}, {"@type": "Question", "name": "자존감 검사와 어느 쪽을 해야 하나요?", "acceptedAnswer": {"@type": "Answer", "text": "둘 다 해보시는 편이 낫습니다. 자기효능감은 해낼 수 있는가를, 자존감은 나는 괜찮은 사람인가를 묻습니다. 두 결과가 어긋나는 조합이 실제로 꽤 있고, 그 조합 자체가 지금의 나를 설명해 줍니다."}}, {"@type": "Question", "name": "점수가 낮은데 실제로는 일을 잘한다고 합니다.", "acceptedAnswer": {"@type": "Answer", "text": "드문 일이 아닙니다. 성공을 운이나 남의 덕으로 돌리고 실패만 자기 탓으로 돌리는 습관이 있으면 아무리 해내도 믿음이 쌓이지 않습니다. 이 경우 더 많은 성취보다 이미 해낸 것을 다시 세는 일이 필요합니다."}}, {"@type": "Question", "name": "자신감을 가지라는 말이 도움이 안 됩니다.", "acceptedAnswer": {"@type": "Answer", "text": "그게 정상입니다. 밴듀라가 정리한 네 경로 중 주변의 설득은 세 번째로 약합니다. 가장 강력한 것은 직접 해낸 경험이고, 그래서 작게라도 실제로 해내는 쪽이 훨씬 빠릅니다."}}, {"@type": "Question", "name": "결과가 저장되거나 어딘가로 전송되나요?", "acceptedAnswer": {"@type": "Answer", "text": "아니요. 모든 계산은 이용자의 브라우저 안에서만 이루어지며, 응답이나 점수는 서버로 전송되지도, 저장되지도 않습니다. 페이지를 닫으면 사라집니다."}}]}]}</script>
 </head>
@@ -93,7 +93,7 @@
     
     
     <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 지속적인 무기력이나 우울감이 있다면 전문가와 상담하세요.</p>
-    <div class="sharebar"><button class="share" id="share">결과 공유하기</button><button class="copy" id="copy">결과 복사</button></div>
+    <div class="sharebar"><button class="share" id="share">결과 공유하기</button><button class="copy" id="copy">결과 복사</button><button class="copy" id="cardsave">결과 이미지 저장</button></div>
     <div class="snsbar" id="snsres" data-url="https://maumcheck.com/self-efficacy/competence/" data-title="자기효능감 자가진단 | 마음체크" data-text="자기효능감 자가진단 결과를 봤어요 — 나도 해보기" data-kakao="bc6674292087c86f5931bff69d97cc59">
 <span class="snsl">결과를 SNS에 올리기</span>
 <div class="snsbtns">
@@ -194,7 +194,7 @@ document.getElementById("go").onclick=function(){
   document.getElementById("sc").textContent=s;
   var tg=document.getElementById("tag");tg.textContent=b.label;tg.style.background="var(--"+b.tone+"-soft)";tg.style.color="var(--"+b.tone+")";
   document.getElementById("ev").innerHTML=b.eval;
-  LAST={score:s,label:b.label};
+  LAST={score:s,label:b.label,tone:b.tone,eval:b.eval};
   // 주소는 share.js가 따로 붙이므로 여기엔 점수 문구만
   document.getElementById("snsres").setAttribute("data-text",T.short_name+" 결과: "+s+"점 / "+T.max+"점 ("+b.label+") — 나도 해보기");
   renderCompare(s);
@@ -229,11 +229,28 @@ document.getElementById("copy").onclick=function(){
   if(navigator.clipboard){navigator.clipboard.writeText(summary()).then(function(){toast("복사했어요");});}
   else{prompt("아래 내용을 복사하세요",summary());}
 };
+document.getElementById("cardsave").onclick=function(){
+  if(!LAST)return;
+  var cs=getComputedStyle(document.body);
+  var first=(LAST.eval||"").replace(/<[^>]+>/g,"").split(". ")[0];
+  if(first&&!/[.!?]$/.test(first))first+=".";
+  window.resultCard({
+    title:"마음체크 · "+T.short_name,
+    headline:LAST.score+" / "+T.max+"점",
+    sub:LAST.label,
+    note:first,
+    bars:[{pct:Math.round((LAST.score-T.min)*100/((T.max-T.min)||1)),lo:T.min+"점",hi:T.max+"점",
+           color:cs.getPropertyValue("--"+(LAST.tone||"accent")).trim()}],
+    url:"maumcheck.com"+location.pathname,
+    accent:cs.getPropertyValue("--accent").trim(),accentSoft:cs.getPropertyValue("--accent-soft").trim(),
+    fileName:"마음체크 "+T.short_name+" 결과"});
+};
 
 
 function renderCompare(){}
 
 </script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "2c81695383d64335ac9127317b21b246"}'></script>
+<script src="/static/card.js?v=edaaf903"></script>
 <script src="/static/share.js?v=2b794fa9"></script>
 </body></html>
