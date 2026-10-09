@@ -133,9 +133,9 @@
   .use{background:var(--field);border-radius:12px;padding:14px 16px;font-size:14px}
   .use b{display:block;font-weight:600;margin-bottom:3px;color:var(--accent);font-size:15px}
   .use span{color:var(--muted);line-height:1.6}
-  .sharebar{display:flex;gap:8px;margin-top:16px}
-  .sharebar .share{flex:1;margin-top:0}
-  .sharebar .copy{font:inherit;font-size:15px;padding:14px 18px;border-radius:12px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;flex:none}
+  .sharebar{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .sharebar .share{flex:1 1 100%;margin-top:0}
+  .sharebar .copy{font:inherit;font-size:15px;padding:12px 16px;border-radius:12px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;flex:1 1 auto}
   /* ---- SNS 공유 띠 ---- */
   .snsbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:14px 0 0}
   .snsl{font-size:13px;color:var(--muted);flex:none}

@@ -64,7 +64,7 @@
     <div id="dims"></div>
     {% if t.crisis %}<div class="crisis"><b>{{ t.crisis.title }}</b>{{ t.crisis.html|safe }}</div>{% endif %}
     <p class="note">자기 이해를 돕는 참고용 검사이며 의학적·심리학적 진단이 아닙니다. 채용, 평가, 진로 결정의 근거로 쓰기에 적합하지 않습니다.</p>
-    <div class="sharebar"><button class="share" id="share">결과 링크 공유하기</button>{% if t.compare %}<button class="copy" id="cmpmake">둘이 비교할 링크 만들기</button>{% endif %}</div>
+    <div class="sharebar"><button class="share" id="share">결과 링크 공유하기</button><button class="copy" id="cardsave">결과 이미지 저장</button>{% if t.compare %}<button class="copy" id="cmpmake">둘이 비교할 링크 만들기</button>{% endif %}</div>
     {{ snsbar(site.url ~ "/" ~ t.slug ~ "/", t.short_name ~ " | " ~ site.name, t.short_name ~ " 결과를 봤어요 — 나도 해보기", "결과를 SNS에 올리기", id="snsres") }}
   </div>
 </div>
@@ -220,6 +220,24 @@ document.getElementById("share").onclick=function(){
   else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){toast("링크를 복사했어요");});}
   else{prompt("아래 링크를 복사하세요",url);}
 };
+document.getElementById("cardsave").onclick=function(){
+  if(!LASTSUMS)return;
+  var cs=getComputedStyle(document.body);
+  var bars=T.dims.map(function(dim,i){
+    var s=LASTSUMS[i];
+    var b=dim.bands.filter(function(x){return s<=x.max;})[0]||dim.bands[dim.bands.length-1];
+    return {label:dim.name,text:s+" / "+dim.max,pct:Math.round((s-dim.min)*100/((dim.max-dim.min)||1)),
+            color:cs.getPropertyValue("--"+(b.tone||"accent")).trim()};
+  });
+  window.resultCard({
+    title:LASTTYPE?("마음체크 · "+T.short_name):"마음체크 결과",
+    headline:LASTTYPE||T.short_name,
+    sub:LASTTYPE?"":"높고 낮음에 좋고 나쁨은 없습니다",
+    bars:bars,
+    url:"maumcheck.com"+location.pathname,
+    accent:cs.getPropertyValue("--accent").trim(),accentSoft:cs.getPropertyValue("--accent-soft").trim(),
+    fileName:"마음체크 "+T.short_name+" 결과"});
+};
 
 {% if t.compare %}
 // ── 둘이 비교하기 ─────────────────────────────────────────
@@ -293,5 +311,6 @@ function renderCompare(){}
 {% endif %}
 </script>
 {% if site.cf_beacon_token %}<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ site.cf_beacon_token }}"}'></script>{% endif %}
+<script src="{{ asset('card.js') }}"></script>
 <script src="{{ asset('share.js') }}"></script>
 </body></html>
