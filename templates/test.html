@@ -4,11 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ t.title }} | {{ site.name }}</title>
+<title>{{ t.seo_title|default(t.title) }} | {{ site.name }}</title>
 <meta name="description" content="{{ t.description }}">
 <link rel="canonical" href="{{ site.url }}/{{ t.slug }}/">
 <meta property="og:type" content="article">
-<meta property="og:title" content="{{ t.title }}">
+<meta property="og:title" content="{{ t.seo_title|default(t.title) }}">
 <meta property="og:description" content="{{ t.og_description }}">
 <meta property="og:url" content="{{ site.url }}/{{ t.slug }}/">
 <meta property="og:image" content="{{ og_image }}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{{ og_image }}">
