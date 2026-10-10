@@ -275,12 +275,18 @@ def load_plays():
 PLAY_STYLE = "--accent:#c8553d;--accent-soft:#fbe9e4"
 
 
+def play_meta(t):
+    if t.get("kind") == "game":
+        return t["card_meta"]
+    return "%d문항 · 약 %d분 · 결과 %d가지" % (len(t["questions"]), t["minutes"], len(t["types"]))
+
+
 def play_cards_html(plays):
     return '<div class="cards">' + "".join(
-        '<a class="card play" href="/%s/" style="%s"><span class="chip">마음놀이</span><b>%s</b>'
-        '<p>%s</p><small>%d문항 · 약 %d분 · 결과 %d가지</small></a>'
-        % (t["slug"], PLAY_STYLE, t["short_name"], t["og_description"],
-           len(t["questions"]), t["minutes"], len(t["types"]))
+        '<a class="card play" href="/%s/" style="%s"><span class="chip">%s</span><b>%s</b>'
+        '<p>%s</p><small>%s</small></a>'
+        % (t["slug"], PLAY_STYLE, "심리게임" if t.get("kind") == "game" else "마음놀이",
+           t["short_name"], t["og_description"], play_meta(t))
         for t in plays) + "</div>"
 
 
@@ -450,29 +456,45 @@ def main():
 
     # 마음놀이 — 재미용 유형 퀴즈. 엔진은 static/play.js.
     pltpl = env.get_template("play.html")
+    gtpl = env.get_template("game.html")
     for t in plays:
         rel = [r for r in tests if r["slug"] in t["rel"]]
         others = [o for o in plays if o["slug"] != t["slug"]][:4]
-        pj = {k: t[k] for k in ("slug", "short_name", "axes", "questions", "types", "pair")}
-        write(t["slug"], pltpl.render(
-            t=t, site=site, related=rel, others=others, ad=AD, year=year, play_style=PLAY_STYLE,
-            types_sorted=sorted(t["types"].items(), key=lambda kv: kv[0], reverse=True),
-            jsonld=task_jsonld(t), play_json=json.dumps(pj, ensure_ascii=False),
-            og_image=og_image(t["slug"].replace("/", "-"), t["short_name"], OG_PLAY,
-                              t.get("og_sub", "%d문항 · 약 %d분" % (len(t["questions"]), t["minutes"])))))
-        print(f"  놀이  /{t['slug']}/")
+        og = og_image(t["slug"].replace("/", "-"), t["short_name"].split(" — ")[0], OG_PLAY,
+                      t.get("og_sub") or play_meta(t))
+        common = dict(t=t, site=site, related=rel, others=others, ad=AD, year=year, play_style=PLAY_STYLE,
+                      jsonld=task_jsonld(t), og_image=og)
+        if t.get("kind") == "game":
+            gj = {k: t[k] for k in ("slug", "short_name", "game", "types")}
+            gj["result_k"] = t.get("result_k", "")
+            write(t["slug"], gtpl.render(game_json=json.dumps(gj, ensure_ascii=False), **common))
+            print(f"  게임  /{t['slug']}/")
+        else:
+            pj = {k: t[k] for k in ("slug", "short_name", "axes", "questions", "types", "pair")}
+            write(t["slug"], pltpl.render(
+                types_sorted=sorted(t["types"].items(), key=lambda kv: kv[0], reverse=True),
+                play_json=json.dumps(pj, ensure_ascii=False), **common))
+            print(f"  놀이  /{t['slug']}/")
     body = ['<p class="lead">검증된 척도로 재는 검사와 달리, 마음놀이는 <b>재미로 해보는 유형 퀴즈</b>입니다. '
             '문항은 마음체크가 직접 썼고 성격이나 상태를 판정하지 않습니다. 친구와 같이 해보고 서로 비교해 보세요.</p>',
-            play_cards_html(plays) if plays else ""]
+            ]
+    quizzes = [t for t in plays if t.get("kind") != "game"]
+    games = [t for t in plays if t.get("kind") == "game"]
+    if quizzes:
+        body += ["<h2>유형 퀴즈</h2>", play_cards_html(quizzes)]
+    if games:
+        body += ["<h2>심리게임</h2>", '<p>심리학과 경제학의 유명한 실험을 직접 해보는 게임입니다. 끝나면 그 실험이 무엇을 밝혔는지 알려 드립니다.</p>',
+                 play_cards_html(games)]
     if play_soon:
         body.append("<h2>곧 나오는 놀이</h2>")
         body.append('<div class="cards soon">' + "".join(
-            '<div class="card"><span class="chip">마음놀이</span><b>%s</b><small>%s 공개 예정</small></div>'
-            % (t["short_name"], t["publish"]) for t in play_soon) + "</div>")
+            '<div class="card"><span class="chip">%s</span><b>%s</b><small>%s 공개 예정</small></div>'
+            % ("심리게임" if t.get("kind") == "game" else "마음놀이", t["short_name"], t["publish"])
+            for t in play_soon) + "</div>")
     body.append('<p class="note">진짜로 재보고 싶은 주제가 있다면 <a href="/tests/">검증된 검사</a>를 해보세요.</p>')
     write("play", ptpl.render(
         site=site, year=year, slug="play", title="마음놀이",
-        description="재미로 해보는 마음놀이. 스트레스 받으면 나는 어떤 동물인지 같은 유형 퀴즈를 친구와 함께 해보고 비교해 보세요.",
+        description="재미로 해보는 마음놀이. 유형 퀴즈와 심리학 실험을 직접 해보는 심리게임을 모았습니다. 친구와 함께 해보고 비교해 보세요.",
         body="".join(body), ad=AD, cat_style=PLAY_STYLE,
         og_image=og_image("play", "마음놀이", OG_PLAY, "재미로 해보는 유형 퀴즈"),
         # 놀이가 둘 이상 쌓일 때까지는 목록만 있는 얇은 페이지라 색인에서 뺀다.

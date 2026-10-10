@@ -336,3 +336,29 @@
   @media (max-width:560px){.ptypes{grid-template-columns:1fr}.pq{font-size:18px}.pr-n{font-size:38px}}
   .top nav a{white-space:nowrap}
   @media (max-width:420px){.top nav a{margin-left:10px;font-size:13px}}
+  /* ---- 심리게임 ---- */
+  .gnote{font-size:15px;color:var(--muted);margin:0 0 14px}
+  .grule{font-size:18px;font-weight:600;margin:0 0 10px;padding:12px 14px;border-radius:10px;background:var(--accent-soft)}
+  .glast{font-size:13px;margin:0 0 10px;padding:8px 12px;border-radius:8px;background:var(--field)}
+  .gscore{display:flex;gap:16px;margin:0 0 12px;font-size:15px}
+  .gscore b{font-size:20px;color:var(--accent)}
+  .gsplit{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 16px}
+  .gs{border-radius:12px;padding:16px;text-align:center;background:var(--field)}
+  .gs.me{background:var(--accent-soft)}
+  .gs small{display:block;font-size:13px;color:var(--muted)}
+  .gs b{font-size:26px}
+  .grow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .grow.wrap{grid-template-columns:repeat(3,1fr)}
+  .grow .popt{text-align:center}
+  .gcards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 16px}
+  .gcard{font:inherit;font-size:22px;font-weight:700;aspect-ratio:3/4;border-radius:12px;border:2px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+  .gcard.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);transform:translateY(-4px)}
+  .gspin{font-size:44px;font-weight:800;text-align:center;margin:4px 0 12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .gspin.done{color:var(--accent)}
+  .ginput{font:inherit;font-size:18px;width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);margin:12px 0 4px}
+  .gerr{color:var(--danger);font-size:13px;min-height:18px;margin:0 0 6px}
+  .gstats{margin:0 0 14px}
+  .gstats th{text-align:left;font-weight:500;color:var(--muted);width:55%}
+  .gextra p{font-size:15px}
+  .gtbl{font-size:12px}
+  @media (max-width:560px){.grow.wrap{grid-template-columns:repeat(2,1fr)}.gcard{font-size:18px}.gs b{font-size:22px}}

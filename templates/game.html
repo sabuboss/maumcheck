@@ -18,33 +18,26 @@
 
 <div class="wrap">
 <div class="crumb"><a href="/">홈</a> › <a href="/play/">마음놀이</a></div>
-<span class="playtag">마음놀이 · 재미로 해보기</span>
+<span class="playtag">마음놀이 · 심리게임</span>
 <h1>{{ t.short_name }}</h1>
 <p class="lead">{{ t.lead|safe }}</p>
-<p class="meta">{{ t.questions|length }}문항 · 약 {{ t.minutes }}분 · 결과 {{ t.types|length }}가지</p>
-{{ snsbar(site.url ~ "/" ~ t.slug ~ "/", t.short_name ~ " | " ~ site.name, t.short_name ~ " — " ~ (t.questions|length) ~ "문항으로 알아보기", "이 놀이 공유하기") }}
-
-<div class="peerbar" id="peerbar" style="display:none"></div>
+<p class="meta">{{ t.card_meta }}</p>
+{{ snsbar(site.url ~ "/" ~ t.slug ~ "/", t.short_name ~ " | " ~ site.name, t.og_description, "이 놀이 공유하기") }}
 
 <div class="playbox">
   <div class="play-intro">
-    <p>더 가까운 쪽을 고르면 바로 다음으로 넘어갑니다. 정답은 없고, 요즘의 나를 떠올리면 됩니다.</p>
-    <button class="task-go" id="playstart" type="button">시작하기</button>
+    <p>{{ t.intro }}</p>
+    <button class="task-go" id="gamestart" type="button">시작하기</button>
   </div>
-  <div id="playwrap" style="display:none">
-    <div class="playtop"><span id="playhead"></span><div class="prog"><i id="playbar"></i></div></div>
-    <div id="playbox"></div>
-    <div class="playres" id="playres" style="display:none"></div>
+  <div id="gamewrap" style="display:none">
+    <div class="playtop"><span id="gamehead"></span><div class="prog"><i id="gamebar"></i></div></div>
+    <div id="gamebox"></div>
+    <div class="playres" id="gameres" style="display:none"></div>
   </div>
 </div>
 <div style="display:none">{{ snsbar(site.url ~ "/" ~ t.slug ~ "/", t.short_name ~ " | " ~ site.name, t.short_name, "결과를 SNS에 올리기", id="snsres") }}</div>
 
 {{ ad|safe }}
-
-<h2 id="all">여덟 동물 한눈에 보기</h2>
-<div class="ptypes">
-{% for k, ty in types_sorted %}<div class="ptype"><b>{{ ty.name }}</b><small>{{ ty.tag }}</small><p>{{ ty.desc }}</p></div>{% endfor %}
-</div>
 
 {% for s in t.sections %}
 <h2 id="{{ s.id }}">{{ s.title }}</h2>
@@ -64,6 +57,11 @@
 {% for f in t.faq %}<details><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>{% endfor %}
 </div>
 
+{% if t.references %}
+<h2 id="refs">참고 문헌</h2>
+<ol class="refs">{% for r in t.references %}<li>{{ r|safe }}</li>{% endfor %}</ol>
+{% endif %}
+
 {% if others %}
 <h2>다른 마음놀이</h2>
 <div class="related">
@@ -79,9 +77,9 @@
 
 <footer><a href="/about/">소개</a>·<a href="/privacy/">개인정보처리방침</a>·<a href="/contact/">문의</a><br>© {{ year }} {{ site.name }}. 마음놀이는 재미로 하는 놀이이며 성격이나 상태를 판정하지 않습니다.</footer>
 <div class="toast" id="toast"></div>
-<script>window.PLAY={{ play_json|safe }};</script>
+<script>window.GAME={{ game_json|safe }};</script>
 <script src="{{ asset('card.js') }}"></script>
-<script src="{{ asset('play.js') }}"></script>
+<script src="{{ asset('game.js') }}"></script>
 {% if site.cf_beacon_token %}<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ site.cf_beacon_token }}"}'></script>{% endif %}
 <script src="{{ asset('share.js') }}"></script>
 </body></html>
