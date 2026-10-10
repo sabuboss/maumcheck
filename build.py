@@ -274,6 +274,51 @@ def load_plays():
 
 PLAY_STYLE = "--accent:#c8553d;--accent-soft:#fbe9e4"
 
+# 마음 책장 — books.json. 검사 주제(cats)와 놀이(plays)에 맞춰 페이지마다 두 권씩 붙인다.
+BOOKS = json.loads((ROOT / "books.json").read_text(encoding="utf-8")) if (ROOT / "books.json").exists() else {"shelves": [], "books": []}
+_shelf_c = {sh["id"]: sh.get("c") for sh in BOOKS["shelves"]}
+for _b in BOOKS["books"]:
+    _b["c"] = _shelf_c.get(_b["shelf"])
+
+
+def books_for(cat=None, play=None, n=2):
+    hit = [b for b in BOOKS["books"] if (cat and cat in b["cats"]) or (play and play in b["plays"])]
+    # 주제를 좁게 잡은 책(태그가 적은 책)을 먼저
+    hit.sort(key=lambda b: len(b["cats"]) + len(b["plays"]))
+    return hit[:n]
+
+
+def write_books_page(ptpl, year, tests):
+    import urllib.parse as up
+    env_books = env.get_template("_books.html").module
+    by_slug = {t["slug"]: t for t in tests}
+    cat_first = {}
+    for t in tests:
+        cat_first.setdefault(t["category"], t)
+    body = ['<p class="lead">검사로 내 마음을 들여다봤다면, 그 주제를 더 깊이 다룬 책을 읽어 보세요. '
+            '국내에 번역되어 있고 지금 구할 수 있는 책만 골랐습니다. 소개글은 각 책이 다루는 내용을 정리한 것입니다.</p>',
+            '<div class="tnav">' + "".join('<a class="tchip" href="#%s">%s</a>' % (sh["id"], sh["name"]) for sh in BOOKS["shelves"]) + "</div>"]
+    for sh in BOOKS["shelves"]:
+        bs = [b for b in BOOKS["books"] if b["shelf"] == sh["id"]]
+        if not bs:
+            continue
+        body.append('<h2 id="%s">%s</h2><p>%s</p><div class="books">' % (sh["id"], sh["name"], sh["d"]))
+        for b in bs:
+            card = str(env_books.book_card(b))
+            rel = [cat_first[c] for c in b["cats"] if c in cat_first][:3]
+            if rel:
+                links = " · ".join('<a href="/%s/">%s</a>' % (t["slug"], t["short_name"]) for t in rel)
+                card = card.replace('<span class="blinks">', '<p class="brel">함께 해볼 검사: %s</p><span class="blinks">' % links, 1)
+            body.append(card)
+        body.append("</div>")
+    body.append('<p class="note">서점 링크는 제휴 링크가 아닌 검색 링크이며, 마음체크는 책 판매로 수익을 얻지 않습니다. '
+                '판본에 따라 출판사나 역자가 바뀔 수 있습니다.</p>')
+    write("books", ptpl.render(
+        site=site, year=year, slug="books", title="마음 책장",
+        description="심리 검사 주제별로 더 읽어볼 만한 책 %d권. 우울과 불안, 번아웃, 자존감, 성격, 관계, 습관, 판단의 함정, 행복을 다룬 국내 번역서를 모았습니다." % len(BOOKS["books"]),
+        body="".join(body), ad=AD,
+        og_image=og_image("books", "마음 책장", "마음체크 · 더 읽어볼 책", "주제별 심리학 책 %d권" % len(BOOKS["books"]))))
+
 
 def play_meta(t):
     if t.get("kind") == "game":
@@ -425,7 +470,7 @@ def main():
             t=t, site=site, related=related, ad=AD, year=year,
             cat_url=t["slug"].split("/")[0],
             jsonld=jsonld(t), tool_json=json.dumps(tool, ensure_ascii=False),
-            cat_style=cat_style(t),
+            cat_style=cat_style(t), books=books_for(cat=t["category"]),
             og_image=og_image(t["slug"].replace("/", "-"), t["short_name"], OG_TEST,
                               f"{len(t['items'])}문항 · 약 {t['minutes']}분")))
         print(f"  발행  /{t['slug']}/")
@@ -463,7 +508,7 @@ def main():
         og = og_image(t["slug"].replace("/", "-"), t["short_name"].split(" — ")[0], OG_PLAY,
                       t.get("og_sub") or play_meta(t))
         common = dict(t=t, site=site, related=rel, others=others, ad=AD, year=year, play_style=PLAY_STYLE,
-                      jsonld=task_jsonld(t), og_image=og)
+                      jsonld=task_jsonld(t), og_image=og, books=books_for(play=t["slug"]))
         if t.get("kind") == "game":
             gj = {k: t[k] for k in ("slug", "short_name", "game", "types")}
             gj["result_k"] = t.get("result_k", "")
@@ -500,6 +545,10 @@ def main():
         # 놀이가 둘 이상 쌓일 때까지는 목록만 있는 얇은 페이지라 색인에서 뺀다.
         robots=None if len(plays) >= 2 else "noindex,follow"))
 
+    if BOOKS["books"]:
+        write_books_page(ptpl, year, tests)
+        print(f"  책장  /books/  ({len(BOOKS['books'])}권)")
+
     # 읽을거리 — 검사가 아닌 글. 검사 페이지만 30장이면 틀로 찍어낸 묶음처럼 보인다.
     atpl = env.get_template("article.html")
 
@@ -509,6 +558,7 @@ def main():
     known = {t["slug"] for t in tests} | {t["slug"] for t in tasks} | pending | {a["slug"] for a in articles}
     known |= {"tests", "about", "privacy", "contact", "articles", "play"}
     known |= {t["slug"] for t in plays}
+    known |= {"books"}
 
     def resolve_links(html, where):
         for sl in pending:
@@ -621,7 +671,7 @@ def main():
     home_ld = json.dumps({"@context": "https://schema.org", "@type": "WebSite", "name": site["name"],
                           "url": site["url"], "description": site["tagline"]}, ensure_ascii=False)
     (DIST / "index.html").write_text(
-        env.get_template("home.html").render(site=site, year=year, tests=tests, plays=plays, play_cards=play_cards_html(plays[:4]), soon=sorted(soon + task_soon, key=lambda x: x["publish"]),
+        env.get_template("home.html").render(site=site, year=year, tests=tests, plays=plays, play_cards=play_cards_html(plays[:4]), book_shelves=[dict(id=sh["id"], name=sh["name"], n=sum(1 for b in BOOKS["books"] if b["shelf"] == sh["id"])) for sh in BOOKS["shelves"]], soon=sorted(soon + task_soon, key=lambda x: x["publish"]),
                                              cards=cards, themes=themes, theme_nav=theme_nav_html(themes),
                                              ad=AD, jsonld=home_ld, og_image=home_og), encoding="utf-8")
 
@@ -640,7 +690,8 @@ def main():
             + [t["slug"] for t in tasks]
             + [a["slug"] for a in articles]
             + (["play"] if len(plays) >= 2 else [])
-            + [t["slug"] for t in plays])
+            + [t["slug"] for t in plays]
+            + (["books"] if BOOKS["books"] else []))
 
     # lastmod — 구글이 무엇을 다시 크롤링할지 정하는 데 쓴다. 매일 발행하는 사이트에서는
     # 이게 없으면 새 글이 올라온 사실을 알아차리는 데 시간이 더 걸린다.

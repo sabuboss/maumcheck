@@ -1,4 +1,5 @@
 {% from "_share.html" import snsbar with context %}
+{% from "_books.html" import books_section %}
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -94,6 +95,8 @@
 </div>
 {% endif %}
 
+{{ books_section(books) }}
+
 <div class="author">
   <div class="av">{{ site.author_initial }}</div>
   <div><b>{{ site.author }}</b><p>{{ site.author_bio }} <a href="/about/">더 보기</a></p></div>
@@ -104,7 +107,7 @@
 </div>
 
 <footer>
-<a href="/about/">소개</a>·<a href="/privacy/">개인정보처리방침</a>·<a href="/contact/">문의</a><br>
+<a href="/about/">소개</a>·<a href="/books/">마음 책장</a>·<a href="/privacy/">개인정보처리방침</a>·<a href="/contact/">문의</a><br>
 © {{ year }} {{ site.name }}. 이 사이트의 검사는 참고용이며 전문적 진단을 대신하지 않습니다.
 </footer>
 <div class="toast" id="toast"></div>

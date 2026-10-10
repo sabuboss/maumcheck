@@ -44,6 +44,10 @@
 
 {{ ad|safe }}
 
+{% if book_shelves %}<h2>마음 책장 <span class="h2sub">더 읽어볼 책</span></h2>
+<div class="tnav">{% for sh in book_shelves %}<a class="tchip" href="/books/#{{ sh.id }}">{{ sh.name }} <i>{{ sh.n }}</i></a>{% endfor %}</div>
+{% endif %}
+
 <h2>이용 방법</h2>
 <ol class="steps">
   <li><b>배경을 읽습니다</b>누가 왜 만든 검사인지, 무엇을 재는지 먼저 짧게 설명합니다. 바로 검사로 건너뛰어도 됩니다.</li>
@@ -54,6 +58,6 @@
 <div class="author"><div class="av">{{ site.author_initial }}</div><div><b>{{ site.author }}</b><p>{{ site.author_bio }} <a href="/about/">더 보기</a></p></div></div>
 
 </div>
-<footer><a href="/about/">소개</a>·<a href="/privacy/">개인정보처리방침</a>·<a href="/contact/">문의</a><br>© {{ year }} {{ site.name }}. 이 사이트의 검사는 참고용이며 전문적 진단을 대신하지 않습니다.</footer>
+<footer><a href="/about/">소개</a>·<a href="/books/">마음 책장</a>·<a href="/privacy/">개인정보처리방침</a>·<a href="/contact/">문의</a><br>© {{ year }} {{ site.name }}. 이 사이트의 검사는 참고용이며 전문적 진단을 대신하지 않습니다.</footer>
 {% if site.cf_beacon_token %}<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ site.cf_beacon_token }}"}'></script>{% endif %}
 </body></html>

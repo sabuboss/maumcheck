@@ -76,7 +76,7 @@
 <ol class="refs">{% for r in t.references %}<li>{{ r|safe }}</li>{% endfor %}</ol>
 </div>
 
-<footer><a href="/about/">소개</a>·<a href="/privacy/">개인정보처리방침</a>·<a href="/contact/">문의</a><br>© {{ year }} {{ site.name }}. 이 사이트의 검사는 참고용이며 전문적 진단을 대신하지 않습니다.</footer>
+<footer><a href="/about/">소개</a>·<a href="/books/">마음 책장</a>·<a href="/privacy/">개인정보처리방침</a>·<a href="/contact/">문의</a><br>© {{ year }} {{ site.name }}. 이 사이트의 검사는 참고용이며 전문적 진단을 대신하지 않습니다.</footer>
 <script>window.TASK={{ task_json|safe }};</script>
 <script src="{{ asset('task.js') }}"></script>
 {% if site.cf_beacon_token %}<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ site.cf_beacon_token }}"}'></script>{% endif %}

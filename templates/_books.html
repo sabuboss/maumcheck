@@ -1,0 +1,29 @@
+{# 더 읽어볼 책. 서점 링크는 제휴가 아닌 검색 링크다.
+   표지: b.cover(정식 도서 API가 준 썸네일 주소)가 있으면 이미지, 없으면 책장 칸 색으로 그린 표지 카드. #}
+{% macro book_card(b) -%}
+{% set q = (b.title ~ ' ' ~ b.author.split(',')[0])|urlencode %}
+<div class="book" id="{{ b.id }}">
+  <div class="bcover" style="--bc:{{ b.c|default('#1d6f63') }}">{% if b.cover %}<img src="{{ b.cover }}" alt="{{ b.title }} 표지" loading="lazy" referrerpolicy="no-referrer">{% else %}<span class="bt">{{ b.title }}</span><span class="ba">{{ b.author.split(',')[0] }}</span>{% endif %}</div>
+  <div class="binfo">
+    <b>{{ b.title }}</b>
+    {% if b.orig %}<small class="borig">{{ b.orig }}{% if b.year %} · {{ b.year }}{% endif %}</small>{% endif %}
+    <dl class="bmeta">
+      <dt>지은이</dt><dd>{{ b.author }}</dd>
+      {% if b.tr %}<dt>옮긴이</dt><dd>{{ b.tr }}</dd>{% endif %}
+      <dt>출판</dt><dd>{% if b.pub == "여러 출판사" %}번역본 여럿{% else %}{{ b.pub }}{% if b.ed %} · {{ b.ed.replace('.', '년 ') }}월{% endif %}{% endif %}</dd>
+    </dl>
+  </div>
+  <p class="bfor">{{ b["for"] }}</p>
+  <p>{{ b.about }}</p>
+  {% if b.who %}<p class="bwho">{{ b.who }}</p>{% endif %}
+  <span class="blinks"><a href="https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=Book&amp;SearchWord={{ q }}" rel="nofollow noopener" target="_blank">알라딘에서 찾기</a><a href="https://search.kyobobook.co.kr/search?keyword={{ q }}" rel="nofollow noopener" target="_blank">교보문고에서 찾기</a></span>
+</div>
+{%- endmacro %}
+
+{% macro books_section(books) -%}
+{% if books %}
+<h2 id="books">더 읽어볼 책</h2>
+<div class="books">{% for b in books %}{{ book_card(b) }}{% endfor %}</div>
+<p class="note"><a href="/books/">마음 책장</a>에서 주제별로 더 볼 수 있습니다. 서점 링크는 제휴 링크가 아니며, 마음체크는 책 판매로 수익을 얻지 않습니다.</p>
+{% endif %}
+{%- endmacro %}

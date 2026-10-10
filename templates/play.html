@@ -1,4 +1,5 @@
 {% from "_share.html" import snsbar with context %}
+{% from "_books.html" import books_section %}
 <!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ t.seo_title|default(t.title) }} | {{ site.name }}</title><meta name="description" content="{{ t.description }}">
@@ -71,13 +72,15 @@
 </div>
 {% endif %}
 
+{{ books_section(books) }}
+
 <div class="author">
   <div class="av">{{ site.author_initial }}</div>
   <div><b>{{ site.author }}</b><p>{{ site.author_bio }} <a href="/about/">더 보기</a></p></div>
 </div>
 </div>
 
-<footer><a href="/about/">소개</a>·<a href="/privacy/">개인정보처리방침</a>·<a href="/contact/">문의</a><br>© {{ year }} {{ site.name }}. 마음놀이는 재미로 하는 놀이이며 성격이나 상태를 판정하지 않습니다.</footer>
+<footer><a href="/about/">소개</a>·<a href="/books/">마음 책장</a>·<a href="/privacy/">개인정보처리방침</a>·<a href="/contact/">문의</a><br>© {{ year }} {{ site.name }}. 마음놀이는 재미로 하는 놀이이며 성격이나 상태를 판정하지 않습니다.</footer>
 <div class="toast" id="toast"></div>
 <script>window.PLAY={{ play_json|safe }};</script>
 <script src="{{ asset('card.js') }}"></script>
