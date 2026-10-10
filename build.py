@@ -274,7 +274,7 @@ def load_plays():
 
 PLAY_STYLE = "--accent:#c8553d;--accent-soft:#fbe9e4"
 
-# 마음 책장 — books.json. 검사 주제(cats)와 놀이(plays)에 맞춰 페이지마다 두 권씩 붙인다.
+# 마음책장 — books.json. 검사 주제(cats)와 놀이(plays)에 맞춰 페이지마다 두 권씩 붙인다.
 BOOKS = json.loads((ROOT / "books.json").read_text(encoding="utf-8")) if (ROOT / "books.json").exists() else {"shelves": [], "books": []}
 _shelf_c = {sh["id"]: sh.get("c") for sh in BOOKS["shelves"]}
 for _b in BOOKS["books"]:
@@ -314,10 +314,10 @@ def write_books_page(ptpl, year, tests):
     body.append('<p class="note">서점 링크는 제휴 링크가 아닌 검색 링크이며, 마음체크는 책 판매로 수익을 얻지 않습니다. '
                 '판본에 따라 출판사나 역자가 바뀔 수 있습니다.</p>')
     write("books", ptpl.render(
-        site=site, year=year, slug="books", title="마음 책장",
+        site=site, year=year, slug="books", title="마음책장",
         description="심리 검사 주제별로 더 읽어볼 만한 책 %d권. 우울과 불안, 번아웃, 자존감, 성격, 관계, 습관, 판단의 함정, 행복을 다룬 국내 번역서를 모았습니다." % len(BOOKS["books"]),
         body="".join(body), ad=AD,
-        og_image=og_image("books", "마음 책장", "마음체크 · 더 읽어볼 책", "주제별 심리학 책 %d권" % len(BOOKS["books"]))))
+        og_image=og_image("books", "마음책장", "마음체크 · 더 읽어볼 책", "주제별 심리학 책 %d권" % len(BOOKS["books"]))))
 
 
 def play_meta(t):

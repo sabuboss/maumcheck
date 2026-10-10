@@ -362,7 +362,7 @@
   .gextra p{font-size:15px}
   .gtbl{font-size:12px}
   @media (max-width:560px){.grow.wrap{grid-template-columns:repeat(2,1fr)}.gcard{font-size:18px}.gs b{font-size:22px}}
-  /* ---- 마음 책장 ---- */
+  /* ---- 마음책장 ---- */
   .books{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
   .book{display:grid;grid-template-columns:84px 1fr;column-gap:14px;align-content:start;border:1px solid var(--line);border-radius:12px;padding:16px;font-size:14px;scroll-margin-top:16px}
   .book > p,.book > .blinks{grid-column:1/-1}
