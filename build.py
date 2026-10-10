@@ -76,7 +76,7 @@ def write_rss(tests, year):
         L.append("      <link>%s</link>" % url)
         L.append('      <guid isPermaLink="true">%s</guid>' % url)
         L.append("      <description>%s</description>" % escape(t["description"]))
-        L.append("      <category>%s</category>" % escape(t["category"]))
+        L.append("      <category>%s</category>" % escape(t.get("category", "마음놀이")))
         L.append("      <pubDate>%s</pubDate>" % rfc822(datetime.date.fromisoformat(t["publish"])))
         L.append("    </item>")
     L.append("  </channel>")
@@ -251,6 +251,39 @@ def load_tasks():
     return out, soon
 
 
+def load_plays():
+    """plays/*.json — 마음놀이. 검증된 척도가 아니라 우리가 직접 쓴 재미용 유형 퀴즈.
+    검사와 섞이지 않게 갈래·주제에 넣지 않고 /play/ 아래에 따로 둔다."""
+    out, soon = [], []
+    d = ROOT / "plays"
+    if not d.exists():
+        return out, soon
+    for p in sorted(d.glob("*.json")):
+        t = json.loads(p.read_text(encoding="utf-8"))
+        t["rel"] = [x.strip() for x in t.get("related", "").split(",") if x.strip()]
+        pub = datetime.date.fromisoformat(t["publish"])
+        if PUBLISH_ALL or pub <= TODAY:
+            out.append(t)
+        else:
+            soon.append(t)
+            print(f"  (예약) [놀이] {t['short_name']} → {pub}")
+    out.sort(key=lambda t: t["publish"], reverse=True)
+    soon.sort(key=lambda t: t["publish"])
+    return out, soon
+
+
+PLAY_STYLE = "--accent:#c8553d;--accent-soft:#fbe9e4"
+
+
+def play_cards_html(plays):
+    return '<div class="cards">' + "".join(
+        '<a class="card play" href="/%s/" style="%s"><span class="chip">마음놀이</span><b>%s</b>'
+        '<p>%s</p><small>%d문항 · 약 %d분 · 결과 %d가지</small></a>'
+        % (t["slug"], PLAY_STYLE, t["short_name"], t["og_description"],
+           len(t["questions"]), t["minutes"], len(t["types"]))
+        for t in plays) + "</div>"
+
+
 def task_jsonld(t):
     url = f"{site['url']}/{t['slug']}/"
     return json.dumps({
@@ -329,6 +362,7 @@ def og_image(key, title, tag, sub, max_lines=2):
 
 
 OG_TEST, OG_TASK, OG_ART = "마음체크 · 무료 심리검사", "마음체크 · 인지 과제", "마음체크 · 읽을거리"
+OG_PLAY = "마음체크 · 마음놀이"
 
 
 def main():
@@ -340,6 +374,7 @@ def main():
     tests, soon = load_tests()
     articles, art_soon = load_articles()
     tasks, task_soon = load_tasks()
+    plays, play_soon = load_plays()
     year = TODAY.year
     # 홈 그림은 고정 페이지(소개·문의 등)에서도 같이 쓴다.
     home_og = og_image("home", site["name"], site["tagline"],
@@ -413,6 +448,36 @@ def main():
                               f"직접 해보는 과제 · 약 {t['minutes']}분")))
         print(f"  과제  /{t['slug']}/")
 
+    # 마음놀이 — 재미용 유형 퀴즈. 엔진은 static/play.js.
+    pltpl = env.get_template("play.html")
+    for t in plays:
+        rel = [r for r in tests if r["slug"] in t["rel"]]
+        others = [o for o in plays if o["slug"] != t["slug"]][:4]
+        pj = {k: t[k] for k in ("slug", "short_name", "axes", "questions", "types", "pair")}
+        write(t["slug"], pltpl.render(
+            t=t, site=site, related=rel, others=others, ad=AD, year=year, play_style=PLAY_STYLE,
+            types_sorted=sorted(t["types"].items(), key=lambda kv: kv[0], reverse=True),
+            jsonld=task_jsonld(t), play_json=json.dumps(pj, ensure_ascii=False),
+            og_image=og_image(t["slug"].replace("/", "-"), t["short_name"], OG_PLAY,
+                              t.get("og_sub", "%d문항 · 약 %d분" % (len(t["questions"]), t["minutes"])))))
+        print(f"  놀이  /{t['slug']}/")
+    body = ['<p class="lead">검증된 척도로 재는 검사와 달리, 마음놀이는 <b>재미로 해보는 유형 퀴즈</b>입니다. '
+            '문항은 마음체크가 직접 썼고 성격이나 상태를 판정하지 않습니다. 친구와 같이 해보고 서로 비교해 보세요.</p>',
+            play_cards_html(plays) if plays else ""]
+    if play_soon:
+        body.append("<h2>곧 나오는 놀이</h2>")
+        body.append('<div class="cards soon">' + "".join(
+            '<div class="card"><span class="chip">마음놀이</span><b>%s</b><small>%s 공개 예정</small></div>'
+            % (t["short_name"], t["publish"]) for t in play_soon) + "</div>")
+    body.append('<p class="note">진짜로 재보고 싶은 주제가 있다면 <a href="/tests/">검증된 검사</a>를 해보세요.</p>')
+    write("play", ptpl.render(
+        site=site, year=year, slug="play", title="마음놀이",
+        description="재미로 해보는 마음놀이. 스트레스 받으면 나는 어떤 동물인지 같은 유형 퀴즈를 친구와 함께 해보고 비교해 보세요.",
+        body="".join(body), ad=AD, cat_style=PLAY_STYLE,
+        og_image=og_image("play", "마음놀이", OG_PLAY, "재미로 해보는 유형 퀴즈"),
+        # 놀이가 둘 이상 쌓일 때까지는 목록만 있는 얇은 페이지라 색인에서 뺀다.
+        robots=None if len(plays) >= 2 else "noindex,follow"))
+
     # 읽을거리 — 검사가 아닌 글. 검사 페이지만 30장이면 틀로 찍어낸 묶음처럼 보인다.
     atpl = env.get_template("article.html")
 
@@ -420,7 +485,8 @@ def main():
     # 링크를 지우는 대신 <a>만 벗겨 두고, 그 검사가 발행되면 자동으로 링크가 살아난다.
     pending = {t["slug"] for t in soon} | {t["slug"] for t in task_soon}
     known = {t["slug"] for t in tests} | {t["slug"] for t in tasks} | pending | {a["slug"] for a in articles}
-    known |= {"tests", "about", "privacy", "contact", "articles"}
+    known |= {"tests", "about", "privacy", "contact", "articles", "play"}
+    known |= {t["slug"] for t in plays}
 
     def resolve_links(html, where):
         for sl in pending:
@@ -533,7 +599,7 @@ def main():
     home_ld = json.dumps({"@context": "https://schema.org", "@type": "WebSite", "name": site["name"],
                           "url": site["url"], "description": site["tagline"]}, ensure_ascii=False)
     (DIST / "index.html").write_text(
-        env.get_template("home.html").render(site=site, year=year, tests=tests, soon=sorted(soon + task_soon, key=lambda x: x["publish"]),
+        env.get_template("home.html").render(site=site, year=year, tests=tests, plays=plays, play_cards=play_cards_html(plays[:4]), soon=sorted(soon + task_soon, key=lambda x: x["publish"]),
                                              cards=cards, themes=themes, theme_nav=theme_nav_html(themes),
                                              ad=AD, jsonld=home_ld, og_image=home_og), encoding="utf-8")
 
@@ -542,7 +608,7 @@ def main():
     (DIST / "404.html").write_text(
         env.get_template("404.html").render(site=site, year=year, tests=tests, cards=cards), encoding="utf-8")
 
-    write_rss(tests + tasks + articles, year)
+    write_rss(tests + tasks + articles + plays, year)
 
     # sitemap / robots
     urls = ([""] + ["tests", "about", "privacy", "contact"]
@@ -550,7 +616,9 @@ def main():
             + [k for k, _, _ in themes]
             + [pre for _, pre in indexed_cats] + [t["slug"] for t in tests]
             + [t["slug"] for t in tasks]
-            + [a["slug"] for a in articles])
+            + [a["slug"] for a in articles]
+            + (["play"] if len(plays) >= 2 else [])
+            + [t["slug"] for t in plays])
 
     # lastmod — 구글이 무엇을 다시 크롤링할지 정하는 데 쓴다. 매일 발행하는 사이트에서는
     # 이게 없으면 새 글이 올라온 사실을 알아차리는 데 시간이 더 걸린다.
@@ -569,6 +637,10 @@ def main():
         lm[t["slug"]] = t["publish"]
     for a in articles:
         lm[a["slug"]] = a.get("updated", a["publish"])
+    for t in plays:
+        lm[t["slug"]] = t["publish"]
+    if plays:
+        lm["play"] = max(t["publish"] for t in plays)
     if articles:
         lm["articles"] = max(a.get("updated", a["publish"]) for a in articles)
 
