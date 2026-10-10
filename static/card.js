@@ -109,7 +109,7 @@
     // 바닥: 주소 + 나도 해보기
     roundRect(ctx, 0, H - 170, W, 170, 0, soft);
     ctx.font = "700 34px " + FONT; center(ctx, "나도 해보기 →  " + (d.url || "maumcheck.com"), H - 95, accent);
-    ctx.font = "500 26px " + FONT; center(ctx, "마음체크 · 참고용 자기 이해 도구, 진단이 아닙니다", H - 48, GREY);
+    ctx.font = "500 26px " + FONT; center(ctx, d.footer || "마음체크 · 참고용 자기 이해 도구, 진단이 아닙니다", H - 48, GREY);
     return c;
   }
 
