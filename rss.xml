@@ -5,9 +5,25 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Sat, 10 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 11 Oct 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>미적 감수성 검사 — 10문항으로 보는 아름다움에 반응하는 정도</title>
+      <link>https://maumcheck.com/aesthetics/artistic/</link>
+      <guid isPermaLink="true">https://maumcheck.com/aesthetics/artistic/</guid>
+      <description>예술과 아름다움에 얼마나 마음이 가는지를 재는 검사입니다. 감수성이 곧 창의성은 아니라는 것, 이 척도의 문항이 왜 취향에 치우쳐 있는지까지 정리했습니다.</description>
+      <category>감수성</category>
+      <pubDate>Sun, 11 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>믿을까 배신할까 — 컴퓨터와 10라운드, 나는 끝까지 믿는 사람일까 (죄수의 딜레마)</title>
+      <link>https://maumcheck.com/play/trust-game/</link>
+      <guid isPermaLink="true">https://maumcheck.com/play/trust-game/</guid>
+      <description>둘 다 믿으면 3점씩, 한쪽만 배신하면 배신한 쪽이 5점. 컴퓨터와 여러 라운드를 하며 내가 먼저 손을 내미는지, 등을 돌리는지, 돌아온 상대를 용서하는지 확인해 봅니다.</description>
+      <category>마음놀이</category>
+      <pubDate>Sun, 11 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>겸손 검사 — 10문항으로 보는 자기를 내세우는 정도</title>
       <link>https://maumcheck.com/modesty/humility/</link>
@@ -151,22 +167,6 @@
       <description>완벽을 요구하는 정도를 재는 검사입니다. 완벽주의가 왜 장점이자 부담인지, 나를 향한 완벽주의와 남을 향한 완벽주의가 어떻게 다른지, 점수를 어떻게 읽어야 하는지까지 정리했습니다.</description>
       <category>완벽주의</category>
       <pubDate>Sat, 26 Sep 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>자기효능감 검사 — 10문항으로 보는 해낼 수 있다는 믿음</title>
-      <link>https://maumcheck.com/self-efficacy/competence/</link>
-      <guid isPermaLink="true">https://maumcheck.com/self-efficacy/competence/</guid>
-      <description>일을 잘 해낼 수 있다는 자신에 대한 믿음을 재는 검사입니다. 자존감과 무엇이 다른지, 이 믿음이 어디서 자라는지, 점수를 어떻게 읽어야 하는지까지 정리했습니다.</description>
-      <category>자기효능감</category>
-      <pubDate>Fri, 25 Sep 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>분노 성향 검사 — 10문항으로 보는 얼마나 쉽게 화가 나는가</title>
-      <link>https://maumcheck.com/anger/irritability/</link>
-      <guid isPermaLink="true">https://maumcheck.com/anger/irritability/</guid>
-      <description>화가 얼마나 쉽게, 얼마나 자주 올라오는지를 재는 검사입니다. 분노가 왜 나쁜 감정이 아닌지, 참는 것이 왜 답이 아닌지, 점수를 어떻게 읽어야 하는지까지 정리했습니다.</description>
-      <category>분노</category>
-      <pubDate>Thu, 24 Sep 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>
