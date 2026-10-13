@@ -42,7 +42,7 @@
 
 {{ ad|safe }}
 
-<h2 id="all">여덟 동물 한눈에 보기</h2>
+<h2 id="all">{{ t.types_title|default("결과 여덟 가지 한눈에 보기") }}</h2>
 <div class="ptypes">
 {% for k, ty in types_sorted %}<div class="ptype"><b>{{ ty.name }}</b><small>{{ ty.tag }}</small><p>{{ ty.desc }}</p></div>{% endfor %}
 </div>
