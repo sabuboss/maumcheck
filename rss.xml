@@ -5,9 +5,25 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Mon, 12 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 13 Oct 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>숫자 폭 과제 — 몇 자리까지 붙잡아 둘 수 있나, 거꾸로는 몇 자리인가</title>
+      <link>https://maumcheck.com/memory-span/digits/</link>
+      <guid isPermaLink="true">https://maumcheck.com/memory-span/digits/</guid>
+      <description>숫자가 하나씩 나타났다 사라지면 순서대로, 그다음엔 거꾸로 입력하는 1887년 과제입니다. 정순과 역순이 서로 다른 것을 재는 이유, 왜 7이 기준이 아닌지, 왜 문항을 매번 새로 만드는지 정리했습니다.</description>
+      <category>기억폭</category>
+      <pubDate>Tue, 13 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
+    <item>
+      <title>카드 4장 문제 — 열에 아홉이 틀리는 논리 퍼즐, 그런데 술과 나이로 바꾸면 (웨이슨 선택 과제)</title>
+      <link>https://maumcheck.com/play/four-cards/</link>
+      <guid isPermaLink="true">https://maumcheck.com/play/four-cards/</guid>
+      <description>카드 네 장 중 규칙을 확인하려면 어떤 카드를 뒤집어야 할까요. 대학생도 열에 하나만 맞히는 문제인데, 같은 구조를 술과 나이로 바꾸면 갑자기 쉬워집니다. 두 문제를 직접 풀어 봅니다.</description>
+      <category>마음놀이</category>
+      <pubDate>Tue, 13 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>단순 반응시간 과제 — 신호를 보고 누르기까지 몇 밀리초가 걸리나</title>
       <link>https://maumcheck.com/reaction/simple/</link>
@@ -151,22 +167,6 @@
       <description>다른 사람의 어려움에 마음이 얼마나 움직이는지를 재는 검사입니다. 공감에는 세 가지 다른 축이 있고 이 검사는 그중 하나만 잽니다. 높은 점수의 대가인 공감 피로까지 함께 다룹니다.</description>
       <category>공감</category>
       <pubDate>Tue, 29 Sep 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>심리 척도의 저작권 — 무료인 것, 아닌 것, 무료인 줄 알았던 것</title>
-      <link>https://maumcheck.com/articles/scale-licenses/</link>
-      <guid isPermaLink="true">https://maumcheck.com/articles/scale-licenses/</guid>
-      <description>심리검사 문항을 웹사이트나 블로그에 옮겨도 되는지 원 출처에서 하나씩 확인한 기록입니다. 자유롭게 쓸 수 있는 척도 여덟 가지와, 무료로 알려졌지만 실제로는 조건이 붙는 네 가지를 정리했습니다.</description>
-      <category>읽을거리</category>
-      <pubDate>Tue, 29 Sep 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>낙관·희망 검사 — 8문항으로 보는 앞날을 대하는 태도</title>
-      <link>https://maumcheck.com/optimism/hope/</link>
-      <guid isPermaLink="true">https://maumcheck.com/optimism/hope/</guid>
-      <description>앞일을 어떻게 내다보는지를 재는 8문항 검사입니다. 낙관이 늘 정답은 아니라는 것, 최악을 예상하는 방식이 어떤 사람에게는 더 잘 작동한다는 것까지 함께 정리했습니다.</description>
-      <category>낙관</category>
-      <pubDate>Mon, 28 Sep 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>
