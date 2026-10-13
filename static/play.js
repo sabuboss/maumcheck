@@ -85,7 +85,7 @@
     res.innerHTML = "";
     res.style.display = "block";
 
-    res.appendChild(el("p", "pr-k", "스트레스 받으면 나는"));
+    res.appendChild(el("p", "pr-k", P.result_k || "나는"));
     res.appendChild(el("b", "pr-n", ty.name));
     res.appendChild(el("p", "pr-t", ty.tag));
     res.appendChild(el("p", "pr-d", ty.desc));
@@ -162,7 +162,7 @@
 
     var sr = document.getElementById("snsres");
     if (sr) {
-      sr.setAttribute("data-text", "스트레스 받으면 나는 " + ty.name + " — 너는 어떤 동물?");
+      sr.setAttribute("data-text", (P.share_text || "나는 {name} — 너는?").replace("{name}", ty.name));
       sr.style.display = "";
       res.appendChild(sr);
     }
