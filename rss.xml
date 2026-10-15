@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Wed, 14 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 15 Oct 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>책임감 검사 — 10문항으로 보는 약속과 규칙을 지키는 정도</title>
+      <link>https://maumcheck.com/dutifulness/rules/</link>
+      <guid isPermaLink="true">https://maumcheck.com/dutifulness/rules/</guid>
+      <description>한 말을 지키고, 정해진 것을 따르고, 맡은 몫을 남에게 넘기지 않는 정도를 재는 검사입니다. 책임감이 높을 때 생기는 비용과, 낮게 나왔을 때 실제로 무엇이 다른지를 정리했습니다.</description>
+      <category>책임감</category>
+      <pubDate>Thu, 15 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>스트룹 과제 — 글자를 읽지 말고 색을 고르기, 1935년부터 쓰인 간섭 실험</title>
       <link>https://maumcheck.com/stroop/color-word/</link>
@@ -159,14 +167,6 @@
       <description>물건을 제자리에 두는 정도와 어수선함을 견디는 정도를 재는 검사입니다. 정돈이 성실함과 다른 이유, 아주 높은 점수에도 비용이 붙는 이유, 같이 사는 사람과 왜 부딪히는지를 정리했습니다.</description>
       <category>정돈</category>
       <pubDate>Mon, 05 Oct 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>신뢰 검사 — 10문항으로 보는 사람을 믿는 정도</title>
-      <link>https://maumcheck.com/trust/others/</link>
-      <guid isPermaLink="true">https://maumcheck.com/trust/others/</guid>
-      <description>처음 만난 사람을 어느 쪽으로 가정하는지를 재는 검사입니다. 잘 믿는 사람이 잘 속는 사람은 아니라는 연구, 한국인의 점수가 낮게 나오는 이유까지 함께 정리했습니다.</description>
-      <category>신뢰</category>
-      <pubDate>Sun, 04 Oct 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>
