@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Fri, 16 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 17 Oct 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>지적 호기심 검사 — 10문항으로 보는 어려운 생각을 즐기는 정도</title>
+      <link>https://maumcheck.com/intellect/curiosity/</link>
+      <guid isPermaLink="true">https://maumcheck.com/intellect/curiosity/</guid>
+      <description>복잡한 문제, 추상적인 생각, 어려운 글을 얼마나 즐기는지를 재는 검사입니다. 이 점수가 지능이 아니라 취향이라는 점과, 낮게 나왔을 때 무엇을 뜻하고 무엇을 뜻하지 않는지를 정리했습니다.</description>
+      <category>지적 호기심</category>
+      <pubDate>Sat, 17 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>쾌활함 검사 — 10문항으로 보는 잘 웃고 즐거워하는 정도</title>
       <link>https://maumcheck.com/cheerfulness/joy/</link>
@@ -159,14 +167,6 @@
       <description>사람과 얼마나 빨리, 얼마나 따뜻하게 가까워지는지를 재는 검사입니다. 친화력이 사교성과 어떻게 다른지, 늦게 친해지는 것이 왜 차가움이 아닌지 정리했습니다.</description>
       <category>친화력</category>
       <pubDate>Wed, 07 Oct 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>16유형 성격 검사 — 네 글자로 나오는 유형, 공공영역 문항으로</title>
-      <link>https://maumcheck.com/personality/16-types/</link>
-      <guid isPermaLink="true">https://maumcheck.com/personality/16-types/</guid>
-      <description>네 글자 유형이 나오는 40문항 검사입니다. 널리 알려진 그 검사는 저작권이 있어 쓸 수 없어서, 공공영역 빅파이브 문항으로 같은 네 축을 쟀습니다. 왜 그렇게 해도 되는지, 유형이 왜 다시 하면 바뀌는지까지 정리했습니다.</description>
-      <category>성격</category>
-      <pubDate>Tue, 06 Oct 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>
