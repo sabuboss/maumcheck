@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Sat, 17 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 18 Oct 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>신중함 검사 — 10문항으로 보는 생각하고 움직이는지, 움직이고 생각하는지</title>
+      <link>https://maumcheck.com/cautiousness/deliberation/</link>
+      <guid isPermaLink="true">https://maumcheck.com/cautiousness/deliberation/</guid>
+      <description>결정하기 전에 얼마나 생각하는지, 충동적으로 뛰어드는지를 재는 검사입니다. 양 끝에 각각 다른 비용이 붙는다는 점과, 신중함과 우유부단을 어떻게 구분하는지를 정리했습니다.</description>
+      <category>신중함</category>
+      <pubDate>Sun, 18 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>지적 호기심 검사 — 10문항으로 보는 어려운 생각을 즐기는 정도</title>
       <link>https://maumcheck.com/intellect/curiosity/</link>
@@ -159,14 +167,6 @@
       <description>목표를 향해 얼마나 밀고 나가는지를 재는 검사입니다. 열심히 하는 것과 잘 해내는 것이 왜 다른지, 이 점수가 높을 때 번아웃으로 가는 길목이 어디인지 정리했습니다.</description>
       <category>성취</category>
       <pubDate>Thu, 08 Oct 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>친화력 검사 — 10문항으로 보는 사람과 가까워지는 속도</title>
-      <link>https://maumcheck.com/friendliness/warmth/</link>
-      <guid isPermaLink="true">https://maumcheck.com/friendliness/warmth/</guid>
-      <description>사람과 얼마나 빨리, 얼마나 따뜻하게 가까워지는지를 재는 검사입니다. 친화력이 사교성과 어떻게 다른지, 늦게 친해지는 것이 왜 차가움이 아닌지 정리했습니다.</description>
-      <category>친화력</category>
-      <pubDate>Wed, 07 Oct 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>
