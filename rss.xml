@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Sun, 18 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 19 Oct 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>활동성 검사 — 10문항으로 보는 바쁘게 사는지 천천히 사는지</title>
+      <link>https://maumcheck.com/activity/pace/</link>
+      <guid isPermaLink="true">https://maumcheck.com/activity/pace/</guid>
+      <description>늘 바쁘게 움직이는지, 여유 있게 가는지, 여러 일을 한꺼번에 다루는지를 재는 검사입니다. 활동성이 곧 부지런함이 아니라는 점과, 높은 쪽이 번아웃과 어떻게 이어지는지를 정리했습니다.</description>
+      <category>활동성</category>
+      <pubDate>Mon, 19 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>신중함 검사 — 10문항으로 보는 생각하고 움직이는지, 움직이고 생각하는지</title>
       <link>https://maumcheck.com/cautiousness/deliberation/</link>
@@ -159,14 +167,6 @@
       <description>새로움과 자극을 얼마나 찾아다니는지를 재는 검사입니다. 이 성향이 나이가 들면서 왜 낮아지는지, 문항이 한국 상황에서 왜 세게 느껴지는지까지 정리했습니다.</description>
       <category>자극추구</category>
       <pubDate>Fri, 09 Oct 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>성취 욕구 검사 — 10문항으로 보는 더 잘하고 싶은 마음의 크기</title>
-      <link>https://maumcheck.com/achievement/striving/</link>
-      <guid isPermaLink="true">https://maumcheck.com/achievement/striving/</guid>
-      <description>목표를 향해 얼마나 밀고 나가는지를 재는 검사입니다. 열심히 하는 것과 잘 해내는 것이 왜 다른지, 이 점수가 높을 때 번아웃으로 가는 길목이 어디인지 정리했습니다.</description>
-      <category>성취</category>
-      <pubDate>Thu, 08 Oct 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>
