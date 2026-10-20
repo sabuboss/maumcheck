@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Mon, 19 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 20 Oct 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>모험심 검사 — 10문항으로 보는 새로운 것과 익숙한 것 사이의 내 자리</title>
+      <link>https://maumcheck.com/adventurousness/novelty/</link>
+      <guid isPermaLink="true">https://maumcheck.com/adventurousness/novelty/</guid>
+      <description>새로운 장소, 새로운 음식, 새로운 방식을 얼마나 찾는지, 익숙한 것을 얼마나 지키는지를 재는 검사입니다. 모험심과 자극 추구가 어떻게 다른지, 익숙함을 지키는 쪽의 강점은 무엇인지 정리했습니다.</description>
+      <category>모험심</category>
+      <pubDate>Tue, 20 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>활동성 검사 — 10문항으로 보는 바쁘게 사는지 천천히 사는지</title>
       <link>https://maumcheck.com/activity/pace/</link>
@@ -159,14 +167,6 @@
       <description>스트레스가 몰려올 때 부딪히는지 물러서는지, 혼자 있는지 사람을 찾는지, 바로 터뜨리는지 삭이는지. 세 갈래로 나눠 여덟 동물 중 하나를 골라 드립니다. 재미로 하는 놀이입니다.</description>
       <category>마음놀이</category>
       <pubDate>Sat, 10 Oct 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>자극 추구 검사 — 10문항으로 보는 지루함을 견디는 정도</title>
-      <link>https://maumcheck.com/excitement/seeking/</link>
-      <guid isPermaLink="true">https://maumcheck.com/excitement/seeking/</guid>
-      <description>새로움과 자극을 얼마나 찾아다니는지를 재는 검사입니다. 이 성향이 나이가 들면서 왜 낮아지는지, 문항이 한국 상황에서 왜 세게 느껴지는지까지 정리했습니다.</description>
-      <category>자극추구</category>
-      <pubDate>Fri, 09 Oct 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>
