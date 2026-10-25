@@ -347,7 +347,60 @@
     round();
   }
 
-  var RUN = { ultimatum: ultimatum, prisoner: prisoner, delay: delay, wason: wason, anchor: anchor };
+  // ---------- 6. 같은 문제, 다른 선택 (틀 효과) ----------
+  // 두 쌍(전염병, 돈)을 얻는 말·잃는 말로 한 번씩 묻는다. 쌍 안의 두 문제는 결과가 같다.
+  function framing() {
+    var Q = [
+      { pair: 0, frame: "gain", q: "600명이 걸린 전염병이 돌고 있습니다. 두 가지 대책 중 하나를 고르세요.",
+        safe: "A안: <b>200명을 살린다</b>", risk: "B안: 3분의 1 확률로 <b>600명 모두 살리고</b>, 3분의 2 확률로 아무도 못 살린다" },
+      { pair: 1, frame: "loss", q: "용돈으로 <b>20만 원</b>을 받았습니다. 이제 둘 중 하나를 고르세요.",
+        safe: "A: <b>확실히 5만 원을 돌려준다</b>", risk: "B: 동전을 던져 앞면이면 <b>10만 원을 돌려주고</b>, 뒷면이면 하나도 안 돌려준다" },
+      { pair: 0, frame: "loss", q: "또 다른 600명이 걸린 전염병이 돌고 있습니다. 두 가지 대책 중 하나를 고르세요.",
+        safe: "C안: <b>400명이 죽는다</b>", risk: "D안: 3분의 1 확률로 <b>아무도 죽지 않고</b>, 3분의 2 확률로 600명 모두 죽는다" },
+      { pair: 1, frame: "gain", q: "용돈으로 <b>10만 원</b>을 받았습니다. 이제 둘 중 하나를 고르세요.",
+        safe: "A: <b>확실히 5만 원을 더 받는다</b>", risk: "B: 동전을 던져 앞면이면 <b>10만 원을 더 받고</b>, 뒷면이면 하나도 못 받는다" }
+    ];
+    var k = 0, pick = [];
+    function round() {
+      if (k >= Q.length) return done();
+      progress(k, Q.length);
+      clear();
+      var q = Q[k];
+      stage.appendChild(el("p", "pq", q.q));
+      var row = el("div", "popts");
+      row.appendChild(btn(q.safe, "popt", function () { pick.push("safe"); k++; wait(150, round); }));
+      row.appendChild(btn(q.risk, "popt", function () { pick.push("risk"); k++; wait(150, round); }));
+      stage.appendChild(row);
+    }
+    function done() {
+      var name = ["전염병", "돈"];
+      var res2 = [0, 1].map(function (p) {
+        var g = pick[Q.findIndex(function (q) { return q.pair === p && q.frame === "gain"; })];
+        var l = pick[Q.findIndex(function (q) { return q.pair === p && q.frame === "loss"; })];
+        return { name: name[p], g: g, l: l, kind: g === l ? "same" : (g === "safe" ? "framed" : "reverse") };
+      });
+      var framed = res2.filter(function (r) { return r.kind === "framed"; }).length;
+      var same = res2.filter(function (r) { return r.kind === "same"; }).length;
+      var key = same === 2 ? "steady" : framed === 2 ? "framed" : framed === 1 ? "half" : (same === 1 ? "half" : "reverse");
+      var t = { safe: "확실한 쪽", risk: "모험하는 쪽" };
+      var rows = res2.map(function (r) {
+        return "<tr><td>" + r.name + "</td><td>" + t[r.g] + "</td><td>" + t[r.l] + "</td><td>" +
+          (r.kind === "same" ? "같은 선택" : r.kind === "framed" ? "틀에 끌림" : "반대로 바뀜") + "</td></tr>";
+      }).join("");
+      var extra = "<table class=\"tbl gtbl\"><tr><th>문제</th><th>얻는 말로 물었을 때</th><th>잃는 말로 물었을 때</th><th></th></tr>" + rows + "</table>" +
+        "<p><b>비밀은 이렇습니다.</b> 네 문제는 두 쌍이었고, 쌍 안의 두 문제는 결과가 완전히 같습니다. 600명 중 \"200명을 살린다\"는 \"400명이 죽는다\"와 같고, 20만 원에서 5만 원을 돌려주는 것과 10만 원에서 5만 원을 더 받는 것은 둘 다 15만 원입니다. 다른 건 말뿐이었습니다.</p>" +
+        "<p>사람은 <b>얻는다는 말 앞에서는 확실한 쪽</b>을, <b>잃는다는 말 앞에서는 모험하는 쪽</b>을 고르는 경향이 있습니다. 원래 실험에서는 서로 다른 사람에게 한 버전씩만 보여 줬는데, \"살린다\"로 물으면 72%가 확실한 쪽을, \"죽는다\"로 물으면 78%가 모험하는 쪽을 골랐습니다.</p>";
+      finish({
+        key: key,
+        stats: [["말이 바뀌어도 같은 선택", same + " / 2쌍"], ["틀에 끌린 쌍", framed + " / 2쌍"]],
+        extra: extra,
+        card_note: "말이 바뀌어도 같은 선택 " + same + " / 2쌍"
+      });
+    }
+    round();
+  }
+
+  var RUN = { ultimatum: ultimatum, prisoner: prisoner, delay: delay, wason: wason, anchor: anchor, framing: framing };
   function start() {
     res.style.display = "none";
     stage.style.display = "block";
