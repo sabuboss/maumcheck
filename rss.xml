@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Sun, 25 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 26 Oct 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>친구 사이에서 나는 어떤 역할? — 9문항으로 보는 내 친구 모임 포지션</title>
+      <link>https://maumcheck.com/play/friend-role/</link>
+      <guid isPermaLink="true">https://maumcheck.com/play/friend-role/</guid>
+      <description>모임을 이끄는지 따라가는지, 말하는 쪽인지 들어주는 쪽인지, 연락과 생일을 챙기는지 자유로운지. 세 갈래로 나눠 여덟 친구 역할 중 하나를 골라 드립니다. 재미로 하는 놀이입니다.</description>
+      <category>마음놀이</category>
+      <pubDate>Mon, 26 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>상상력 검사 — 10문항으로 보는 공상과 딴생각에 빠지는 정도</title>
       <link>https://maumcheck.com/imagination/fantasy/</link>
@@ -158,14 +166,6 @@
       <guid isPermaLink="true">https://maumcheck.com/modesty/humility/</guid>
       <description>자기를 얼마나 드러내고 얼마나 낮추는지를 재는 검사입니다. 겸손이 미덕인 문화에서 이 점수가 왜 높게 나오는지, 겸손과 자기 저평가를 어떻게 구분하는지 정리했습니다.</description>
       <category>겸손</category>
-      <pubDate>Sat, 10 Oct 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>나누기 게임 — 1만 원을 나눌 때 얼마부터 거절하나 (최후통첩 게임)</title>
-      <link>https://maumcheck.com/play/split-game/</link>
-      <guid isPermaLink="true">https://maumcheck.com/play/split-game/</guid>
-      <description>상대가 1만 원을 나눠 주는데, 거절하면 둘 다 0원. 계산으로는 1원이라도 받는 게 이득인데 사람들은 왜 거절할까요. 경제학과 심리학의 유명한 실험을 직접 해봅니다.</description>
-      <category>마음놀이</category>
       <pubDate>Sat, 10 Oct 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
