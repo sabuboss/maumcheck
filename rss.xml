@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Mon, 26 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 27 Oct 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>자꾸 미루는 이유 — 게으름이 아니라 기분의 문제입니다</title>
+      <link>https://maumcheck.com/articles/procrastination/</link>
+      <guid isPermaLink="true">https://maumcheck.com/articles/procrastination/</guid>
+      <description>할 일을 알면서도 미루는 건 시간 관리를 못해서가 아니라, 그 일이 주는 불편한 기분을 피하려는 것이라는 연구가 많습니다. 미루기가 왜 생기는지, 미루면 정말 편한지, 연구로 효과가 확인된 방법은 무엇인지 정리했습니다.</description>
+      <category>읽을거리</category>
+      <pubDate>Tue, 27 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>친구 사이에서 나는 어떤 역할? — 9문항으로 보는 내 친구 모임 포지션</title>
       <link>https://maumcheck.com/play/friend-role/</link>
@@ -159,14 +167,6 @@
       <description>둘 다 믿으면 3점씩, 한쪽만 배신하면 배신한 쪽이 5점. 컴퓨터와 여러 라운드를 하며 내가 먼저 손을 내미는지, 등을 돌리는지, 돌아온 상대를 용서하는지 확인해 봅니다.</description>
       <category>마음놀이</category>
       <pubDate>Sun, 11 Oct 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>겸손 검사 — 10문항으로 보는 자기를 내세우는 정도</title>
-      <link>https://maumcheck.com/modesty/humility/</link>
-      <guid isPermaLink="true">https://maumcheck.com/modesty/humility/</guid>
-      <description>자기를 얼마나 드러내고 얼마나 낮추는지를 재는 검사입니다. 겸손이 미덕인 문화에서 이 점수가 왜 높게 나오는지, 겸손과 자기 저평가를 어떻게 구분하는지 정리했습니다.</description>
-      <category>겸손</category>
-      <pubDate>Sat, 10 Oct 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>
