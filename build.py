@@ -516,7 +516,7 @@ def main():
             print(f"  게임  /{t['slug']}/")
         else:
             pj = {k: t[k] for k in ("slug", "short_name", "axes", "questions", "types", "pair")}
-            pj.update({k: t[k] for k in ("result_k", "share_text") if k in t})
+            pj.update({k: t[k] for k in ("result_k", "share_text", "guide_title") if k in t})
             write(t["slug"], pltpl.render(
                 types_sorted=sorted(t["types"].items(), key=lambda kv: kv[0], reverse=True),
                 play_json=json.dumps(pj, ensure_ascii=False), **common))

@@ -95,6 +95,13 @@
     ul.appendChild(el("li", null, "<b>조심할 것</b>" + ty.watch));
     ul.appendChild(el("li", null, "<b>이렇게 해보세요</b>" + ty.tip));
     res.appendChild(ul);
+    // 유형별 맞춤 가이드 (수험생 컨디션 같은 놀이에서만): [[제목, 내용], ...]
+    if (ty.guide && ty.guide.length) {
+      res.appendChild(el("p", "pr-gh", P.guide_title || "나에게 맞는 가이드"));
+      var gl = el("ul", "pr-list pr-guide");
+      ty.guide.forEach(function (g) { gl.appendChild(el("li", null, "<b>" + g[0] + "</b>" + g[1])); });
+      res.appendChild(gl);
+    }
 
     // 축별 막대
     var ax = el("div", "pr-axes");
