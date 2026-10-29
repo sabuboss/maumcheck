@@ -1,0 +1,41 @@
+{
+  "slug": "play/false-memory",
+  "kind": "game",
+  "game": "drm",
+  "publish": "2026-11-02",
+  "short_name": "기억 착각 게임 — 본 적 없는 단어를 봤다고 기억할까",
+  "title": "기억 착각 게임 — 단어 24개를 외웠을 뿐인데, 본 적 없는 단어가 떠오른다 (거짓 기억)",
+  "seo_title": "거짓 기억 실험 체험 게임 — 본 적 없는 단어를 봤다고 기억할까 | 심리게임",
+  "description": "단어 24개가 하나씩 지나간 뒤, 어떤 단어가 있었는지 확인하는 기억력 게임입니다. 그런데 이 게임에는 비밀이 있습니다. 1995년 발표된 유명한 기억 실험을 1분 만에 직접 해봅니다.",
+  "og_description": "단어 24개를 외웠을 뿐인데, 본 적 없는 단어를 봤다고 기억한다? 1분 기억 실험을 직접 해보세요.",
+  "og_sub": "단어 24개 · 1분 · 거짓 기억 체험",
+  "card_meta": "단어 24개 · 약 1분 · 심리게임",
+  "minutes": 1,
+  "lead": "단어 스물네 개가 하나씩 지나갑니다. 다 지나가면 어떤 단어가 있었는지 물어봅니다. 간단한 기억력 게임입니다. 적어도, 겉으로 보기엔 그렇습니다.",
+  "result_k": "기억 착각 게임에서 나는",
+  "intro": "단어가 1초 남짓 간격으로 지나갑니다. 메모하지 말고 머리로만 기억하세요. 끝나면 열두 단어를 보여 드리고, 있었는지 없었는지 물어봅니다.",
+  "types": {
+    "made": {"name": "기억이 이야기를 만든 사람", "tag": "본 적 없는 두 단어를 모두 봤다고 기억했다",
+      "desc": "본 적 없는 '잠'과 '의사'를 둘 다 봤다고 답했습니다. 기억력이 나빠서가 아닙니다. 오히려 단어들의 공통된 뜻을 잘 붙잡았기 때문에 생기는 일입니다. 실험에서도 많은 사람이 이렇게 답합니다. 기억은 녹화가 아니라 재구성이라는 것을 몸으로 겪은 셈입니다."},
+    "half": {"name": "반쯤 속은 사람", "tag": "본 적 없는 단어 하나를 봤다고 기억했다",
+      "desc": "두 단어 중 하나는 걸러 냈고, 하나는 봤다고 기억했습니다. 아주 흔한 결과입니다. 어느 쪽 단어에 속았는지 아래 표에서 확인해 보세요. 그 목록의 단어들이 더 강하게 한 뜻으로 묶여 있었을 수 있습니다."},
+    "clear": {"name": "함정을 피한 사람", "tag": "본 적 없는 단어를 모두 걸러 냈다",
+      "desc": "'잠'과 '의사'를 둘 다 못 봤다고 답했습니다. 실험에서는 생각보다 적은 결과입니다. 단어를 하나하나 따로 붙잡았거나, 중간에 비밀을 눈치챘을 수도 있습니다. 다만 실제로 있던 단어도 많이 못 봤다고 했다면, 그냥 조심스럽게 답한 것일 수 있습니다."}
+  },
+  "related": "intellect/curiosity, cautiousness/deliberation, imagination/fantasy",
+  "sections": [
+    {"id": "what", "title": "이 게임의 비밀", "html": "<p>앞의 열두 단어는 침대, 꿈, 베개, 하품처럼 모두 <b>잠</b>과 관련된 단어였고, 뒤의 열두 단어는 간호사, 병원, 청진기처럼 모두 <b>의사</b>와 관련된 단어였습니다. 그런데 정작 <b>잠</b>과 <b>의사</b>는 한 번도 나오지 않았습니다.</p><p>그런데도 많은 사람이 이 두 단어를 봤다고 기억합니다. 그냥 그럴 것 같다고 짐작하는 게 아니라, 실제로 본 장면이 떠오른다고 느끼는 경우도 많습니다.</p>"},
+    {"id": "history", "title": "기억은 녹화가 아니라 재구성", "html": "<p>이 방법은 1959년 심리학자 제임스 디즈(James Deese)가 처음 쓰고, 1995년 헨리 로디거(Henry Roediger)와 캐슬린 맥더멋(Kathleen McDermott)이 다시 실험해 널리 알려졌습니다. 그래서 세 사람의 이름을 따 <b>DRM 실험</b>이라고 부릅니다. 이들의 실험에서 참가자들은 본 적 없는 단어를, 실제로 본 단어와 비슷한 비율로 봤다고 답했습니다.</p><p>왜 이런 일이 생길까요. 뇌는 단어를 하나하나 녹음하듯 저장하지 않고, <b>전체의 뜻</b>을 함께 기억합니다. 그리고 떠올릴 때 그 뜻에 맞춰 내용을 다시 짜 맞춥니다. 대부분은 이 방식이 효율적이지만, 가끔은 없던 것까지 채워 넣습니다.</p><p>이 현상은 실험실 밖에서 더 중요합니다. 1974년 엘리자베스 로프터스(Elizabeth Loftus)의 실험에서는 자동차 사고 영상을 본 사람들에게 \"차가 <b>박살 났을</b> 때\" 속도를 물으면 \"<b>부딪혔을</b> 때\"로 물을 때보다 더 빠른 속도를 답했습니다. 일주일 뒤에는 영상에 없던 깨진 유리를 봤다고 답한 사람도 더 많았습니다. 질문 하나가 기억을 바꾼 것입니다. 목격자 증언을 조심스럽게 다뤄야 하는 이유입니다.</p><p>친구와 같은 일을 다르게 기억하는 것도 같은 이유일 수 있습니다. 누가 거짓말을 하는 게 아니라, 둘 다 자기 뜻에 맞게 기억을 다시 짜 맞추고 있는 것입니다.</p><div class=\"callout\"><b>이건 놀이입니다.</b> 단어 목록은 원 실험의 방식을 바탕으로 마음체크가 한국어로 새로 만들었습니다. 문항이 적어 우연이 크게 섞이며, 기억력을 판정하지 않습니다. 머릿속에 숫자를 몇 자리까지 붙잡아 둘 수 있는지 재보고 싶다면 <a href=\"/memory-span/digits/\">숫자 폭 과제</a>를 해보세요.</div>"}
+  ],
+  "faq": [
+    {"q": "거짓 기억이 생기면 기억력이 나쁜 건가요?", "a": "아니요. 오히려 단어들의 공통된 뜻을 잘 파악했기 때문에 생기는 경우가 많습니다. 기억력이 좋은 사람에게서도 똑같이 나타납니다."},
+    {"q": "비밀을 알았으니 다시 하면 안 속겠죠?", "a": "같은 단어로 다시 하면 당연히 덜 속습니다. 흥미로운 건, 연구에서 이런 함정이 있다고 미리 알려 줘도 거짓 기억이 완전히 사라지지는 않았다는 점입니다."},
+    {"q": "결과가 저장되나요?", "a": "아니요. 모든 계산은 브라우저 안에서만 이루어지고 어디로도 보내지 않습니다."}
+  ],
+  "references": [
+    "Roediger, H. L., &amp; McDermott, K. B. (1995). Creating false memories: Remembering words not presented in lists. <em>Journal of Experimental Psychology: Learning, Memory, and Cognition</em>, 21(4), 803–814.",
+    "Deese, J. (1959). On the prediction of occurrence of particular verbal intrusions in immediate recall. <em>Journal of Experimental Psychology</em>, 58(1), 17–22.",
+    "Loftus, E. F., &amp; Palmer, J. C. (1974). Reconstruction of automobile destruction: An example of the interaction between language and memory. <em>Journal of Verbal Learning and Verbal Behavior</em>, 13(5), 585–589.",
+    "McDermott, K. B., &amp; Roediger, H. L. (1998). Attempting to avoid illusory memories: Robust false recognition of associates persists under conditions of explicit warnings and immediate testing. <em>Journal of Memory and Language</em>, 39(3), 508–520."
+  ]
+}

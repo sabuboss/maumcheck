@@ -1,6 +1,6 @@
 /* 마음놀이 게임 엔진 — 심리학 실험 패러다임을 브라우저에서 해보는 놀이. 서버 없음.
    window.GAME = {slug, short_name, game, types:{key:{name,tag,desc}}}
-   game: ultimatum(나누기) | prisoner(믿을까 배신할까) | delay(지금 vs 나중) | wason(카드 4장) | anchor(숫자 끌림) */
+   game: ultimatum(나누기) | prisoner(믿을까 배신할까) | delay(지금 vs 나중) | wason(카드 4장) | anchor(숫자 끌림) | framing(틀 효과) | drm(기억 착각) */
 (function () {
   var G = window.GAME;
   if (!G) return;
@@ -400,7 +400,76 @@
     round();
   }
 
-  var RUN = { ultimatum: ultimatum, prisoner: prisoner, delay: delay, wason: wason, anchor: anchor, framing: framing };
+  // ---------- 7. 기억 착각 (DRM 거짓 기억) ----------
+  // 한 단어(잠, 의사)와 가까운 단어들만 보여 주고, 정작 그 단어는 보여 주지 않는다.
+  function drm() {
+    var L = [
+      { lure: "잠", words: ["침대", "휴식", "깨다", "피곤", "꿈", "이불", "졸음", "베개", "하품", "눕다", "코골이", "밤"] },
+      { lure: "의사", words: ["간호사", "병원", "환자", "진료", "약", "주사", "청진기", "수술", "처방", "가운", "진찰", "응급실"] }
+    ];
+    var seen = L[0].words.concat(L[1].words);
+    var test = [
+      { w: "꿈", kind: "old" }, { w: "사과", kind: "new" }, { w: "잠", kind: "lure" }, { w: "주사", kind: "old" },
+      { w: "기차", kind: "new" }, { w: "베개", kind: "old" }, { w: "의사", kind: "lure" }, { w: "연필", kind: "new" },
+      { w: "청진기", kind: "old" }, { w: "침대", kind: "old" }, { w: "바다", kind: "new" }, { w: "간호사", kind: "old" }
+    ];
+    var STEP = 1300;
+    function show() {
+      clear();
+      stage.appendChild(el("p", "gnote", "단어가 하나씩 지나갑니다. 최대한 많이 기억해 두세요."));
+      var w = el("div", "gspin done", "");
+      stage.appendChild(w);
+      var i = 0;
+      function next() {
+        if (i >= seen.length) return quiz();
+        progress(i, seen.length, "단어 " + (i + 1) + " / " + seen.length);
+        w.textContent = seen[i];
+        i++;
+        wait(STEP, next);
+      }
+      next();
+    }
+    var k = 0, ans = [];
+    function quiz() {
+      if (k >= test.length) return done();
+      progress(k, test.length, "기억 확인 " + (k + 1) + " / " + test.length);
+      clear();
+      stage.appendChild(el("p", "gnote", "방금 지나간 단어 중에 이 단어가 <b>있었나요?</b>"));
+      stage.appendChild(el("div", "gspin done", test[k].w));
+      var row = el("div", "grow");
+      row.appendChild(btn("봤다", "popt", function () { ans.push(true); k++; wait(120, quiz); }));
+      row.appendChild(btn("못 봤다", "popt", function () { ans.push(false); k++; wait(120, quiz); }));
+      stage.appendChild(row);
+    }
+    function done() {
+      function count(kind) {
+        return test.filter(function (t, j) { return t.kind === kind && ans[j]; }).length;
+      }
+      var lure = count("lure"), hit = count("old"), fa = count("new");
+      var nOld = test.filter(function (t) { return t.kind === "old"; }).length;
+      var key = lure === 2 ? "made" : lure === 1 ? "half" : "clear";
+      var rows = test.map(function (t, j) {
+        var real = t.kind === "old" ? "있었음" : t.kind === "lure" ? "<b>없었음</b>" : "없었음";
+        return "<tr><td>" + t.w + "</td><td>" + (ans[j] ? "봤다" : "못 봤다") + "</td><td>" + real + "</td></tr>";
+      }).join("");
+      var extra = "<p><b>비밀은 이렇습니다.</b> 앞의 열두 단어는 모두 <b>잠</b>과 관련된 단어였고, 뒤의 열두 단어는 모두 <b>의사</b>와 관련된 단어였습니다. 그런데 정작 <b>잠</b>과 <b>의사</b>는 한 번도 나오지 않았습니다.</p>" +
+        "<table class=\"tbl gtbl\"><tr><th>단어</th><th>내 답</th><th>실제</th></tr>" + rows + "</table>" +
+        "<p>뇌는 단어를 하나하나 녹음하듯 저장하지 않습니다. <b>전체의 뜻</b>을 함께 기억하고, 떠올릴 때 그 뜻에 맞춰 내용을 다시 짜 맞춥니다. 그래서 \"잠에 관한 단어들이었지\"라는 기억이 본 적 없는 \"잠\"을 본 것처럼 느끼게 만듭니다. 1995년 이 실험을 다시 발표한 연구에서도 참가자들은 실제로 본 단어만큼이나 자신 있게 이 단어를 봤다고 답했습니다.</p>";
+      if (fa >= 3) extra += "<p>다만 사과, 기차처럼 전혀 상관없는 단어도 대부분 봤다고 하셨네요. 그렇다면 '잠'과 '의사'에 속았다기보다 전체적으로 \"봤다\" 쪽으로 답했을 수 있습니다. 한 번 더 해보면 결과가 달라질 수 있습니다.</p>";
+      else if (hit <= 2) extra += "<p>실제로 있었던 단어도 대부분 못 봤다고 하셨네요. 단어 스물네 개가 빠르게 지나가서, 기억이 덜 남았을 수 있습니다. 한 번 더 해보면 결과가 달라질 수 있습니다.</p>";
+      finish({
+        key: key,
+        stats: [["본 적 없는데 봤다고 한 단어 (잠·의사)", lure + " / 2"], ["실제로 있던 단어를 맞힌 수", hit + " / " + nOld], ["상관없는 단어를 봤다고 한 수", fa + " / 4"]],
+        extra: extra,
+        card_note: "본 적 없는 단어 " + lure + "개를 봤다고 기억"
+      });
+    }
+    clear();
+    stage.appendChild(el("p", "gnote", "단어 <b>24개</b>가 1초 남짓 간격으로 하나씩 지나갑니다. 다 지나가면 어떤 단어가 있었는지 물어봅니다. 적지 말고 머리로만 기억하는 게 규칙입니다."));
+    stage.appendChild(btn("준비됐어요", "task-go", show));
+  }
+
+  var RUN = { ultimatum: ultimatum, prisoner: prisoner, delay: delay, wason: wason, anchor: anchor, framing: framing, drm: drm };
   function start() {
     res.style.display = "none";
     stage.style.display = "block";
