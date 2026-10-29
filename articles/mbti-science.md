@@ -1,7 +1,7 @@
 title: MBTI는 과학일까 — 심리학이 성격을 재는 방법
 description: MBTI는 왜 심리학계에서 비판을 받을까요. 다시 하면 유형이 바뀌는 이유, 성격을 네 글자로 나누는 방식의 한계, 심리학자들이 실제로 쓰는 성격 5요인과의 관계를 정리했습니다.
 og_description: 다시 하면 유형이 바뀐다? MBTI에 대한 심리학의 시선과, 심리학자들이 실제로 성격을 재는 방법.
-publish: 2026-11-01
+publish: 2026-10-29
 lead: 처음 만난 자리에서 MBTI를 묻는 게 자연스러운 시대입니다. 그런데 심리학 수업에서는 MBTI를 잘 다루지 않습니다. 왜 그럴까요. MBTI를 깎아내리려는 글이 아니라, 무엇이 맞고 무엇이 아쉬운지 차분히 정리해 본 글입니다.
 related: personality/big-five, personality/16-types, sociability/gregariousness
 ---
