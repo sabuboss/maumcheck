@@ -1,0 +1,103 @@
+{
+ "_note": "마음놀이 카드 사진. 파일은 static/img/play/<놀이 이름>.webp (800x400). Wikimedia Commons의 CC0·퍼블릭 도메인 사진만 쓴다(출처 표기 의무 없음, 기록용).",
+ "exam-condition": {
+  "by": "Andy Li",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:All_Day_Breakfast_C_-_CK_Bistro_2025-10-11.jpg"
+ },
+ "false-memory": {
+  "by": "Miller, Glennard Earl",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Glennard_Miller_photo_album_pg1.jpg"
+ },
+ "first-impression": {
+  "by": "Chevanon Photography",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Close-up_of_espresso_machine_with_two_brown_coffee_cups.jpg"
+ },
+ "four-cards": {
+  "by": "tookapic on Pixabay",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Cards_-Deck_Playing.jpg"
+ },
+ "friend-role": {
+  "by": "Scott Webb scottwebb",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Beach_Picnic_(Unsplash).jpg"
+ },
+ "gift-type": {
+  "by": "Nathan Lemon processrepeat",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Holiday_Paper_Gift_Wrapping_(Unsplash).jpg"
+ },
+ "interview-type": {
+  "by": "Federal Bureau of Investigation (FBI)",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:July_2017-_Female_Special_Agent%27s_Briefcase_(35852087081).jpg"
+ },
+ "love-dessert": {
+  "by": "https://pixabay.com/es/users/pexels-2286921/",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Macarons_Pixabay.jpg"
+ },
+ "meeting-type": {
+  "by": "Breather breather",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Minimalist_meeting_room_(Unsplash).jpg"
+ },
+ "messenger-type": {
+  "by": "Chris Adamus",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Woman_holding_mobile_phone_with_laptop_and_colorful_pencils_on_table.jpg"
+ },
+ "money-type": {
+  "by": "QuinceMedia on Pixabay",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Piggy_bank_on_pink_background.jpg"
+ },
+ "now-or-later": {
+  "by": "Daderot",
+  "license": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Lucklum_hoard,_jar_with_120_coins,_c._1240_AD,_earthenware_and_silver_-_Braunschweigisches_Landesmuseum_-_DSC04589.JPG"
+ },
+ "number-pull": {
+  "by": "Jonathan Petersson",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Casino-3262947_1920.jpg"
+ },
+ "same-choice": {
+  "by": "Wikideas1",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Fork_in_the_road.jpg"
+ },
+ "split-game": {
+  "by": "igorovsyannykov",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Pizza-3007395.jpg"
+ },
+ "stress-animal": {
+  "by": "Ranya",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Cute-wildlife-pet-cat-sleeping-feline.jpg"
+ },
+ "study-type": {
+  "by": "chuttersnap chuttersnap",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Books_in_stack_with_lamps_(Unsplash).jpg"
+ },
+ "travel-type": {
+  "by": "safaritravelplus",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Travel_luggage.png"
+ },
+ "trust-game": {
+  "by": "Wilfredor",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Chess_game_Staunton_No._6_perfil_view_8.jpg"
+ },
+ "weekend-type": {
+  "by": "Jake Ingle ingle_jake",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Campsite_hammocks_(Unsplash).jpg"
+ }
+}

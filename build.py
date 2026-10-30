@@ -332,11 +332,21 @@ def play_meta(t):
     return "%d문항 · 약 %d분 · 결과 %d가지" % (len(t["questions"]), t["minutes"], len(t["types"]))
 
 
+def play_thumb(t):
+    # 카드 사진 (CC0·퍼블릭 도메인, 출처는 play_images.json). 없으면 글자 카드 그대로.
+    name = t["slug"].split("/", 1)[1]
+    if not (ROOT / "static" / "img" / "play" / f"{name}.webp").exists():
+        return ""
+    return ('<img class="thumb" src="/static/img/play/%s.webp" alt="" width="800" height="400" '
+            'loading="lazy" decoding="async">' % name)
+
+
 def play_cards_html(plays):
     return '<div class="cards">' + "".join(
-        '<a class="card play" href="/%s/" style="%s"><span class="chip">%s</span><b>%s</b>'
+        '<a class="card play%s" href="/%s/" style="%s">%s<span class="chip">%s</span><b>%s</b>'
         '<p>%s</p><small>%s</small></a>'
-        % (t["slug"], PLAY_STYLE, "심리게임" if t.get("kind") == "game" else "마음놀이",
+        % (" has-img" if play_thumb(t) else "", t["slug"], PLAY_STYLE, play_thumb(t),
+           "심리게임" if t.get("kind") == "game" else "마음놀이",
            t["short_name"], t["og_description"], play_meta(t))
         for t in plays) + "</div>"
 
