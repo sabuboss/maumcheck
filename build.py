@@ -156,6 +156,11 @@ def theme_nav_html(themes, current=None):
     return '<div class="tnav">' + "".join(out) + "</div>"
 
 
+def cat_href(cat, pre):
+    """주제(카테고리)는 따로 페이지를 두지 않고 갈래 페이지 안의 구역으로 간다."""
+    return f"/{theme_of(cat)}/#{pre}"
+
+
 def cat_nav_html(groups, current=None):
     """주제 칩 목록. 자기 자신은 링크 대신 표시만 한다."""
     out = []
@@ -165,7 +170,7 @@ def cat_nav_html(groups, current=None):
         if cat == current:
             out.append('<span class="tchip on"%s>%s <i>%d</i></span>' % (attr, cat, len(ts)))
         else:
-            out.append('<a class="tchip" href="/%s/"%s>%s <i>%d</i></a>' % (pre, attr, cat, len(ts)))
+            out.append('<a class="tchip" href="%s"%s>%s <i>%d</i></a>' % (cat_href(cat, pre), attr, cat, len(ts)))
     return '<div class="tnav">' + "".join(out) + "</div>"
 
 
@@ -487,7 +492,7 @@ def main():
             tool["max"] = t["max_score"]
         write(t["slug"], (mtpl if multi else tpl).render(
             t=t, site=site, related=related, ad=AD, year=year,
-            cat_url=t["slug"].split("/")[0],
+            cat_href=cat_href(t["category"], t["slug"].split("/")[0]),
             jsonld=jsonld(t), tool_json=json.dumps(tool, ensure_ascii=False),
             cat_style=cat_style(t), books=books_for(cat=t["category"]),
             og_image=og_image(t["slug"].replace("/", "-"), t["short_name"], OG_TEST,
@@ -512,7 +517,7 @@ def main():
                 "warn": t.get("result_warn", "")}
         write(t["slug"], ttpl.render(
             t=t, site=site, related=rel, ad=("" if t.get("no_ads") else AD), year=year,
-            cat_url=t["slug"].split("/")[0], cat_style=cat_style(t),
+            cat_href=cat_href(t["category"], t["slug"].split("/")[0]), cat_style=cat_style(t),
             jsonld=task_jsonld(t), task_json=json.dumps(tool, ensure_ascii=False),
             og_image=og_image(t["slug"].replace("/", "-"), t["short_name"], OG_TASK,
                               f"직접 해보는 과제 · 약 {t['minutes']}분")))
@@ -576,9 +581,10 @@ def main():
     # 링크를 지우는 대신 <a>만 벗겨 두고, 그 검사가 발행되면 자동으로 링크가 살아난다.
     pending = {t["slug"] for t in soon} | {t["slug"] for t in task_soon}
     known = {t["slug"] for t in tests} | {t["slug"] for t in tasks} | pending | {a["slug"] for a in articles}
-    known |= {"tests", "about", "privacy", "contact", "articles", "play"}
+    known |= {"tests", "about", "editorial", "privacy", "contact", "articles", "play"}
     known |= {t["slug"] for t in plays}
     known |= {"books"}
+    known |= set(site.get("themes", {}))   # 갈래 페이지 (/mood/ 등)
 
     def resolve_links(html, where):
         for sl in pending:
@@ -619,39 +625,25 @@ def main():
     # 주제 > 카테고리 > 검사, 세 층으로 묶는다
     groups = group_by_cat(tests + tasks)
     themes = group_by_theme(groups)
-    CAT_MIN = 2   # 검사가 이만큼 안 되는 카테고리는 내용이 얇아서 색인에서 뺀다 (링크는 그대로 동작)
-    indexed_cats = [(c, pre) for c, pre, ts in groups if len(ts) >= CAT_MIN]
-
-    # 1) 카테고리 페이지 — /depression/ 처럼 검사 주소의 윗단계가 그대로 주소가 된다
+    # 주제(카테고리)마다 따로 페이지를 두면 검사 하나짜리 빈 페이지가 수십 개 생긴다.
+    # 애드센스 '가치 없는 콘텐츠'의 원인이 돼서 2026-10-30부터 없애고, 갈래 페이지 안의 구역으로 합쳤다.
+    # 예전 주소(/depression/ 등)는 _redirects로 갈래 페이지에 영구 이동시킨다.
+    redirects = []
     for cat, pre, ts in groups:
-        d = cat_meta(cat).get("d", "")
-        tkey = theme_of(cat)
-        tname = site.get("themes", {}).get(tkey, {}).get("name", "")
-        body = [f'<p class="lead">{d}</p>' if d else "", cards_html(ts)]
-        if len(ts) < CAT_MIN:
-            body.append('<p class="note">이 주제는 아직 검사가 하나뿐입니다. '
-                        '<b>자유롭게 쓸 수 있는 척도만 올린다</b>는 기준을 지키다 보니 천천히 늘어납니다. '
-                        f'비슷한 주제는 <a href="/{tkey}/">{tname}</a>에서 함께 보실 수 있습니다.</p>')
-        body.append("<h2>같은 갈래의 다른 주제</h2>")
-        body.append(cat_nav_html([g for g in groups if theme_of(g[0]) == tkey], current=cat))
-        crumb = (f'<div class="crumb"><a href="/">홈</a> &rsaquo; <a href="/tests/">전체 검사</a>'
-                 f' &rsaquo; <a href="/{tkey}/">{tname}</a> &rsaquo; {cat}</div>')
-        write(pre, ptpl.render(
-            site=site, year=year, slug=pre, title=f"{cat} 검사",
-            description=f"{cat} 관련 무료 심리 자가진단 {len(ts)}종. {d}",
-            crumb=crumb, cat_style=cat_style_of(cat), body="".join(body), ad=AD,
-            og_image=og_image(pre.replace("/", "-"), f"{cat} 검사", OG_TEST, f"검사 {len(ts)}종"),
-            robots=None if len(ts) >= CAT_MIN else "noindex,follow"))
+        redirects += [f"/{pre}/ /{theme_of(cat)}/ 301", f"/{pre} /{theme_of(cat)}/ 301"]
 
     # 2) 주제 페이지 — 카테고리 여러 개를 묶어 실제로 읽을거리가 되는 층
     for key, meta, inner in themes:
         n = sum(len(ts) for _, _, ts in inner)
         body = [f'<p class="lead">{meta["d"]}</p>']
+        if meta.get("long"):
+            body.append(f'<div class="theme-long">{meta["long"]}</div>')
+        body.append("<h2>이 갈래의 검사</h2>" + cat_nav_html(inner))
         for cat, pre, ts in inner:
             d = cat_meta(cat).get("d", "")
             st = cat_style_of(cat)
             attr = f' style="{st}"' if st else ""
-            body.append(f'<section class="topic"{attr}><h2><a href="/{pre}/">{cat}</a></h2>'
+            body.append(f'<section class="topic" id="{pre}"{attr}><h3>{cat}</h3>'
                         f'{f"<p>{d}</p>" if d else ""}{cards_html(ts)}</section>')
         body.append("<h2>다른 갈래</h2>")
         body.append(theme_nav_html(themes, current=key))
@@ -703,10 +695,10 @@ def main():
     write_rss(tests + tasks + articles + plays, year)
 
     # sitemap / robots
-    urls = ([""] + ["tests", "about", "privacy", "contact"]
+    urls = ([""] + ["tests", "about", "editorial", "privacy", "contact"]
             + (["articles"] if articles else [])
             + [k for k, _, _ in themes]
-            + [pre for _, pre in indexed_cats] + [t["slug"] for t in tests]
+            + [t["slug"] for t in tests]
             + [t["slug"] for t in tasks]
             + [a["slug"] for a in articles]
             + (["play"] if len(plays) >= 2 else [])
@@ -719,8 +711,6 @@ def main():
     lm = {"": newest, "tests": newest}
     for key, _meta, inner in themes:
         lm[key] = max(t["publish"] for _c, _p, ts in inner for t in ts)
-    for _cat, pre, ts in groups:
-        lm[pre] = max(t["publish"] for t in ts)
     for t in tests:
         lm[t["slug"]] = t["publish"]
     for stem, d in page_upd.items():
@@ -762,13 +752,16 @@ def main():
         "",
     ]), encoding="utf-8")
 
+    # 예전 주제 페이지 주소 → 갈래 페이지 (Cloudflare Pages는 출력 루트의 _redirects를 읽는다)
+    (DIST / "_redirects").write_text(NL.join(redirects + [""]), encoding="utf-8")
+
     # ads.txt — site.json에 adsense_client(ca-pub-...)가 들어오면 자동 생성된다.
     # ID 없이 빈 파일을 올리면 오히려 경고가 뜨므로 있을 때만 쓴다.
     pub = site.get("adsense_client", "").replace("ca-pub-", "")
     if pub:
         (DIST / "ads.txt").write_text(
             "google.com, pub-%s, DIRECT, f08c47fec0942fa0%s" % (pub, NL), encoding="utf-8")
-    print(f"완료: 검사 {len(tests)}개 · 과제 {len(tasks)}개 · 글 {len(articles)}편 · 갈래 {len(themes)}개 · 주제 {len(groups)}개(색인 {len(indexed_cats)}개)")
+    print(f"완료: 검사 {len(tests)}개 · 과제 {len(tasks)}개 · 글 {len(articles)}편 · 갈래 {len(themes)}개 · 주제 {len(groups)}개(갈래 페이지로 이동)")
 
 
 if __name__ == "__main__":
