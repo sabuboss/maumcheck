@@ -205,6 +205,10 @@ def load_tests():
     return out, soon
 
 
+# 읽을거리 대표 사진 (CC0·퍼블릭 도메인). 출처는 heroes.json, 파일은 static/img/articles/
+HEROES = json.loads((ROOT / "heroes.json").read_text(encoding="utf-8"))
+
+
 def load_articles():
     """articles/*.md — 검사가 아닌 읽을거리. 검사와 똑같이 publish로 예약 발행한다."""
     out, soon = [], []
@@ -219,6 +223,8 @@ def load_articles():
         a["body"] = body.strip()
         a.setdefault("category", "읽을거리")
         a["rel"] = [s.strip() for s in a.get("related", "").split(",") if s.strip()]
+        if p.stem in HEROES and (ROOT / "static" / "img" / "articles" / f"{p.stem}.webp").exists():
+            a["hero"] = dict(HEROES[p.stem], src=f"/static/img/articles/{p.stem}.webp")
         pub = datetime.date.fromisoformat(a["publish"])
         if PUBLISH_ALL or pub <= TODAY:
             out.append(a)
@@ -350,10 +356,12 @@ def article_cards_html(arts):
     out = []
     for a in arts:
         badge = '<span class="new">NEW</span>' if is_new(a) else ""
+        img = ('<img class="thumb" src="%s" alt="" width="1200" height="600" loading="lazy" decoding="async">'
+               % a["hero"]["src"]) if a.get("hero") else ""
         out.append(
-            '<a class="card art" href="/%s/"><span class="chip">읽을거리</span>%s<b>%s</b>'
+            '<a class="card art%s" href="/%s/">%s<span class="chip">읽을거리</span>%s<b>%s</b>'
             '<p>%s</p><small>%s</small></a>'
-            % (a["slug"], badge, a["title"], a.get("lead", a["description"]), a["publish"]))
+            % (" has-img" if img else "", a["slug"], img, badge, a["title"], a.get("lead", a["description"]), a["publish"]))
     return '<div class="cards">' + "".join(out) + "</div>"
 
 
@@ -365,7 +373,8 @@ def article_jsonld(a):
         "author": {"@type": "Person", "name": site["author"], "url": f"{site['url']}/about/"},
         "publisher": {"@type": "Organization", "name": site["name"], "url": site["url"]},
         "datePublished": a["publish"], "dateModified": a.get("updated", a["publish"]),
-        "mainEntityOfPage": url}, ensure_ascii=False)
+        "mainEntityOfPage": url,
+        **({"image": site["url"] + a["hero"]["src"]} if a.get("hero") else {})}, ensure_ascii=False)
 
 
 

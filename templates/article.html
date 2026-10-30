@@ -18,6 +18,8 @@
 <h1>{{ a.title }}</h1>
 {% if a.lead %}<p class="lead">{{ a.lead }}</p>{% endif %}
 <p class="meta">작성 {{ a.publish }}{% if a.updated and a.updated != a.publish %} · 최종 수정 {{ a.updated }}{% endif %} · {{ site.author }}</p>
+{% if a.hero %}<figure class="arthero"><img src="{{ a.hero.src }}" alt="{{ a.hero.alt }}" width="1200" height="600" fetchpriority="high" decoding="async">
+<figcaption>사진 {{ a.hero.by }} · <a href="{{ a.hero.page }}" rel="noopener" target="_blank">Wikimedia Commons</a> ({{ a.hero.license }})</figcaption></figure>{% endif %}
 {{ snsbar(site.url ~ "/" ~ a.slug ~ "/", a.title ~ " | " ~ site.name, a.title ~ " — " ~ site.name, "이 글 공유하기") }}
 
 {{ a.body|safe }}
