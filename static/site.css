@@ -183,7 +183,10 @@
   .tchip i{font-style:normal;font-weight:500;opacity:.65;font-size:12px}
   .tchip.on{border-color:currentColor;cursor:default}
   .topic{margin:0 0 34px;padding-left:14px;border-left:3px solid var(--accent)}
-  .topic h2{margin:0 0 4px;font-size:19px}
+  .topic h2,.topic h3{margin:0 0 4px;font-size:19px;color:var(--accent);scroll-margin-top:16px}
+  .topic{scroll-margin-top:16px}
+  .theme-long{margin:0 0 26px;line-height:1.8}
+  .theme-long h2{font-size:19px;margin:26px 0 8px}
   .topic h2 a{color:var(--accent);text-decoration:none}
   .topic h2 a:hover{text-decoration:underline}
   .topic>p{margin:0 0 14px;color:var(--muted);font-size:14px;line-height:1.65}
