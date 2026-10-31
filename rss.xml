@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Fri, 30 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>심리검사 점수, 제대로 읽는 법 — 기준선, 오차, 그리고 점수가 말하지 않는 것</title>
+      <link>https://maumcheck.com/articles/reading-scores/</link>
+      <guid isPermaLink="true">https://maumcheck.com/articles/reading-scores/</guid>
+      <description>우울 검사에서 10점이 나오면 우울증일까요. 선별 검사의 기준선이 무엇을 뜻하는지, 왜 기준선을 넘어도 해당하지 않는 사람이 많은지, 점수의 오차와 응답 습관까지 심리검사 결과를 읽을 때 알아야 할 것을 정리했습니다.</description>
+      <category>읽을거리</category>
+      <pubDate>Sat, 31 Oct 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>번아웃인지 그냥 피곤한 건지 — 구분하는 기준과 회복에 도움이 되는 것</title>
       <link>https://maumcheck.com/articles/burnout-or-tired/</link>
@@ -159,14 +167,6 @@
       <description>복잡한 문제, 추상적인 생각, 어려운 글을 얼마나 즐기는지를 재는 검사입니다. 이 점수가 지능이 아니라 취향이라는 점과, 낮게 나왔을 때 무엇을 뜻하고 무엇을 뜻하지 않는지를 정리했습니다.</description>
       <category>지적 호기심</category>
       <pubDate>Sat, 17 Oct 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>쾌활함 검사 — 10문항으로 보는 잘 웃고 즐거워하는 정도</title>
-      <link>https://maumcheck.com/cheerfulness/joy/</link>
-      <guid isPermaLink="true">https://maumcheck.com/cheerfulness/joy/</guid>
-      <description>얼마나 자주 즐거워하고, 소리 내어 웃고, 밝은 쪽을 보는지를 재는 검사입니다. 쾌활함과 행복은 다르다는 점, 낮게 나왔을 때 우울과 어떻게 구분하는지를 정리했습니다.</description>
-      <category>쾌활함</category>
-      <pubDate>Fri, 16 Oct 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>
