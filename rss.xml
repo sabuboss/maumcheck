@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Sat, 31 Oct 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 01 Nov 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>가을 타는 이유 — 해가 짧아지면 기분도 가라앉을까</title>
+      <link>https://maumcheck.com/articles/autumn-blues/</link>
+      <guid isPermaLink="true">https://maumcheck.com/articles/autumn-blues/</guid>
+      <description>가을만 되면 쓸쓸하고 기운이 없다면 기분 탓만은 아닐 수 있습니다. 해가 짧아질 때 몸과 기분에 일어나는 변화, 가벼운 가을 우울과 계절성 우울의 차이, 연구에서 효과가 확인된 대처법을 정리했습니다.</description>
+      <category>읽을거리</category>
+      <pubDate>Sun, 01 Nov 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>심리검사 점수, 제대로 읽는 법 — 기준선, 오차, 그리고 점수가 말하지 않는 것</title>
       <link>https://maumcheck.com/articles/reading-scores/</link>
@@ -159,14 +167,6 @@
       <description>결정하기 전에 얼마나 생각하는지, 충동적으로 뛰어드는지를 재는 검사입니다. 양 끝에 각각 다른 비용이 붙는다는 점과, 신중함과 우유부단을 어떻게 구분하는지를 정리했습니다.</description>
       <category>신중함</category>
       <pubDate>Sun, 18 Oct 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>지적 호기심 검사 — 10문항으로 보는 어려운 생각을 즐기는 정도</title>
-      <link>https://maumcheck.com/intellect/curiosity/</link>
-      <guid isPermaLink="true">https://maumcheck.com/intellect/curiosity/</guid>
-      <description>복잡한 문제, 추상적인 생각, 어려운 글을 얼마나 즐기는지를 재는 검사입니다. 이 점수가 지능이 아니라 취향이라는 점과, 낮게 나왔을 때 무엇을 뜻하고 무엇을 뜻하지 않는지를 정리했습니다.</description>
-      <category>지적 호기심</category>
-      <pubDate>Sat, 17 Oct 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>
