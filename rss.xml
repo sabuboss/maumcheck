@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Mon, 02 Nov 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 03 Nov 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>공부할 때 나는 어떤 스타일? — 9문항으로 보는 나의 공부 습관과 맞춤 공부법</title>
+      <link>https://maumcheck.com/play/study-type/</link>
+      <guid isPermaLink="true">https://maumcheck.com/play/study-type/</guid>
+      <description>몰아서 하는지 나눠서 하는지, 읽고 정리하는지 문제를 풀며 꺼내 보는지, 혼자 하는지 같이 하는지. 세 갈래로 나눠 여덟 공부 스타일 중 하나를 골라 드리고, 학습 연구에서 효과가 확인된 방법을 스타일에 맞춰 알려 드립니다.</description>
+      <category>마음놀이</category>
+      <pubDate>Tue, 03 Nov 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>자존감, 높이려 할수록 흔들리는 이유 — 자존감 연구가 알려 주는 것</title>
       <link>https://maumcheck.com/articles/self-esteem/</link>
@@ -159,14 +167,6 @@
       <description>새로운 장소, 새로운 음식, 새로운 방식을 얼마나 찾는지, 익숙한 것을 얼마나 지키는지를 재는 검사입니다. 모험심과 자극 추구가 어떻게 다른지, 익숙함을 지키는 쪽의 강점은 무엇인지 정리했습니다.</description>
       <category>모험심</category>
       <pubDate>Tue, 20 Oct 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>활동성 검사 — 10문항으로 보는 바쁘게 사는지 천천히 사는지</title>
-      <link>https://maumcheck.com/activity/pace/</link>
-      <guid isPermaLink="true">https://maumcheck.com/activity/pace/</guid>
-      <description>늘 바쁘게 움직이는지, 여유 있게 가는지, 여러 일을 한꺼번에 다루는지를 재는 검사입니다. 활동성이 곧 부지런함이 아니라는 점과, 높은 쪽이 번아웃과 어떻게 이어지는지를 정리했습니다.</description>
-      <category>활동성</category>
-      <pubDate>Mon, 19 Oct 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>
