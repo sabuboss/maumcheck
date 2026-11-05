@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Wed, 04 Nov 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>선물 고를 때 나는 어떤 유형? — 9문항으로 보는 나의 선물 스타일</title>
+      <link>https://maumcheck.com/play/gift-type/</link>
+      <guid isPermaLink="true">https://maumcheck.com/play/gift-type/</guid>
+      <description>몰래 준비해 놀라게 하는지 갖고 싶은 걸 물어보는지, 물건을 주는지 함께할 시간을 주는지, 몇 주 전부터 준비하는지 당일에 고르는지. 세 갈래로 나눠 여덟 선물 유형 중 하나를 골라 드립니다. 받는 사람이 정말 좋아하는 선물에 대한 연구도 함께 알려 드립니다.</description>
+      <category>마음놀이</category>
+      <pubDate>Thu, 05 Nov 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>공부한 게 오래 남는 법 — 다시 읽기보다 꺼내 보기</title>
       <link>https://maumcheck.com/articles/study-that-sticks/</link>
@@ -159,14 +167,6 @@
       <description>모임을 이끄는지 따라가는지, 말하는 쪽인지 들어주는 쪽인지, 연락과 생일을 챙기는지 자유로운지. 세 갈래로 나눠 여덟 친구 역할 중 하나를 골라 드립니다. 재미로 하는 놀이입니다.</description>
       <category>마음놀이</category>
       <pubDate>Mon, 26 Oct 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>상상력 검사 — 10문항으로 보는 공상과 딴생각에 빠지는 정도</title>
-      <link>https://maumcheck.com/imagination/fantasy/</link>
-      <guid isPermaLink="true">https://maumcheck.com/imagination/fantasy/</guid>
-      <description>공상을 즐기는지, 생각에 잠기는지, 머릿속에 그림을 잘 그리는지를 재는 검사입니다. 상상력이 곧 창의성은 아니라는 점과, 딴생각이 많은 것이 언제 강점이고 언제 비용인지를 정리했습니다.</description>
-      <category>상상력</category>
-      <pubDate>Wed, 21 Oct 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>
