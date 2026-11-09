@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Sun, 08 Nov 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 09 Nov 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>걱정이 멈추지 않을 때 — 걱정을 다루는 연구들</title>
+      <link>https://maumcheck.com/articles/worry/</link>
+      <guid isPermaLink="true">https://maumcheck.com/articles/worry/</guid>
+      <description>걱정은 대개 일어나지 않을 일에 대한 것이라는 걸 알면서도 멈추기 어렵습니다. 걱정의 90% 이상이 실제로는 일어나지 않았다는 연구, 걱정을 정해진 시간으로 미루는 방법, 쓸모 있는 걱정과 쓸모없는 걱정을 가르는 질문을 정리했습니다.</description>
+      <category>읽을거리</category>
+      <pubDate>Mon, 09 Nov 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>자꾸 남과 비교하게 될 때 — 비교의 심리학</title>
       <link>https://maumcheck.com/articles/comparison/</link>
@@ -159,14 +167,6 @@
       <description>계획해서 쓰는지 기분 따라 쓰는지, 경험에 쓰는지 물건에 쓰는지, 나를 위해 쓰는지 함께를 위해 쓰는지. 세 갈래로 나눠 여덟 소비 유형 중 하나를 골라 드립니다. 재미로 하는 놀이입니다.</description>
       <category>마음놀이</category>
       <pubDate>Wed, 28 Oct 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>자꾸 미루는 이유 — 게으름이 아니라 기분의 문제입니다</title>
-      <link>https://maumcheck.com/articles/procrastination/</link>
-      <guid isPermaLink="true">https://maumcheck.com/articles/procrastination/</guid>
-      <description>할 일을 알면서도 미루는 건 시간 관리를 못해서가 아니라, 그 일이 주는 불편한 기분을 피하려는 것이라는 연구가 많습니다. 미루기가 왜 생기는지, 미루면 정말 편한지, 연구로 효과가 확인된 방법은 무엇인지 정리했습니다.</description>
-      <category>읽을거리</category>
-      <pubDate>Tue, 27 Oct 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>
