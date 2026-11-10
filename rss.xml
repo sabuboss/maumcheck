@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Mon, 09 Nov 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 10 Nov 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>기억 착각 게임 — 단어 24개를 외웠을 뿐인데, 본 적 없는 단어가 떠오른다 (거짓 기억)</title>
+      <link>https://maumcheck.com/play/false-memory/</link>
+      <guid isPermaLink="true">https://maumcheck.com/play/false-memory/</guid>
+      <description>단어 24개가 하나씩 지나간 뒤, 어떤 단어가 있었는지 확인하는 기억력 게임입니다. 그런데 이 게임에는 비밀이 있습니다. 1995년 발표된 유명한 기억 실험을 1분 만에 직접 해봅니다.</description>
+      <category>마음놀이</category>
+      <pubDate>Tue, 10 Nov 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>걱정이 멈추지 않을 때 — 걱정을 다루는 연구들</title>
       <link>https://maumcheck.com/articles/worry/</link>
@@ -159,14 +167,6 @@
       <description>답장을 바로 하는지 몰아서 하는지, 길게 쓰는지 짧게 쓰는지, 먼저 연락하는지 기다리는지. 세 갈래로 나눠 여덟 메신저 유형 중 하나를 골라 드립니다. 재미로 하는 놀이입니다.</description>
       <category>마음놀이</category>
       <pubDate>Thu, 29 Oct 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>돈 쓸 때 나는 어떤 소비 유형? — 9문항으로 보는 내 지갑이 열리는 방식</title>
-      <link>https://maumcheck.com/play/money-type/</link>
-      <guid isPermaLink="true">https://maumcheck.com/play/money-type/</guid>
-      <description>계획해서 쓰는지 기분 따라 쓰는지, 경험에 쓰는지 물건에 쓰는지, 나를 위해 쓰는지 함께를 위해 쓰는지. 세 갈래로 나눠 여덟 소비 유형 중 하나를 골라 드립니다. 재미로 하는 놀이입니다.</description>
-      <category>마음놀이</category>
-      <pubDate>Wed, 28 Oct 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
 </rss>
