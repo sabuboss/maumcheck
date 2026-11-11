@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Tue, 10 Nov 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 11 Nov 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>화가 날 때 — 터뜨리면 풀린다는 말은 사실일까</title>
+      <link>https://maumcheck.com/articles/anger/</link>
+      <guid isPermaLink="true">https://maumcheck.com/articles/anger/</guid>
+      <description>화는 참지 말고 풀어야 한다는 말을 많이 듣습니다. 그런데 샌드백을 치며 화를 푼 사람들이 오히려 더 공격적이 됐다는 실험이 있습니다. 화를 터뜨리는 것과 삼키는 것 사이에서, 연구가 권하는 화 다루는 법을 정리했습니다.</description>
+      <category>읽을거리</category>
+      <pubDate>Wed, 11 Nov 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>기억 착각 게임 — 단어 24개를 외웠을 뿐인데, 본 적 없는 단어가 떠오른다 (거짓 기억)</title>
       <link>https://maumcheck.com/play/false-memory/</link>
@@ -157,14 +165,6 @@
       <link>https://maumcheck.com/play/interview-type/</link>
       <guid isPermaLink="true">https://maumcheck.com/play/interview-type/</guid>
       <description>답변을 대본처럼 준비하는지 키워드만 잡는지, 긴장이 겉으로 드러나는지 속으로 삭이는지, 길게 설명하는지 짧게 답하는지. 세 갈래로 나눠 여덟 면접 유형과 유형별 준비 방법을 알려 드립니다.</description>
-      <category>마음놀이</category>
-      <pubDate>Thu, 29 Oct 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>카톡 할 때 나는 어떤 메신저 유형? — 9문항으로 보는 내 연락 스타일</title>
-      <link>https://maumcheck.com/play/messenger-type/</link>
-      <guid isPermaLink="true">https://maumcheck.com/play/messenger-type/</guid>
-      <description>답장을 바로 하는지 몰아서 하는지, 길게 쓰는지 짧게 쓰는지, 먼저 연락하는지 기다리는지. 세 갈래로 나눠 여덟 메신저 유형 중 하나를 골라 드립니다. 재미로 하는 놀이입니다.</description>
       <category>마음놀이</category>
       <pubDate>Thu, 29 Oct 2026 09:00:00 +0900</pubDate>
     </item>
