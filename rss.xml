@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Wed, 11 Nov 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 12 Nov 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>내향인은 사람을 싫어할까 — 외향성 연구가 말하는 것</title>
+      <link>https://maumcheck.com/articles/introvert/</link>
+      <guid isPermaLink="true">https://maumcheck.com/articles/introvert/</guid>
+      <description>내향인은 사람을 싫어하고 수줍음이 많다는 생각은 반만 맞습니다. 외향성이 실제로 무엇을 재는지, 내향성과 수줍음은 어떻게 다른지, 내향인이 외향적으로 행동하면 어떤 일이 생기는지 연구로 정리했습니다.</description>
+      <category>읽을거리</category>
+      <pubDate>Thu, 12 Nov 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>화가 날 때 — 터뜨리면 풀린다는 말은 사실일까</title>
       <link>https://maumcheck.com/articles/anger/</link>
@@ -157,14 +165,6 @@
       <link>https://maumcheck.com/play/same-choice/</link>
       <guid isPermaLink="true">https://maumcheck.com/play/same-choice/</guid>
       <description>숫자는 똑같은데 '살린다'와 '죽는다', '받는다'와 '잃는다'로 말만 바꿨습니다. 그런데도 사람들의 선택은 정반대로 갈립니다. 노벨상을 받은 심리학 실험을 네 문제로 직접 해봅니다.</description>
-      <category>마음놀이</category>
-      <pubDate>Thu, 29 Oct 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>면접장에서 나는 어떤 유형? — 9문항으로 보는 내 면접 스타일과 준비 방법</title>
-      <link>https://maumcheck.com/play/interview-type/</link>
-      <guid isPermaLink="true">https://maumcheck.com/play/interview-type/</guid>
-      <description>답변을 대본처럼 준비하는지 키워드만 잡는지, 긴장이 겉으로 드러나는지 속으로 삭이는지, 길게 설명하는지 짧게 답하는지. 세 갈래로 나눠 여덟 면접 유형과 유형별 준비 방법을 알려 드립니다.</description>
       <category>마음놀이</category>
       <pubDate>Thu, 29 Oct 2026 09:00:00 +0900</pubDate>
     </item>
