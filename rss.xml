@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Thu, 12 Nov 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 13 Nov 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>외로움 — 혼자 있는 것과 외로운 것은 다릅니다</title>
+      <link>https://maumcheck.com/articles/loneliness/</link>
+      <guid isPermaLink="true">https://maumcheck.com/articles/loneliness/</guid>
+      <description>사람들 사이에 있어도 외로울 수 있고, 혼자 있어도 외롭지 않을 수 있습니다. 외로움이 무엇이고 왜 몸에도 영향을 주는지, 외로움을 줄이는 방법 중 연구에서 가장 효과가 컸던 것은 무엇인지 정리했습니다.</description>
+      <category>읽을거리</category>
+      <pubDate>Fri, 13 Nov 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>내향인은 사람을 싫어할까 — 외향성 연구가 말하는 것</title>
       <link>https://maumcheck.com/articles/introvert/</link>
@@ -157,14 +165,6 @@
       <link>https://maumcheck.com/play/first-impression/</link>
       <guid isPermaLink="true">https://maumcheck.com/play/first-impression/</guid>
       <description>처음 만난 자리에서 따뜻해 보이는지 시크해 보이는지, 활발한지 차분한지, 먼저 말을 거는지 기다리는지. 세 갈래로 나눠 여덟 첫인상 타입 중 하나를 골라 드립니다. 친구가 보는 나와 비교해 보세요.</description>
-      <category>마음놀이</category>
-      <pubDate>Thu, 29 Oct 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>같은 문제, 다른 선택 — 말만 바꿨는데 내 선택이 바뀔까 (틀 효과)</title>
-      <link>https://maumcheck.com/play/same-choice/</link>
-      <guid isPermaLink="true">https://maumcheck.com/play/same-choice/</guid>
-      <description>숫자는 똑같은데 '살린다'와 '죽는다', '받는다'와 '잃는다'로 말만 바꿨습니다. 그런데도 사람들의 선택은 정반대로 갈립니다. 노벨상을 받은 심리학 실험을 네 문제로 직접 해봅니다.</description>
       <category>마음놀이</category>
       <pubDate>Thu, 29 Oct 2026 09:00:00 +0900</pubDate>
     </item>
