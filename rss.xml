@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Fri, 13 Nov 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 14 Nov 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>여행 갈 때 나는 어떤 여행자? — 9문항으로 보는 나의 여행 스타일</title>
+      <link>https://maumcheck.com/play/travel-type/</link>
+      <guid isPermaLink="true">https://maumcheck.com/play/travel-type/</guid>
+      <description>일정표부터 짜는지 일단 떠나는지, 하루 종일 돌아다니는지 숙소에서 쉬는지, 혼자만의 시간이 좋은지 다 같이 어울리는 게 좋은지. 세 갈래로 나눠 여덟 여행자 유형 중 하나를 골라 드립니다. 같이 갈 친구와 비교해 보세요.</description>
+      <category>마음놀이</category>
+      <pubDate>Sat, 14 Nov 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>외로움 — 혼자 있는 것과 외로운 것은 다릅니다</title>
       <link>https://maumcheck.com/articles/loneliness/</link>
@@ -157,14 +165,6 @@
       <link>https://maumcheck.com/play/exam-condition/</link>
       <guid isPermaLink="true">https://maumcheck.com/play/exam-condition/</guid>
       <description>사람마다 생활 리듬도, 긴장이 오는 방식도, 회복하는 방식도 다릅니다. 9문항으로 내 컨디션 유형을 알아보고, 유형에 맞는 수면·식사·카페인·긴장 관리 가이드를 받아 보세요.</description>
-      <category>마음놀이</category>
-      <pubDate>Thu, 29 Oct 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>내 첫인상은 어떤 타입? — 9문항으로 보는 처음 만난 사람이 보는 나</title>
-      <link>https://maumcheck.com/play/first-impression/</link>
-      <guid isPermaLink="true">https://maumcheck.com/play/first-impression/</guid>
-      <description>처음 만난 자리에서 따뜻해 보이는지 시크해 보이는지, 활발한지 차분한지, 먼저 말을 거는지 기다리는지. 세 갈래로 나눠 여덟 첫인상 타입 중 하나를 골라 드립니다. 친구가 보는 나와 비교해 보세요.</description>
       <category>마음놀이</category>
       <pubDate>Thu, 29 Oct 2026 09:00:00 +0900</pubDate>
     </item>
