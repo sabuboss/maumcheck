@@ -5,9 +5,17 @@
     <link>https://maumcheck.com/</link>
     <description>검증된 무료 심리 척도만 모았습니다</description>
     <language>ko</language>
-    <lastBuildDate>Sat, 14 Nov 2026 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 15 Nov 2026 09:00:00 +0900</lastBuildDate>
     <copyright>&#169; 2026 마음체크</copyright>
     <atom:link href="https://maumcheck.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>완벽주의 — 기준이 높은 것과 나를 몰아세우는 것은 다릅니다</title>
+      <link>https://maumcheck.com/articles/perfectionism/</link>
+      <guid isPermaLink="true">https://maumcheck.com/articles/perfectionism/</guid>
+      <description>완벽주의는 장점일까요, 단점일까요. 연구는 완벽주의를 두 얼굴로 나눕니다. 높은 기준을 향해 애쓰는 쪽과, 실수를 두려워하며 나를 몰아세우는 쪽입니다. 완벽주의가 젊은 세대에서 늘고 있다는 연구와 함께, 완벽주의를 다루는 법을 정리했습니다.</description>
+      <category>읽을거리</category>
+      <pubDate>Sun, 15 Nov 2026 09:00:00 +0900</pubDate>
+    </item>
     <item>
       <title>여행 갈 때 나는 어떤 여행자? — 9문항으로 보는 나의 여행 스타일</title>
       <link>https://maumcheck.com/play/travel-type/</link>
@@ -158,14 +166,6 @@
       <guid isPermaLink="true">https://maumcheck.com/articles/test-anxiety/</guid>
       <description>시험장에서 머리가 하얘지는 건 실력이 없어서가 아니라 걱정이 머릿속 작업 공간을 차지하기 때문입니다. 시험 직전 걱정 적어 내기, 긴장을 설렘으로 다시 부르기처럼 실험으로 효과가 확인된 방법 네 가지를 정리했습니다.</description>
       <category>읽을거리</category>
-      <pubDate>Thu, 29 Oct 2026 09:00:00 +0900</pubDate>
-    </item>
-    <item>
-      <title>수험생 컨디션 유형 테스트 — 나에게 맞는 수면·식사·긴장 관리법</title>
-      <link>https://maumcheck.com/play/exam-condition/</link>
-      <guid isPermaLink="true">https://maumcheck.com/play/exam-condition/</guid>
-      <description>사람마다 생활 리듬도, 긴장이 오는 방식도, 회복하는 방식도 다릅니다. 9문항으로 내 컨디션 유형을 알아보고, 유형에 맞는 수면·식사·카페인·긴장 관리 가이드를 받아 보세요.</description>
-      <category>마음놀이</category>
       <pubDate>Thu, 29 Oct 2026 09:00:00 +0900</pubDate>
     </item>
   </channel>
